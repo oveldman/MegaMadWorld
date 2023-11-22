@@ -19,8 +19,8 @@ sudo docker image prune -f
 
 sudo microk8s kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.crds.yaml
 sudo microk8s kubectl apply -f Deployments/Kubernetes/Environment/Config.yaml
-sudo microk8s kubectl apply -f Deployments/Kubernetes/Environment/Ingress-Deployment-Prod.yaml
 sudo microk8s kubectl apply -f Deployments/Kubernetes/Internal
+sudo microk8s kubectl apply -f Deployments/Kubernetes/Environment/Ingress-Deployment-Prod.yaml
 #sudo microk8s kubectl apply -f Deployments/Kubernetes/External
 
 sudo rm -r Deployment/Kubernetes/images
