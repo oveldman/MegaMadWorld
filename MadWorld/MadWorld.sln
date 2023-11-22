@@ -22,6 +22,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{7B
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployments", "Deployments", "{3B624B8F-4CB5-4CF4-B3BD-2D9C6333091A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{9CF73880-0C45-42FC-90FB-2867E6D1B5A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Internal", "Internal", "{7385B179-B9DB-463F-A14E-DB55829C1708}"
+	ProjectSection(SolutionItems) = preProject
+		Deployments\Kubernetes\Internal\Api-Deployment.yaml = Deployments\Kubernetes\Internal\Api-Deployment.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Environment", "Environment", "{48BCE473-AA74-4127-BAA4-8C8238B6085E}"
+	ProjectSection(SolutionItems) = preProject
+		Deployments\Kubernetes\Environment\Config.yaml = Deployments\Kubernetes\Environment\Config.yaml
+		Deployments\Kubernetes\Environment\Ingress-Deployment-Local.yaml = Deployments\Kubernetes\Environment\Ingress-Deployment-Local.yaml
+		Deployments\Kubernetes\Environment\Ingress-Deployment-Prod.yaml = Deployments\Kubernetes\Environment\Ingress-Deployment-Prod.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{564D932A-A4FD-4527-99C1-A058041865BC}"
+	ProjectSection(SolutionItems) = preProject
+		Deployments\Scripts\local-build-and-deploy.sh = Deployments\Scripts\local-build-and-deploy.sh
+		Deployments\Scripts\prod-build-and-deploy.sh = Deployments\Scripts\prod-build-and-deploy.sh
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,5 +57,9 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{90092A5F-7D1D-4DC3-8958-9FFB2D26A304} = {858F32A4-7092-459E-A31A-B4BF9254909C}
+		{9CF73880-0C45-42FC-90FB-2867E6D1B5A4} = {3B624B8F-4CB5-4CF4-B3BD-2D9C6333091A}
+		{7385B179-B9DB-463F-A14E-DB55829C1708} = {9CF73880-0C45-42FC-90FB-2867E6D1B5A4}
+		{48BCE473-AA74-4127-BAA4-8C8238B6085E} = {9CF73880-0C45-42FC-90FB-2867E6D1B5A4}
+		{564D932A-A4FD-4527-99C1-A058041865BC} = {3B624B8F-4CB5-4CF4-B3BD-2D9C6333091A}
 	EndGlobalSection
 EndGlobal

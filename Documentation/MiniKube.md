@@ -31,6 +31,10 @@ To retrieve the external IP and Port
 ```bash
 kubectl get svc
 ```
+Delete everything
+```bash
+minikube delete --all
+```
 
 ## Install
 ```bash

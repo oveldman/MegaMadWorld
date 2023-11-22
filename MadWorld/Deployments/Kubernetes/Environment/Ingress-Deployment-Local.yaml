@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: madworld-ingress
+  namespace: madworld
+spec:
+  rules:
+    - host: api.mad-world.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: madworld-api-loadbalancer
+                port:
+                  number: 80
