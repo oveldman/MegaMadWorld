@@ -26,6 +26,7 @@ metadata:
   name: madworld-api-loadbalancer
   namespace: madworld
 spec:
+  externalTrafficPolicy: Cluster
   selector:
     app: madworld-api
   ports:
