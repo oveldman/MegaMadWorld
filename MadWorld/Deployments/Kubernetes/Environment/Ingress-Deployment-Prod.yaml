@@ -1,20 +1,31 @@
 apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
+kind: Issuer
 metadata:
   name: letsencrypt-prod
   namespace: madworld
 spec:
   acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    #change to your email
+    # Staging API
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
     email: oveldman@gmail.com
     privateKeySecretRef:
-      name: letsencrypt-prod
+      name: madworld-letsencrypt-prod-key
     solvers:
       - http01:
           ingress:
-            class: public
-
+            class: nginx
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: madworld-letsencrypt-prod
+  namespace: madworld
+spec:
+  secretName: madworld-letsencrypt-prod-key
+  issuerRef:
+    name: letsencrypt-prod
+  dnsNames:
+    - api.mad-world.nl            
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -22,6 +33,7 @@ metadata:
   name: madworld-ingress
   namespace: madworld
   annotations:
+    kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
@@ -38,4 +50,4 @@ spec:
   tls:
     - hosts:
         - api.mad-world.nl
-      secretName: letsencrypt-prod
+      secretName: madworld-letsencrypt-prod-key
