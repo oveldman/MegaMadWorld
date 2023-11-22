@@ -27,6 +27,7 @@ kind: ClusterIssuer
 metadata:
   name: lets-encrypt
 spec:
+  hostNetwork: true
   acme:
     email: oveldman@gmail.com
     server: https://acme-v02.api.letsencrypt.org/directory
