@@ -1,17 +1,19 @@
 apiVersion: cert-manager.io/v1
-kind: ClusterIssuer # I'm using ClusterIssuer here
+kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
+    #change to your email
     email: oveldman@gmail.com
     privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
       - http01:
           ingress:
-            class: nginx
+            class: public
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
