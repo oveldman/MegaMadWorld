@@ -10,7 +10,7 @@ microk8s kubectl port-forward -n kube-system service/kubernetes-dashboard 10443:
 
 Enable addons
 ```bash
-sudo microk8s enable registry dashboard ingress metrics-server
+sudo microk8s enable registry dashboard ingress metrics-server cert-manager
 ```
 
 ### Edit config
