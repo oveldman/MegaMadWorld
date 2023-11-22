@@ -38,6 +38,7 @@ sudo ufw allow 80
 sudo ufw allow 443
 sudo ufw allow 1194
 # Open port for kubernetes dashboard
-sudo ufw allow from {{InternalIP}} proto tcp to any port 10443
+sudo ufw allow in on tun0 to {{InternalIP}} port 10443 proto tcp
 sudo ufw enable
+sudo ufw reload
 ```

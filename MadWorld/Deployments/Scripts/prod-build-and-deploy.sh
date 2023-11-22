@@ -10,8 +10,8 @@ build_and_load_image () {
 sudo docker pull nginx
 
 mkdir -p Deployment/Kubernetes/images
-sudo microk8s kubectl delete deployment,pods --all -n madworld
-sudo microk8s kubectl delete deployment,pods --all -n default
+sudo microk8s kubectl delete deployment,pods,services --all -n madworld
+sudo microk8s kubectl delete deployment,pods,services --all -n default
 
 build_and_load_image "MadWorld.Backend.API" "api"
 

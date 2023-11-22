@@ -9,8 +9,8 @@ build_and_load_image () {
 #This removes the error of nginx image not found while building the image
 sudo docker pull nginx
 
-sudo kubectl delete deployment,pods --all -n madworld
-sudo kubectl delete deployment,pods --all -n default
+sudo kubectl delete deployment,pods,services --all -n madworld
+sudo kubectl delete deployment,pods,services --all -n default
 
 build_and_load_image "MadWorld.Backend.API" "api"
 
