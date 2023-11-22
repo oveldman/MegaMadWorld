@@ -18,27 +18,27 @@ spec:
                 name: madworld-api-loadbalancer
                 port:
                   number: 80
----
   tls:
     - hosts:
         - api.mad-world.nl
       secretName: madworld-letsencrypt-prod-key
-      apiVersion: cert-manager.io/v1
-      kind: Issuer
-      metadata:
-        name: letsencrypt-prod
-        namespace: madworld
-      spec:
-        acme:
-          # Staging API
-          server: https://acme-staging-v02.api.letsencrypt.org/directory
-          email: oveldman@gmail.com
-          privateKeySecretRef:
-            name: madworld-letsencrypt-prod-key
-          solvers:
-            - http01:
-                ingress:
-                  class: nginx
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-prod
+  namespace: madworld
+spec:
+  acme:
+    # Staging API
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: oveldman@gmail.com
+    privateKeySecretRef:
+      name: madworld-letsencrypt-prod-key
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
