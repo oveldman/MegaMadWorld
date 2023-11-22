@@ -3,6 +3,10 @@ Start Dashboard
 ```bash
 sudo microk8s dashboard-proxy --address 0.0.0.0
 ```
+Forward dashboard to port 10443
+```bash
+microk8s kubectl port-forward -n kube-system service/kubernetes-dashboard 10443:443
+```
 
 Enable addons
 ```bash
@@ -18,4 +22,22 @@ var/snap/microk8s/current/args/kube-proxy
 --bind-address=0.0.0.0
 --healthz-bind-address=127.0.0.1
 --profiling=false
+```
+
+### Add pods to firewall
+You may need to configure your firewall to allow pod-to-pod and pod-to-internet communication:
+```bash
+sudo ufw allow in on cni0 && sudo ufw allow out on cni0
+sudo ufw default allow routed
+```
+
+### Open default firewall
+```bash
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw allow 1194
+# Open port for kubernetes dashboard
+sudo ufw allow from {{InternalIP}} proto tcp to any port 10443
+sudo ufw enable
 ```
