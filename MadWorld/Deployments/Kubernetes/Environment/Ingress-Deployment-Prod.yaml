@@ -7,10 +7,6 @@ metadata:
     cert-manager.io/cluster-issuer: lets-encrypt
     kubernetes.io/ingress.class: "public"
 spec:
-  tls:
-    - hosts:
-        - api.mad-world.nl
-      secretName: madworld-ingress-tls
   rules:
     - host: api.mad-world.nl
       http:
@@ -22,22 +18,3 @@ spec:
                 name: madworld-api-loadbalancer
                 port:
                   number: 80
----
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: lets-encrypt
-  namespace: madworld
-spec:
-  acme:
-    email: oveldman@gmail.com
-    server: https://acme-v02.api.letsencrypt.org/directory
-    privateKeySecretRef:
-      # Secret resource that will be used to store the account's private key.
-      name: lets-encrypt-priviate-key
-    # Add a single challenge solver, HTTP01 using nginx
-    solvers:
-      - http01:
-          ingress:
-            class: public
-      

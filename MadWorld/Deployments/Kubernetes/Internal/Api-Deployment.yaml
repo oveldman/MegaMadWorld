@@ -25,15 +25,9 @@ kind: Service
 metadata:
   name: madworld-api-loadbalancer
   namespace: madworld
-  labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
 spec:
-  externalTrafficPolicy: Cluster
   selector:
     app: madworld-api
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
   ports:
     - protocol: TCP
       name: http

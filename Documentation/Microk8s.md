@@ -13,6 +13,11 @@ Enable addons
 sudo microk8s enable registry dashboard ingress metrics-server dns cert-manager
 ```
 
+Enable cert-manager
+```bash
+kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.1/cert-manager.crds.yaml
+```
+
 ### Edit config
 Edit the following path to change the binding path of the pods:\
 var/snap/microk8s/current/args/kube-proxy
