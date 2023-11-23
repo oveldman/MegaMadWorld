@@ -33,8 +33,4 @@ spec:
       name: http
       port: 80
       targetPort: http
-    - protocol: TCP
-      port: 443
-      name: https
-      targetPort: https
   type: LoadBalancer
