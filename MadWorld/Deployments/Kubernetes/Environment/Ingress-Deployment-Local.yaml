@@ -15,3 +15,13 @@ spec:
                 name: madworld-api-loadbalancer
                 port:
                   number: 80
+    - host: www.mad-world.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: madworld-ui-loadbalancer
+                port:
+                  number: 80
