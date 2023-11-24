@@ -24,10 +24,21 @@ metadata:
 spec:
   tls:
     - hosts:
+        - admin.mad-world.nl
         - api.mad-world.nl
         - www.mad-world.nl
       secretName: madworld-tls
   rules:
+    - host: admin.mad-world.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: madworld-admin-loadbalancer
+                port:
+                  number: 80
     - host: api.mad-world.nl
       http:
         paths:
