@@ -16,6 +16,7 @@ spec:
     metadata:
       labels:
         app: madworld-ui
+        task: frontend-ui
     spec:
       containers:
         - name: madworld-ui
