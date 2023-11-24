@@ -14,4 +14,4 @@ spec:
               service:
                 name: madworld-api-loadbalancer
                 port:
-                  name: http
+                  number: 80
