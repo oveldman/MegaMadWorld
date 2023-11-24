@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: madworld-admin
-          image: madworld/vps/ui:latest
+          image: madworld/vps/admin:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 80
