@@ -3,11 +3,15 @@ kind: Deployment
 metadata:
   name: madworld-ui-deployment
   namespace: madworld
+  labels:
+    app: madworld-ui
+    name: frontend-ui
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: madworld-ui
-  replicas: 1
+      task: frontend-ui
   template:
     metadata:
       labels:
@@ -28,6 +32,7 @@ metadata:
 spec:
   selector:
     app: madworld-ui
+    task: frontend-ui
   ports:
     - protocol: TCP
       name: http

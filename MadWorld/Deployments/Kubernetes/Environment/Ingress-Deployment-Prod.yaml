@@ -18,7 +18,15 @@ kind: Ingress
 metadata:
   name: madworld-ingress
   namespace: madworld
+  annotations:
+    cert-manager.io/cluster-issuer: "lets-encrypt"
+    kubernetes.io/ingress.class: "public"
 spec:
+  tls:
+    - hosts:
+        - api.mad-world.nl
+        - www.mad-world.nl
+      secretName: madworld-tls
   rules:
     - host: api.mad-world.nl
       http:

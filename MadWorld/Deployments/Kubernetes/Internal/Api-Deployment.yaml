@@ -3,15 +3,20 @@ kind: Deployment
 metadata:
   name: madworld-api-deployment
   namespace: madworld
+  labels:
+    app: madworld-api
+    name: backend-api
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: madworld-api
-  replicas: 1
+      task: backend-api
   template:
     metadata:
       labels:
         app: madworld-api
+        task: backend-api
     spec:
       containers:
         - name: madworld-api
@@ -28,6 +33,7 @@ metadata:
 spec:
   selector:
     app: madworld-api
+    task: backend-api
   ports:
     - protocol: TCP
       name: http
