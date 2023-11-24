@@ -7,7 +7,8 @@
 [Start Kubernetes](https://kubernetes.io/docs/concepts/overview/working-with-objects/)\
 [Enable Kubernetes Ingress Controller](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/)\
 [Change host interfaces kubernetes](https://microk8s.io/docs/configure-host-interfaces)\
-[Helm - Generate variables in yaml](https://helm.sh/docs/intro/using_helm/)
+[Helm - Generate variables in yaml](https://helm.sh/docs/intro/using_helm/)\
+[Set Nginx Certifications](https://blog.antosubash.com/posts/setup-nginx-and-cert-manager-in-micro-k8s)
 
 ## Github Actions
 [Github Actions deploy on VPS](https://gist.github.com/danielwetan/4f4db933531db5dd1af2e69ec8d54d8a)\
