@@ -55,6 +55,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{8C
 		Deployments\Kubernetes\External\Postgres-Deployment.yaml = Deployments\Kubernetes\External\Postgres-Deployment.yaml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Domain", "MadWorld.Backend.Domain\MadWorld.Backend.Domain.csproj", "{E2AF8AEE-308C-4E98-B6D3-8E395729ECEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Application", "MadWorld.Backend.Application\MadWorld.Backend.Application.csproj", "{C8F1FFA3-3CFA-4502-8946-DABD72095DAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Infrastructure", "MadWorld.Backend.Infrastructure\MadWorld.Backend.Infrastructure.csproj", "{F98E495F-4A0E-4C8A-8BB4-23CFC25629E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +79,18 @@ Global
 		{472DF471-3F5E-4BA5-B7EB-41862554FC19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{472DF471-3F5E-4BA5-B7EB-41862554FC19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{472DF471-3F5E-4BA5-B7EB-41862554FC19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2AF8AEE-308C-4E98-B6D3-8E395729ECEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2AF8AEE-308C-4E98-B6D3-8E395729ECEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2AF8AEE-308C-4E98-B6D3-8E395729ECEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2AF8AEE-308C-4E98-B6D3-8E395729ECEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8F1FFA3-3CFA-4502-8946-DABD72095DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8F1FFA3-3CFA-4502-8946-DABD72095DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8F1FFA3-3CFA-4502-8946-DABD72095DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8F1FFA3-3CFA-4502-8946-DABD72095DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F98E495F-4A0E-4C8A-8BB4-23CFC25629E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F98E495F-4A0E-4C8A-8BB4-23CFC25629E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F98E495F-4A0E-4C8A-8BB4-23CFC25629E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F98E495F-4A0E-4C8A-8BB4-23CFC25629E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{90092A5F-7D1D-4DC3-8958-9FFB2D26A304} = {858F32A4-7092-459E-A31A-B4BF9254909C}
@@ -83,5 +101,8 @@ Global
 		{2DA8D0F9-4DDE-4351-93EA-32987BB833F3} = {858F32A4-7092-459E-A31A-B4BF9254909C}
 		{472DF471-3F5E-4BA5-B7EB-41862554FC19} = {858F32A4-7092-459E-A31A-B4BF9254909C}
 		{8C746908-3C5D-4B25-AE23-F2BC2D546E1A} = {9CF73880-0C45-42FC-90FB-2867E6D1B5A4}
+		{E2AF8AEE-308C-4E98-B6D3-8E395729ECEA} = {858F32A4-7092-459E-A31A-B4BF9254909C}
+		{C8F1FFA3-3CFA-4502-8946-DABD72095DAC} = {858F32A4-7092-459E-A31A-B4BF9254909C}
+		{F98E495F-4A0E-4C8A-8BB4-23CFC25629E5} = {858F32A4-7092-459E-A31A-B4BF9254909C}
 	EndGlobalSection
 EndGlobal
