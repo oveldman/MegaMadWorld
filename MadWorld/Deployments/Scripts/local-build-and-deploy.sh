@@ -13,6 +13,7 @@ sudo kubectl delete deployment,pods,services --all -n madworld
 sudo kubectl delete deployment,pods,services --all -n default
 
 build_and_load_image "MadWorld.Backend.API" "api"
+build_and_load_image "MadWorld.Frontend.API" "ui"
 
 sudo docker image prune -f
 
