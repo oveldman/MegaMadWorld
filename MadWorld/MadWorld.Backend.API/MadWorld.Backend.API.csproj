@@ -24,6 +24,6 @@
       <ProjectReference Include="..\MadWorld.Backend.Infrastructure\MadWorld.Backend.Infrastructure.csproj" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\MadWorld.Backend.Infrastructure\MadWorld.Backend.Infrastructure.csproj" />
+        <InternalsVisibleTo Include="MadWorld.Backend.IntegrationTests" />
     </ItemGroup>
 </Project>

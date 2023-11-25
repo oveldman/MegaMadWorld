@@ -24,3 +24,5 @@ app.AddCurriculumVitaeEndpoints();
 app.MigrateDatabases();
 
 app.Run();
+
+public partial class Program { }

@@ -20,6 +20,7 @@ public static class WebApplicationBuilderExtensions
             options.UseNpgsql(
                 builder.Configuration.GetConnectionString(nameof(CurriculaVitaeContext)),
                 b => b.MigrationsAssembly("MadWorld.Backend.Infrastructure")));
+                
         
         builder.Services.AddScoped<ICurriculaVitaeRepository, CurriculaVitaeRepository>();
     }

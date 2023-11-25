@@ -3,7 +3,8 @@
 [Upload public ssh Key to VPS](https://linuxhandbook.com/add-ssh-public-key-to-server/)\
 [Add user to the sudo group](https://phoenixnap.com/kb/how-to-create-sudo-user-on-ubuntu)\
 [Setup openvpn](https://www.cyberciti.biz/faq/howto-setup-openvpn-server-on-ubuntu-linux-14-04-or-16-04-lts/)\
-[Identity Dotnet 8](https://kgrontis.github.io/posts/Exploring-Identity-Endpoints-in-.NET-8/)
+[Identity Dotnet 8](https://kgrontis.github.io/posts/Exploring-Identity-Endpoints-in-.NET-8/)\
+[Integration API dotnet 8](https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-8.0)
 
 ## Kubernetes
 [Start Kubernetes](https://kubernetes.io/docs/concepts/overview/working-with-objects/)\
