@@ -9,5 +9,10 @@ public class CurriculaVitaeRepository : ICurriculaVitaeRepository
     public CurriculaVitaeRepository(CurriculaVitaeContext context)
     {
         _context = context;
-    }   
+    }
+
+    public Profile GetProfile(bool isDraft)
+    {
+        return _context.Profiles.FirstOrDefault();
+    }
 }

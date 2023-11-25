@@ -13,6 +13,7 @@
       </Content>
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\MadWorld.Backend.Application\MadWorld.Backend.Application.csproj" />
       <ProjectReference Include="..\MadWorld.Backend.Infrastructure\MadWorld.Backend.Infrastructure.csproj" />
     </ItemGroup>
     <ItemGroup>

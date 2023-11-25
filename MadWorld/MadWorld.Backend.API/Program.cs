@@ -1,4 +1,5 @@
 using MadWorld.Backend.API.Endpoints;
+using MadWorld.Backend.Application.CommonLogic.Extensions;
 using MadWorld.Backend.Infrastructure.Database.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.AddApplication();
 builder.AddDatabase();
 
 var app = builder.Build();

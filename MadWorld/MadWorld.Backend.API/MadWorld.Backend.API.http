@@ -1,6 +1,6 @@
-@MadWorld.Backend.API_HostAddress = http://localhost:5086
+@MadWorld_Backend_API_HostAddress = http://localhost:5086
 
-GET {{MadWorld.Backend.API_HostAddress}}/weatherforecast/
+GET {{MadWorld_Backend_API_HostAddress}}/CurriculumVitae/
 Accept: application/json
 
 ###

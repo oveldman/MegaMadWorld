@@ -63,6 +63,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Applicatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Infrastructure", "MadWorld.Backend.Infrastructure\MadWorld.Backend.Infrastructure.csproj", "{F98E495F-4A0E-4C8A-8BB4-23CFC25629E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Shared.Contracts", "MadWorld.Shared.Contracts\MadWorld.Shared.Contracts.csproj", "{ED878E64-A544-43DA-B44F-C7DFBAEE84B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{F98E495F-4A0E-4C8A-8BB4-23CFC25629E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F98E495F-4A0E-4C8A-8BB4-23CFC25629E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F98E495F-4A0E-4C8A-8BB4-23CFC25629E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED878E64-A544-43DA-B44F-C7DFBAEE84B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED878E64-A544-43DA-B44F-C7DFBAEE84B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED878E64-A544-43DA-B44F-C7DFBAEE84B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED878E64-A544-43DA-B44F-C7DFBAEE84B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{90092A5F-7D1D-4DC3-8958-9FFB2D26A304} = {858F32A4-7092-459E-A31A-B4BF9254909C}
@@ -106,5 +112,6 @@ Global
 		{E2AF8AEE-308C-4E98-B6D3-8E395729ECEA} = {858F32A4-7092-459E-A31A-B4BF9254909C}
 		{C8F1FFA3-3CFA-4502-8946-DABD72095DAC} = {858F32A4-7092-459E-A31A-B4BF9254909C}
 		{F98E495F-4A0E-4C8A-8BB4-23CFC25629E5} = {858F32A4-7092-459E-A31A-B4BF9254909C}
+		{ED878E64-A544-43DA-B44F-C7DFBAEE84B3} = {858F32A4-7092-459E-A31A-B4BF9254909C}
 	EndGlobalSection
 EndGlobal

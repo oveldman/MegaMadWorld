@@ -1,2 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MadWorld.Backend.Domain\MadWorld.Backend.Domain.csproj" />
+    <ProjectReference Include="..\MadWorld.Shared.Contracts\MadWorld.Shared.Contracts.csproj" />
+  </ItemGroup>
 </Project>
