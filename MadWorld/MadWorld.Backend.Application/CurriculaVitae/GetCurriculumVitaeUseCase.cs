@@ -1,4 +1,5 @@
 using MadWorld.Backend.Application.CurriculaVitae.Mapper;
+using MadWorld.Backend.Domain.CommonExceptions;
 using MadWorld.Backend.Domain.CurriculaVitae;
 using MadWorld.Shared.Contracts.CurriculaVitae;
 
@@ -15,8 +16,14 @@ public class GetCurriculumVitaeUseCase
 
     public GetCurriculumVitaeResponse GetCurriculumVitae(GetCurriculumVitaeRequest request)
     {
+        if (request is null)
+            throw new ValidationException(nameof(GetCurriculumVitaeRequest));
+        
         var profile = _curriculaVitaeRepository.GetProfile(request.IsDraft);
 
+        if (profile is null)
+            throw new EntityNotFoundException(nameof(profile));
+        
         return new GetCurriculumVitaeResponse()
         {
             Profile = profile.ToDto()
