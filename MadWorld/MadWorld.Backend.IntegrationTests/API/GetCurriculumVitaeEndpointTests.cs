@@ -1,18 +1,19 @@
-using System.Diagnostics.Metrics;
+using System.Net.Http.Json;
 using MadWorld.Backend.Domain.CurriculaVitae;
 using MadWorld.Backend.Infrastructure.CurriculaVitae;
-using Microsoft.AspNetCore.Hosting;
+using MadWorld.Shared.Contracts.CurriculaVitae;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Shouldly;
 using Testcontainers.PostgreSql;
 
 namespace MadWorld.Backend.IntegrationTests.API;
 
 public class GetCurriculumVitaeEndpointTests : IClassFixture<WebApplicationFactory<Program>>, IAsyncLifetime
 {
-    private readonly WebApplicationFactory<Program> _factory;
+    private WebApplicationFactory<Program> _factory;
     
     private readonly PostgreSqlContainer _postgreSqlContainer = new PostgreSqlBuilder()
         .WithImage("postgres:latest")
@@ -31,42 +32,42 @@ public class GetCurriculumVitaeEndpointTests : IClassFixture<WebApplicationFacto
     public async Task Execute_WhenRequestIsValid_ShouldReturnValidResponse()
     {
         // Arrange
-        var client = _factory.WithWebHostBuilder(builder =>
+        _factory = _factory.WithWebHostBuilder(builder =>
         {
             builder.ConfigureTestServices(services =>
             {
-                var descriptor = services
-                    .SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<CurriculaVitaeContext>));
-
-                if (descriptor != null)
-                {
-                    services.Remove(descriptor);
-                }
-                
+                services.RemoveAll(typeof(CurriculaVitaeContext));
                 services.RemoveAll(typeof(DbContextOptions<CurriculaVitaeContext>));
-                
+
                 services.AddDbContext<CurriculaVitaeContext>(options =>
                     options.UseNpgsql(_postgreSqlContainer.GetConnectionString()));
             });
-        }).CreateClient();
-
-        var host = _factory.Server.Host;
-        var context = host.Services.GetService<CurriculaVitaeContext>();
-        context!.Profiles.Add(new Profile()
-        {
-            Id = new Guid("18d757f1-7352-41bb-9f8f-f1888465bb38"),
-            FullName = "Emily Thompson",
-            JobTitle = "Sales Manager"
         });
-        await context.SaveChangesAsync();
         
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var context = scope.ServiceProvider.GetRequiredService<CurriculaVitaeContext>();
+
+            await context.Profiles.AddAsync(new Profile()
+            {
+                Id = Guid.Parse("c6e2d4f0-8580-4f1c-9fd7-81c4a273b9a2"),
+                FullName = "Emily Thompson",
+                JobTitle = "Graphic Designer"
+            });
+            await context.SaveChangesAsync();
+        }
+
+        var client = _factory.CreateClient();
         // Act
         var response = await client.GetAsync("/CurriculumVitae?isdraft=false");
 
         // Assert
-        response.EnsureSuccessStatusCode(); // Status Code 200-299
-        Assert.Equal("text/html; charset=utf-8", 
-           response.Content.Headers.ContentType.ToString());
+        response.EnsureSuccessStatusCode();
+        var result = await response.Content
+            .ReadFromJsonAsync<GetCurriculumVitaeResponse>();
+        result!.Profile.Id.ShouldBe(Guid.Parse("c6e2d4f0-8580-4f1c-9fd7-81c4a273b9a2"));
+        result!.Profile.FullName.ShouldBe("Emily Thompson");
+        result!.Profile.JobTitle.ShouldBe("Graphic Designer");
     }
 
     public Task InitializeAsync()
