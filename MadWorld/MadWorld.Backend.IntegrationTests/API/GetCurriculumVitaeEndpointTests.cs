@@ -43,17 +43,12 @@ public class GetCurriculumVitaeEndpointTests : IClassFixture<WebApplicationFacto
                     options.UseNpgsql(_postgreSqlContainer.GetConnectionString()));
             });
         });
-        
+
+        var profile = Profile.Create("Emily Thompson", "Graphic Designer");
         using (var scope = _factory.Services.CreateScope())
         {
             var context = scope.ServiceProvider.GetRequiredService<CurriculaVitaeContext>();
-
-            await context.Profiles.AddAsync(new Profile()
-            {
-                Id = Guid.Parse("c6e2d4f0-8580-4f1c-9fd7-81c4a273b9a2"),
-                FullName = "Emily Thompson",
-                JobTitle = "Graphic Designer"
-            });
+            await context.Profiles.AddAsync(profile);
             await context.SaveChangesAsync();
         }
 
@@ -65,7 +60,7 @@ public class GetCurriculumVitaeEndpointTests : IClassFixture<WebApplicationFacto
         response.EnsureSuccessStatusCode();
         var result = await response.Content
             .ReadFromJsonAsync<GetCurriculumVitaeResponse>();
-        result!.Profile.Id.ShouldBe(Guid.Parse("c6e2d4f0-8580-4f1c-9fd7-81c4a273b9a2"));
+        result!.Profile.Id.ShouldBe(profile.Id);
         result!.Profile.FullName.ShouldBe("Emily Thompson");
         result!.Profile.JobTitle.ShouldBe("Graphic Designer");
     }

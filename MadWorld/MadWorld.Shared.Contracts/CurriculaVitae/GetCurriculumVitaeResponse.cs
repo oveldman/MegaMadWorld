@@ -1,6 +1,6 @@
 namespace MadWorld.Shared.Contracts.CurriculaVitae;
 
-public class GetCurriculumVitaeResponse
+public record GetCurriculumVitaeResponse
 {
-    public ProfileContract Profile { get; set; } = null!;
+    public ProfileContract Profile { get; init; } = null!;
 }

@@ -1,6 +1,6 @@
 namespace MadWorld.Shared.Contracts.CurriculaVitae;
 
-public class GetCurriculumVitaeRequest
+public record GetCurriculumVitaeRequest
 {
-    public bool IsDraft { get; set; }
+    public bool IsDraft { get; init; }
 }
