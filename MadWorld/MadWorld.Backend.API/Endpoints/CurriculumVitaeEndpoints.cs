@@ -8,10 +8,14 @@ public static class CurriculumVitaeEndpoints
 {
     public static void AddCurriculumVitaeEndpoints(this WebApplication app)
     {
-        app.MapGet("/CurriculumVitae", 
-                ([AsParameters] GetCurriculumVitaeRequest request, [FromServices] GetCurriculumVitaeUseCase useCase) => 
+        var curriculumVitaeEndpoints = app.MapGroup("")
+            .WithTags("CurriculumVitae");
+        
+        curriculumVitaeEndpoints.MapGet("/CurriculumVitae",
+                ([AsParameters] GetCurriculumVitaeRequest request, [FromServices] GetCurriculumVitaeUseCase useCase) =>
                     useCase.GetCurriculumVitae(request))
             .WithName("GetCurriculumVitae")
-            .WithOpenApi();
+            .WithOpenApi()
+            .AllowAnonymous();
     }
 }

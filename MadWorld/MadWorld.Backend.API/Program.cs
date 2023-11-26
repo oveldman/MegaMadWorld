@@ -21,6 +21,7 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.AddCurriculumVitaeEndpoints();
+app.AddTestEndpoints();
 app.MigrateDatabases();
 
 app.Run();
