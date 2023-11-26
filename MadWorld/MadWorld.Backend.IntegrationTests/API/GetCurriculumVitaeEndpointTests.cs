@@ -11,7 +11,7 @@ using Testcontainers.PostgreSql;
 
 namespace MadWorld.Backend.IntegrationTests.API;
 
-public class GetCurriculumVitaeEndpointTests : IClassFixture<WebApplicationFactory<Program>>, IAsyncLifetime
+public sealed class GetCurriculumVitaeEndpointTests : IClassFixture<WebApplicationFactory<Program>>, IAsyncLifetime
 {
     private WebApplicationFactory<Program> _factory;
     

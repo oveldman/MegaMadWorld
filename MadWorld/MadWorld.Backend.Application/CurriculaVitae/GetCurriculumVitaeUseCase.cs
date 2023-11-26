@@ -5,7 +5,7 @@ using MadWorld.Shared.Contracts.CurriculaVitae;
 
 namespace MadWorld.Backend.Application.CurriculaVitae;
 
-public class GetCurriculumVitaeUseCase
+public sealed class GetCurriculumVitaeUseCase
 {
     private readonly ICurriculaVitaeRepository _curriculaVitaeRepository;
 

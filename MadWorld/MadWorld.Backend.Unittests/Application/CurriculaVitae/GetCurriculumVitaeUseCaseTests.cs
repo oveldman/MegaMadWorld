@@ -5,7 +5,7 @@ using MadWorld.Shared.Contracts.CurriculaVitae;
 
 namespace MadWorld.Backend.Unittests.Application.CurriculaVitae;
 
-public class GetCurriculumVitaeUseCaseTests
+public sealed class GetCurriculumVitaeUseCaseTests
 {
     [Fact]
     public void GetCurriculumVitae_WhenRequestIsNull_ThrowsValidationException()

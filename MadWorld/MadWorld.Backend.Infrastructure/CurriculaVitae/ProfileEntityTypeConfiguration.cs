@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MadWorld.Backend.Infrastructure.CurriculaVitae;
 
-public class ProfileEntityTypeConfiguration : IEntityTypeConfiguration<Profile>
+public sealed class ProfileEntityTypeConfiguration : IEntityTypeConfiguration<Profile>
 {
     public void Configure(EntityTypeBuilder<Profile> builder)
     {

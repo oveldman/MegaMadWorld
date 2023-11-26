@@ -1,6 +1,6 @@
 namespace MadWorld.Backend.Domain.CurriculaVitae;
 
-public class Profile
+public sealed class Profile
 {
     public const int MaxLength = 250;
     

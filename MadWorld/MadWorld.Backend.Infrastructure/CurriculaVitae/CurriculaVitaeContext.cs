@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MadWorld.Backend.Infrastructure.CurriculaVitae;
 
-public class CurriculaVitaeContext : DbContext
+public sealed class CurriculaVitaeContext : DbContext
 {
     public CurriculaVitaeContext(DbContextOptions<CurriculaVitaeContext> options) : base(options)
     {
