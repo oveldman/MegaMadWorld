@@ -7,6 +7,12 @@ dotnet tool update --global dotnet-ef
 ```
 ## Migration
 ### Create Migration
+**Default**
+```bash
+dotnet ef migrations add InitialCreate
+```
+
+**Extra information**
 ```bash
 dotnet ef migrations add InitialCreate --context CurriculumVitaeContext --project ../MadWorld.Backend.Infrastructure -o ../MadWorld.Backend.Infrastructure/CurriculumVitae/Migrations
 ```
