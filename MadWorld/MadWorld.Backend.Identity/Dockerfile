@@ -3,6 +3,9 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+# Ensure we listen on any IP Address 
+ENV DOTNET_URLS=http://+:80
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["MadWorld.Backend.Identity/MadWorld.Backend.Identity.csproj", "MadWorld.Backend.Identity/"]
