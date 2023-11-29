@@ -33,6 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Internal", "Internal", "{73
 		Deployments\Kubernetes\Internal\Api-Deployment.yaml = Deployments\Kubernetes\Internal\Api-Deployment.yaml
 		Deployments\Kubernetes\Internal\UI-Deployment.yaml = Deployments\Kubernetes\Internal\UI-Deployment.yaml
 		Deployments\Kubernetes\Internal\Admin-Deployment.yaml = Deployments\Kubernetes\Internal\Admin-Deployment.yaml
+		Deployments\Kubernetes\Internal\Identity-Deployment.yaml = Deployments\Kubernetes\Internal\Identity-Deployment.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Environment", "Environment", "{48BCE473-AA74-4127-BAA4-8C8238B6085E}"

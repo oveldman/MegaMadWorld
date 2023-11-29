@@ -20,6 +20,7 @@ metadata:
   namespace: madworld
   annotations:
     cert-manager.io/cluster-issuer: "lets-encrypt"
+    cert-manager.io/common-name: "www.mad-world.nl"
     kubernetes.io/ingress.class: "public"
 spec:
   tls:
@@ -47,6 +48,16 @@ spec:
             backend:
               service:
                 name: madworld-api-loadbalancer
+                port:
+                  number: 80
+    - host: identity.mad-world.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: madworld-identity-loadbalancer
                 port:
                   number: 80
     - host: www.mad-world.nl

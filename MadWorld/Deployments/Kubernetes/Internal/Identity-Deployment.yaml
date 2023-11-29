@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: madworld-api-deployment
+  name: madworld-identity-deployment
   namespace: madworld
   labels:
-    app: madworld-api
-    name: backend-api
+    app: madworld-identity
+    name: backend-identity
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: madworld-api
-      task: backend-api
+      app: madworld-identity
+      task: backend-identity
   template:
     metadata:
       labels:
-        app: madworld-api
-        task: backend-api
+        app: madworld-identity
+        task: backend-identity
     spec:
       containers:
-        - name: madworld-api
-          image: madworld/vps/api:latest
+        - name: madworld-identity
+          image: madworld/vps/identity:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 80
@@ -28,15 +28,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: madworld-api-loadbalancer
+  name: madworld-identity-loadbalancer
   namespace: madworld
 spec:
   selector:
-    app: madworld-api
-    task: backend-api
+    app: madworld-identity
+    task: backend-identity
   ports:
     - protocol: TCP
       name: http
-      port: 8082
+      port: 8083
       targetPort: 80
   type: LoadBalancer
