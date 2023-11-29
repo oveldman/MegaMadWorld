@@ -19,6 +19,8 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseDeveloperExceptionPage();
+
 app.MapIdentityApi<IdentityUser>();
 app.MigrateDatabases();
 
