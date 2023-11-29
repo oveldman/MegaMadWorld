@@ -21,6 +21,8 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "lets-encrypt"
     cert-manager.io/common-name: "www.mad-world.nl"
+    cert-manager.io/subject-countries: "NL"
+    cert-manager.io/email-sans: "oveldman@gmail.com"
     kubernetes.io/ingress.class: "public"
 spec:
   tls:
