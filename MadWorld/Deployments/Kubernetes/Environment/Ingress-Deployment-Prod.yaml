@@ -27,6 +27,7 @@ spec:
     - hosts:
         - admin.mad-world.nl
         - api.mad-world.nl
+        - identity.mad-world.nl
         - www.mad-world.nl
       secretName: madworld-tls
   rules:
