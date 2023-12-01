@@ -55,6 +55,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 builder.Services.AddAuthorization();
 
+builder.Services.AddHealthChecks();
+
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<UserDbContext>();
 
@@ -63,6 +65,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.AddIdentityEndpoints();
+app.MapHealthChecks("/healthz");
+
 app.MigrateDatabases();
 
 app.UseHttpsRedirection();
