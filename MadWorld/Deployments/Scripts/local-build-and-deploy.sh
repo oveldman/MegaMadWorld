@@ -15,10 +15,11 @@ sudo kubectl delete deployment,pods,services --all -n default
 build_and_load_image "MadWorld.Backend.API" "api"
 build_and_load_image "MadWorld.Backend.Identity" "identity"
 build_and_load_image "MadWorld.Frontend.Admin" "admin"
-build_and_load_image "MadWorld.Frontend.API" "ui"
+build_and_load_image "MadWorld.Frontend.UI" "ui"
 
 sudo docker image prune -f
 
+minikube kubectl -- apply -f Deployments/Kubernetes/Environment/Secrets/Secrets-Local.yaml
 minikube kubectl -- apply -f Deployments/Kubernetes/Environment/Config.yaml
 minikube kubectl -- apply -f Deployments/Kubernetes/Internal
 minikube kubectl -- apply -f Deployments/Kubernetes/Environment/Ingress-Deployment-Local.yaml

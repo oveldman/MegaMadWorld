@@ -40,7 +40,7 @@ builder.Services.AddSwaggerGen(opt =>
 
 builder.Services.AddDbContext<UserDbContext>(
     options => 
-        options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(UserDbContext))));
+        options.UseNpgsql(builder.BuildConnectionString("IdentityConnectionString")));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
     options.TokenValidationParameters = new TokenValidationParameters {

@@ -72,6 +72,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Integratio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Identity", "MadWorld.Backend.Identity\MadWorld.Backend.Identity.csproj", "{4F865CD5-89EE-4F7E-8073-BCC1A981A0B9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Secrets", "Secrets", "{DBD70294-9427-4DF7-9DDF-9960AA468682}"
+	ProjectSection(SolutionItems) = preProject
+		Deployments\Kubernetes\Environment\Secrets\Secrets-Local.yaml = Deployments\Kubernetes\Environment\Secrets\Secrets-Local.yaml
+		Deployments\Kubernetes\Environment\Secrets\Secrets-Prod-Example.yaml = Deployments\Kubernetes\Environment\Secrets\Secrets-Prod-Example.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,5 +141,6 @@ Global
 		{81AE9E7F-5645-47EF-9180-0EEEFCC4F631} = {77370D3D-4A77-4414-ADD5-D80BFB1B2944}
 		{AE241495-17D3-41BA-ADFE-8F6654D84966} = {77370D3D-4A77-4414-ADD5-D80BFB1B2944}
 		{4F865CD5-89EE-4F7E-8073-BCC1A981A0B9} = {858F32A4-7092-459E-A31A-B4BF9254909C}
+		{DBD70294-9427-4DF7-9DDF-9960AA468682} = {48BCE473-AA74-4127-BAA4-8C8238B6085E}
 	EndGlobalSection
 EndGlobal

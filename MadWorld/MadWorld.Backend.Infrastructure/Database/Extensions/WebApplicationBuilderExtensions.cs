@@ -18,10 +18,17 @@ public static class WebApplicationBuilderExtensions
     {
         builder.Services.AddDbContext<CurriculaVitaeContext>(options =>
             options.UseNpgsql(
-                builder.Configuration.GetConnectionString(nameof(CurriculaVitaeContext)),
+                builder.BuildConnectionString("CurriculaVitaeConnectionString"),
                 b => b.MigrationsAssembly("MadWorld.Backend.Infrastructure")));
                 
         
         builder.Services.AddScoped<ICurriculaVitaeRepository, CurriculaVitaeRepository>();
+    }
+
+    private static string BuildConnectionString(this WebApplicationBuilder builder, string connectionStringName)
+    {
+        var connectionString = builder.Configuration.GetValue<string>($"DbContext:{connectionStringName}")!;
+        var password = builder.Configuration.GetValue<string>("DbContext:Password")!;
+        return connectionString.Replace("{password}", password);
     }
 }

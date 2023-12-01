@@ -21,6 +21,17 @@ spec:
       containers:
         - name: madworld-identity
           image: madworld/vps/identity:latest
+          env:
+            - name: DbContext__Password
+              valueFrom:
+                secretKeyRef:
+                  name: madworld-secrets
+                  key: dbpassword
+            - name: Jwt__Key
+              valueFrom:
+                secretKeyRef:
+                  name: madworld-secrets
+                  key: jwtkey
           imagePullPolicy: Never
           ports:
             - containerPort: 80

@@ -8,8 +8,6 @@ metadata:
 data:
   POSTGRES_DB: "defaultdb"
   POSTGRES_USER: "admin"
-  # This password is not deployed yet in production
-  POSTGRES_PASSWORD: "psltest"
 ---
 kind: PersistentVolume
 apiVersion: v1
@@ -62,6 +60,12 @@ spec:
       containers:
         - name: postgres
           image: postgres:latest
+          env: 
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: madworld-secrets
+                  key: dbpassword
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432

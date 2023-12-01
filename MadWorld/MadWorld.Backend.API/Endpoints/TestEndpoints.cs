@@ -1,5 +1,3 @@
-using Microsoft.OpenApi.Models;
-
 namespace MadWorld.Backend.API.Endpoints;
 
 public static class TestEndpoints
