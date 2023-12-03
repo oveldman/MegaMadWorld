@@ -64,8 +64,6 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
-
 app.AddCurriculumVitaeEndpoints();
 app.AddTestEndpoints();
 app.MapHealthChecks("/healthz");

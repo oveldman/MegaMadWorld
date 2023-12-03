@@ -72,6 +72,4 @@ app.MapHealthChecks("/healthz");
 
 app.MigrateDatabases();
 
-app.UseHttpsRedirection();
-
 app.Run();
