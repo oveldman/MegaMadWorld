@@ -57,6 +57,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{8C746908-3C5D-4B25-AE23-F2BC2D546E1A}"
 	ProjectSection(SolutionItems) = preProject
 		Deployments\Kubernetes\External\Postgres-Deployment.yaml = Deployments\Kubernetes\External\Postgres-Deployment.yaml
+		Deployments\Kubernetes\External\Seq-Deployment.yaml = Deployments\Kubernetes\External\Seq-Deployment.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Domain", "MadWorld.Backend.Domain\MadWorld.Backend.Domain.csproj", "{E2AF8AEE-308C-4E98-B6D3-8E395729ECEA}"

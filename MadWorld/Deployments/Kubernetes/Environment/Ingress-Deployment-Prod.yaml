@@ -30,6 +30,7 @@ spec:
         - admin.mad-world.nl
         - api.mad-world.nl
         - identity.mad-world.nl
+        - log.mad-world.nl
         - www.mad-world.nl
       secretName: madworld-tls
   rules:
@@ -61,6 +62,16 @@ spec:
             backend:
               service:
                 name: madworld-identity-loadbalancer
+                port:
+                  number: 80
+    - host: log.mad-world.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: seq-loadbalancer
                 port:
                   number: 80
     - host: www.mad-world.nl
