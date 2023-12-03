@@ -18,6 +18,10 @@
         </PackageReference>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" />
+        <PackageReference Include="Serilog.AspNetCore" />
+        <PackageReference Include="Serilog.Enrichers.ClientInfo" />
+        <PackageReference Include="Serilog.Exceptions" />
+        <PackageReference Include="Serilog.Sinks.Console" />
         <PackageReference Include="Swashbuckle.AspNetCore" />
     </ItemGroup>
 
