@@ -22,6 +22,7 @@
         <PackageReference Include="Serilog.Enrichers.ClientInfo" />
         <PackageReference Include="Serilog.Exceptions" />
         <PackageReference Include="Serilog.Sinks.Console" />
+        <PackageReference Include="Serilog.Sinks.Seq" />
         <PackageReference Include="Swashbuckle.AspNetCore" />
     </ItemGroup>
 
