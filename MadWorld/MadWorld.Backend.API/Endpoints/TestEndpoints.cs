@@ -16,7 +16,7 @@ public static class TestEndpoints
             .AllowAnonymous();
         
         testEndpoint.MapGet("/IpAddress", (HttpContext context) => 
-            context.Connection.RemoteIpAddress?.ToString() ?? "Unknown")
+            context.Request.Headers["X-Forwarded-For"].ToString())
             .WithName("IpAddress")
             .WithOpenApi()
             .AllowAnonymous();

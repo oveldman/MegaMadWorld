@@ -67,7 +67,7 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
         rateLimiterOptions.AddPolicy("GeneralLimiter", httpContext =>
         {
             return RateLimitPartition.GetFixedWindowLimiter(
-                partitionKey: httpContext.Connection.RemoteIpAddress?.ToString(),
+                partitionKey: httpContext.Request.Headers["X-Forwarded-For"],
                 factory: _ => new FixedWindowRateLimiterOptions()
                 {
                     PermitLimit = 10,
