@@ -14,12 +14,6 @@ public static class TestEndpoints
             .WithName("AnonymousTest")
             .WithOpenApi()
             .AllowAnonymous();
-        
-        testEndpoint.MapGet("/IpAddress", (HttpContext context) => 
-            context.Request.Headers["X-Forwarded-For"].ToString())
-            .WithName("IpAddress")
-            .WithOpenApi()
-            .AllowAnonymous();
 
         testEndpoint.MapGet("/Authorized", () => "Hello Authorized World!")
             .WithName("AuthorizedTest")
