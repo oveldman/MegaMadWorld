@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace MadWorld.Backend.API.Endpoints;
 
 public static class TestEndpoints
@@ -10,6 +12,12 @@ public static class TestEndpoints
 
         testEndpoint.MapGet("/Anonymous", () => "Hello Anonymous World!")
             .WithName("AnonymousTest")
+            .WithOpenApi()
+            .AllowAnonymous();
+        
+        testEndpoint.MapGet("/IpAddress", (HttpContext context) => 
+            context.Connection.RemoteIpAddress?.ToString() ?? "Unknown")
+            .WithName("IpAddress")
             .WithOpenApi()
             .AllowAnonymous();
 
