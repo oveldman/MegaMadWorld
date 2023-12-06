@@ -1,8 +1,10 @@
 using System.Text;
+using System.Threading.RateLimiting;
 using MadWorld.Backend.API.Endpoints;
 using MadWorld.Backend.Application.CommonLogic.Extensions;
 using MadWorld.Backend.Infrastructure.Database.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -58,15 +60,36 @@ builder.Services.AddHealthChecks();
 builder.AddApplication();
 builder.AddDatabase();
 
+builder.Services.AddRateLimiter(rateLimiterOptions =>
+    {
+        rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+        
+        rateLimiterOptions.AddPolicy("GeneralLimiter", httpContext =>
+        {
+            return RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: httpContext.Connection.RemoteIpAddress?.ToString(),
+                factory: _ => new FixedWindowRateLimiterOptions()
+                {
+                    PermitLimit = 10,
+                    Window = TimeSpan.FromSeconds(10)
+                });
+        });
+    }
+);
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
+app.MapHealthChecks("/healthz");
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.AddCurriculumVitaeEndpoints();
 app.AddTestEndpoints();
-app.MapHealthChecks("/healthz");
+
+app.UseRateLimiter();
 
 app.MigrateDatabases();
 

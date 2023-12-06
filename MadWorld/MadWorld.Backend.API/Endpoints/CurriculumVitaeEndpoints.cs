@@ -9,7 +9,8 @@ public static class CurriculumVitaeEndpoints
     public static void AddCurriculumVitaeEndpoints(this WebApplication app)
     {
         var curriculumVitaeEndpoints = app.MapGroup("")
-            .WithTags("CurriculumVitae");
+            .WithTags("CurriculumVitae")
+            .RequireRateLimiting("GeneralLimiter");
         
         curriculumVitaeEndpoints.MapGet("/CurriculumVitae",
                 ([AsParameters] GetCurriculumVitaeRequest request, [FromServices] GetCurriculumVitaeUseCase useCase) =>

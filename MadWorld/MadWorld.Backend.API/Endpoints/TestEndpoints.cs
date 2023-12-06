@@ -5,7 +5,8 @@ public static class TestEndpoints
     public static void AddTestEndpoints(this WebApplication app)
     {
         var testEndpoint = app.MapGroup("/Test")
-            .WithTags("Test");
+            .WithTags("Test")
+            .RequireRateLimiting("GeneralLimiter");
 
         testEndpoint.MapGet("/Anonymous", () => "Hello Anonymous World!")
             .WithName("AnonymousTest")

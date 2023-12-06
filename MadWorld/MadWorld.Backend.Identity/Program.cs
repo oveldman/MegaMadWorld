@@ -1,4 +1,5 @@
 using System.Text;
+using System.Threading.RateLimiting;
 using MadWorld.Backend.Identity.Endpoints;
 using MadWorld.Backend.Identity.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -63,12 +64,34 @@ builder.Services.AddHealthChecks();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<UserDbContext>();
 
+builder.Services.AddRateLimiter(rateLimiterOptions =>
+    {
+        rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+        
+        rateLimiterOptions.AddPolicy("GeneralLimiter", httpContext =>
+        {
+            return RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: httpContext.Connection.RemoteIpAddress?.ToString(),
+                factory: _ => new FixedWindowRateLimiterOptions()
+                {
+                    PermitLimit = 10,
+                    Window = TimeSpan.FromSeconds(10)
+                });
+        });
+    }
+);
+
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
+app.MapHealthChecks("/healthz");
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.AddIdentityEndpoints();
-app.MapHealthChecks("/healthz");
+
+app.UseRateLimiter();
 
 app.MigrateDatabases();
 

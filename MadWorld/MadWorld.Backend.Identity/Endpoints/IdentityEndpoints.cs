@@ -12,7 +12,8 @@ public static class IdentityEndpoints
     public static void AddIdentityEndpoints(this WebApplication app)
     {
         var account = app.MapGroup("/Account");
-        account.MapIdentityApi<IdentityUser>();
+        account.MapIdentityApi<IdentityUser>()
+            .RequireRateLimiting("GeneralLimiter");
         
         account.MapPost("/JwtLogin", async ([FromBody] JwtLoginRequest request, [FromServices] SignInManager<IdentityUser> signInManager) =>
             {
