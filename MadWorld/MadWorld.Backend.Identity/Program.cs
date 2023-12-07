@@ -3,6 +3,7 @@ using System.Threading.RateLimiting;
 using MadWorld.Backend.Identity.Endpoints;
 using MadWorld.Backend.Identity.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -64,6 +65,12 @@ builder.Services.AddHealthChecks();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<UserDbContext>();
 
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
+
 builder.Services.AddRateLimiter(rateLimiterOptions =>
     {
         rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -91,6 +98,7 @@ app.UseAuthorization();
 
 app.AddIdentityEndpoints();
 
+app.UseForwardedHeaders();
 app.UseRateLimiter();
 
 app.MigrateDatabases();

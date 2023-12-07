@@ -1,3 +1,4 @@
+using MadWorld.Shared.Contracts.Test;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MadWorld.Backend.API.Endpoints;
@@ -19,5 +20,15 @@ public static class TestEndpoints
             .WithName("AuthorizedTest")
             .WithOpenApi()
             .RequireAuthorization();
+        
+        testEndpoint.MapGet("/WhatIsMyIp", (HttpContext context) => 
+                new GetWhatIsMyIpResponse()
+                {
+                    HeaderIp = context.Request.Headers["X-Forwarded-For"]!,
+                    RemoteIp = context.Connection.RemoteIpAddress?.ToString() ?? "Unknown"
+                })
+            .WithName("WhatIsMyIp")
+            .WithOpenApi()
+            .AllowAnonymous();
     }
 }

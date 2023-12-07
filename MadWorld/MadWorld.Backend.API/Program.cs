@@ -4,6 +4,7 @@ using MadWorld.Backend.API.Endpoints;
 using MadWorld.Backend.Application.CommonLogic.Extensions;
 using MadWorld.Backend.Infrastructure.Database.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -60,6 +61,12 @@ builder.Services.AddHealthChecks();
 builder.AddApplication();
 builder.AddDatabase();
 
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
+
 builder.Services.AddRateLimiter(rateLimiterOptions =>
     {
         rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -89,6 +96,7 @@ app.UseAuthorization();
 app.AddCurriculumVitaeEndpoints();
 app.AddTestEndpoints();
 
+app.UseForwardedHeaders();
 app.UseRateLimiter();
 
 app.MigrateDatabases();
