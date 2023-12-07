@@ -23,8 +23,7 @@ public static class TestEndpoints
         testEndpoint.MapGet("/WhatIsMyIp", (HttpContext context) => 
                 new GetWhatIsMyIpResponse()
                 {
-                    HeaderIp = context.Request.Headers["X-Forwarded-For"]!,
-                    RemoteIp = context.Connection.RemoteIpAddress?.ToString() ?? "Unknown"
+                    IpAddress = context.Request.Headers["X-Forwarded-For"]!
                 })
             .WithName("WhatIsMyIp")
             .WithOpenApi()
