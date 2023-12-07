@@ -24,7 +24,7 @@ public static class IdentityEndpoints
                     }
                     
                     var tokenHandler = new JwtSecurityTokenHandler();
-                    var key = Encoding.ASCII.GetBytes(app.Configuration["Jwt:Key"]);
+                    var key = Encoding.ASCII.GetBytes(app.Configuration["Jwt:Key"]!);
 
                     var claims = new List<Claim>
                     {
