@@ -1,5 +1,4 @@
 using MadWorld.Shared.Contracts.Test;
-using Microsoft.AspNetCore.Mvc;
 
 namespace MadWorld.Backend.API.Endpoints;
 
