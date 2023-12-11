@@ -89,6 +89,8 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
 );
 
 var app = builder.Build();
+app.UseForwardedHeaders();
+
 app.UseSwagger();
 app.UseSwaggerUI();
 app.MapHealthChecks("/healthz");
@@ -98,7 +100,6 @@ app.UseAuthorization();
 
 app.AddIdentityEndpoints();
 
-app.UseForwardedHeaders();
 app.UseRateLimiter();
 
 app.MigrateDatabases();

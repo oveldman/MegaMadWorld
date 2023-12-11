@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Internal", "Internal", "{73
 		Deployments\Kubernetes\Internal\UI-Deployment.yaml = Deployments\Kubernetes\Internal\UI-Deployment.yaml
 		Deployments\Kubernetes\Internal\Admin-Deployment.yaml = Deployments\Kubernetes\Internal\Admin-Deployment.yaml
 		Deployments\Kubernetes\Internal\Identity-Deployment.yaml = Deployments\Kubernetes\Internal\Identity-Deployment.yaml
+		Deployments\Kubernetes\Internal\ShipSimulator-Backend-Deployment.yaml = Deployments\Kubernetes\Internal\ShipSimulator-Backend-Deployment.yaml
+		Deployments\Kubernetes\Internal\ShipSimulator-Frontend-Deployment.yaml = Deployments\Kubernetes\Internal\ShipSimulator-Frontend-Deployment.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Environment", "Environment", "{48BCE473-AA74-4127-BAA4-8C8238B6085E}"
@@ -79,6 +81,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Secrets", "Secrets", "{DBD7
 		Deployments\Kubernetes\Environment\Secrets\Secrets-Local.yaml = Deployments\Kubernetes\Environment\Secrets\Secrets-Local.yaml
 		Deployments\Kubernetes\Environment\Secrets\Secrets-Prod-Example.yaml = Deployments\Kubernetes\Environment\Secrets\Secrets-Prod-Example.yaml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.ShipSimulator.API", "MadWorld.ShipSimulator.API\MadWorld.ShipSimulator.API.csproj", "{66AE19B1-B036-4C65-AA59-707A17D99A5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.ShipSimulator.UI", "MadWorld.ShipSimulator.UI\MadWorld.ShipSimulator.UI.csproj", "{86F9613C-BD43-4E7A-8600-0F100AA4C489}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -126,6 +132,14 @@ Global
 		{4F865CD5-89EE-4F7E-8073-BCC1A981A0B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F865CD5-89EE-4F7E-8073-BCC1A981A0B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F865CD5-89EE-4F7E-8073-BCC1A981A0B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66AE19B1-B036-4C65-AA59-707A17D99A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66AE19B1-B036-4C65-AA59-707A17D99A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66AE19B1-B036-4C65-AA59-707A17D99A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66AE19B1-B036-4C65-AA59-707A17D99A5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F9613C-BD43-4E7A-8600-0F100AA4C489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F9613C-BD43-4E7A-8600-0F100AA4C489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F9613C-BD43-4E7A-8600-0F100AA4C489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F9613C-BD43-4E7A-8600-0F100AA4C489}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{90092A5F-7D1D-4DC3-8958-9FFB2D26A304} = {858F32A4-7092-459E-A31A-B4BF9254909C}
@@ -144,5 +158,7 @@ Global
 		{AE241495-17D3-41BA-ADFE-8F6654D84966} = {77370D3D-4A77-4414-ADD5-D80BFB1B2944}
 		{4F865CD5-89EE-4F7E-8073-BCC1A981A0B9} = {858F32A4-7092-459E-A31A-B4BF9254909C}
 		{DBD70294-9427-4DF7-9DDF-9960AA468682} = {48BCE473-AA74-4127-BAA4-8C8238B6085E}
+		{66AE19B1-B036-4C65-AA59-707A17D99A5B} = {858F32A4-7092-459E-A31A-B4BF9254909C}
+		{86F9613C-BD43-4E7A-8600-0F100AA4C489} = {858F32A4-7092-459E-A31A-B4BF9254909C}
 	EndGlobalSection
 EndGlobal

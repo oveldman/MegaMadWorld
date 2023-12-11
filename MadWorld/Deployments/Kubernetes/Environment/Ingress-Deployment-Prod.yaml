@@ -33,6 +33,8 @@ spec:
         - api.mad-world.nl
         - identity.mad-world.nl
         - log.mad-world.nl
+        - shipsimulator.mad-world.nl
+        - shipsimulator-api.mad-world.nl
         - www.mad-world.nl
       secretName: madworld-tls
   rules:
@@ -74,6 +76,26 @@ spec:
             backend:
               service:
                 name: seq-loadbalancer
+                port:
+                  number: 80
+    - host: shipsimulator.mad-world.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: madworld-shipsimulator-frontend-loadbalancer
+                port:
+                  number: 80
+    - host: shipsimulator-api.mad-world.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: madworld-shipsimulator-backend-loadbalancer
                 port:
                   number: 80
     - host: www.mad-world.nl

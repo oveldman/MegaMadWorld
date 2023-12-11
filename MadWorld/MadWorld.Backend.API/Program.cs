@@ -5,7 +5,6 @@ using MadWorld.Backend.Application.CommonLogic.Extensions;
 using MadWorld.Backend.Infrastructure.Database.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -85,6 +84,7 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
 );
 
 var app = builder.Build();
+app.UseForwardedHeaders();
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -96,7 +96,6 @@ app.UseAuthorization();
 app.AddCurriculumVitaeEndpoints();
 app.AddTestEndpoints();
 
-app.UseForwardedHeaders();
 app.UseRateLimiter();
 
 app.MigrateDatabases();

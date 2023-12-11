@@ -17,6 +17,8 @@ build_and_load_image "MadWorld.Backend.API" "api"
 build_and_load_image "MadWorld.Backend.Identity" "identity"
 build_and_load_image "MadWorld.Frontend.Admin" "admin"
 build_and_load_image "MadWorld.Frontend.UI" "ui"
+build_and_load_image "MadWorld.ShipSimulator.API" "shipsimulatorbackend"
+build_and_load_image "MadWorld.ShipSimulator.UI" "shipsimulatorfrontend"
 
 sudo docker image prune -f
 

@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: madworld-identity-deployment
+  name: madworld-shipsimulator-backend-deployment
   namespace: madworld
   labels:
-    app: madworld-identity
-    name: backend-identity
+    app: madworld-shipsimulator-backend
+    name: shipsimulator-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: madworld-identity
-      task: backend-identity
+      app: madworld-shipsimulator-backend
+      task: shipsimulator-api
   template:
     metadata:
       labels:
-        app: madworld-identity
-        task: backend-identity
+        app: madworld-shipsimulator-backend
+        task: shipsimulator-api
     spec:
       containers:
-        - name: madworld-identity
-          image: madworld/vps/identity:latest
+        - name: madworld-shipsimulator-backend
+          image: madworld/vps/shipsimulatorbackend:latest
           args:
             - /server
           livenessProbe:
@@ -47,15 +47,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: madworld-identity-loadbalancer
+  name: madworld-shipsimulator-backend-loadbalancer
   namespace: madworld
 spec:
   selector:
-    app: madworld-identity
-    task: backend-identity
+    app: madworld-shipsimulator-backend
+    task: shipsimulator-api
   ports:
     - protocol: TCP
       name: http
-      port: 8083
+      port: 8084
       targetPort: 80
   type: LoadBalancer

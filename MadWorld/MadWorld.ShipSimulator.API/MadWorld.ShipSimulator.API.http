@@ -1,0 +1,6 @@
+@MadWorld.ShipSimulator.API_HostAddress = http://localhost:5187
+
+GET {{MadWorld.ShipSimulator.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
