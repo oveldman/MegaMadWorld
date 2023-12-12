@@ -11,17 +11,25 @@ public static class IdentityEndpoints
 {
     public static void AddIdentityEndpoints(this WebApplication app)
     {
-        var account = app.MapGroup("/Account");
+        var account = app.MapGroup("/Account")
+            .WithTags("Account");
+        
         account.MapIdentityApi<IdentityUser>()
             .RequireRateLimiting("GeneralLimiter");
         
-        account.MapPost("/JwtLogin", async ([FromBody] JwtLoginRequest request, [FromServices] SignInManager<IdentityUser> signInManager) =>
+        account.MapPost("/JwtLogin", 
+                async ([FromBody] JwtLoginRequest request, 
+                [FromServices] SignInManager<IdentityUser> signInManager,
+                [FromServices] UserManager<IdentityUser> userManager) =>
             {
                     var result = await signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
                     if (!result.Succeeded)
                     {
                         return Results.Unauthorized();
                     }
+
+                    var user = await userManager.FindByEmailAsync(request.Email);
+                    var roles = await userManager.GetRolesAsync(user!);
                     
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var key = Encoding.ASCII.GetBytes(app.Configuration["Jwt:Key"]!);
@@ -29,9 +37,13 @@ public static class IdentityEndpoints
                     var claims = new List<Claim>
                     {
                         new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new(JwtRegisteredClaimNames.Sub, request.Email),
-                        new(JwtRegisteredClaimNames.Email, request.Email),
+                        new(JwtRegisteredClaimNames.Sub, user!.Email!),
+                        new(JwtRegisteredClaimNames.Email, user.Email!),
                     };
+                    
+                    claims.AddRange(
+                        roles.Select(
+                            role => new Claim(ClaimTypes.Role, role)));
                     
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {

@@ -1,5 +1,7 @@
 using System.Text;
 using System.Threading.RateLimiting;
+using MadWorld.Backend.Identity.Application;
+using MadWorld.Backend.Identity.Domain;
 using MadWorld.Backend.Identity.Endpoints;
 using MadWorld.Backend.Identity.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,6 +15,9 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, configuration) => 
     configuration.ReadFrom.Configuration(context.Configuration));
+
+builder.Services.AddScoped<GetUsersUseCase>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
@@ -58,11 +63,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
     };
 });
+
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy(Policies.IdentityAdministrator, policy =>
+        policy
+            .RequireRole(Roles.IdentityAdministrator));
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddHealthChecks();
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<UserDbContext>();
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
@@ -99,9 +111,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.AddIdentityEndpoints();
+app.AddUserManagerEndpoints();
 
 app.UseRateLimiter();
 
 app.MigrateDatabases();
+await app.AddFirstAdminAccountAsync();
 
 app.Run();
