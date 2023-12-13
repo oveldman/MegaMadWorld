@@ -12,10 +12,11 @@ public static class IdentityEndpoints
     public static void AddIdentityEndpoints(this WebApplication app)
     {
         var account = app.MapGroup("/Account")
-            .WithTags("Account");
-        
-        account.MapIdentityApi<IdentityUser>()
+            .WithTags("Account")
             .RequireRateLimiting("GeneralLimiter");
+
+        account.MapIdentityApi<IdentityUser>()
+            .WithOpenApi();
         
         account.MapPost("/JwtLogin", 
                 async ([FromBody] JwtLoginRequest request, 
@@ -40,10 +41,13 @@ public static class IdentityEndpoints
                         new(JwtRegisteredClaimNames.Sub, user!.Email!),
                         new(JwtRegisteredClaimNames.Email, user.Email!),
                     };
-                    
-                    claims.AddRange(
-                        roles.Select(
-                            role => new Claim(ClaimTypes.Role, role)));
+
+                    if (roles.Any())
+                    {
+                        claims.AddRange(
+                            roles.Select(role => 
+                                new Claim(ClaimTypes.Role, role)));
+                    }
                     
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {

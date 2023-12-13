@@ -53,6 +53,10 @@ builder.Services.AddDbContext<UserDbContext>(
     options => 
         options.UseNpgsql(builder.BuildConnectionString("IdentityConnectionString")));
 
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<UserDbContext>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
     options.TokenValidationParameters = new TokenValidationParameters {
         ValidateIssuer = true,
@@ -67,16 +71,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy(Policies.IdentityAdministrator, policy =>
-        policy
-            .RequireRole(Roles.IdentityAdministrator));
+        policy.RequireRole(Roles.IdentityAdministrator));
 
 builder.Services.AddAuthorization();
 
 builder.Services.AddHealthChecks();
-
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<UserDbContext>();
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -120,3 +119,5 @@ app.MigrateDatabases();
 await app.AddFirstAdminAccountAsync();
 
 app.Run();
+
+public sealed partial class Program { }

@@ -9,11 +9,12 @@ public static class UserManagerEndpoints
     public static void AddUserManagerEndpoints(this WebApplication app)
     {
         var userManager = app.MapGroup("/UserManager")
+            .WithTags("UserManager")
             .RequireRateLimiting("GeneralLimiter")
-            .WithTags("UserManager");
+            .RequireAuthorization(Policies.IdentityAdministrator);
 
         userManager.MapGet("/Users", ([FromServices] GetUsersUseCase userCase)
                 => userCase.GetUsers())
-            .RequireAuthorization(Policies.IdentityAdministrator);
+            .WithOpenApi();
     }
 }
