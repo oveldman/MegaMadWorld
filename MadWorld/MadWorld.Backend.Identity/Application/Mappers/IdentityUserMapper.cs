@@ -14,9 +14,9 @@ public static class IdentityUserMapper
 
     private static UserContract ToUserContract(IdentityUser user)
     {
-        return new UserContract()
+        return new UserContract
         {
-
+            Email = user.Email!
         };
     }
 }
