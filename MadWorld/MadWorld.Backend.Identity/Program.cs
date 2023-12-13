@@ -1,9 +1,9 @@
 using System.Text;
 using System.Threading.RateLimiting;
 using MadWorld.Backend.Identity.Application;
-using MadWorld.Backend.Identity.Domain;
 using MadWorld.Backend.Identity.Endpoints;
 using MadWorld.Backend.Identity.Infrastructure;
+using MadWorld.Shared.Settings.API;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;

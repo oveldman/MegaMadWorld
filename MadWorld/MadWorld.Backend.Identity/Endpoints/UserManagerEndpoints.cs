@@ -1,5 +1,5 @@
 using MadWorld.Backend.Identity.Application;
-using MadWorld.Backend.Identity.Domain;
+using MadWorld.Shared.Settings.API;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MadWorld.Backend.Identity.Endpoints;

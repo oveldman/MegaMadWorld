@@ -1,4 +1,4 @@
-using MadWorld.Backend.Identity.Domain;
+using MadWorld.Shared.Settings.API;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
