@@ -98,7 +98,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.ShipSimulator.Infr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.ShipSimulator.Contracts", "MadWorld.ShipSimulator.Contracts\MadWorld.ShipSimulator.Contracts.csproj", "{739B4367-E562-4F59-BF20-F138250A3C15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Shared.Settings", "MadWorld.Shared.Settings\MadWorld.Shared.Settings.csproj", "{62F4349E-47E8-4B4E-93EC-99C021AE9374}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Shared.Infrastructure", "MadWorld.Shared.Infrastructure\MadWorld.Shared.Infrastructure.csproj", "{62F4349E-47E8-4B4E-93EC-99C021AE9374}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

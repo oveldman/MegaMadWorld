@@ -3,7 +3,8 @@ using System.Threading.RateLimiting;
 using MadWorld.Backend.Identity.Application;
 using MadWorld.Backend.Identity.Endpoints;
 using MadWorld.Backend.Identity.Infrastructure;
-using MadWorld.Shared.Settings.API;
+using MadWorld.Shared.Infrastructure.Databases;
+using MadWorld.Shared.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
@@ -115,7 +116,7 @@ app.AddUserManagerEndpoints();
 
 app.UseRateLimiter();
 
-app.MigrateDatabases();
+app.MigrateDatabase<UserDbContext>();
 await app.AddFirstAdminAccountAsync();
 
 app.Run();

@@ -1,4 +1,4 @@
-using MadWorld.Shared.Settings.API;
+using MadWorld.Shared.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,13 +6,6 @@ namespace MadWorld.Backend.Identity.Infrastructure;
 
 public static class IApplicationBuilderExtensions
 {
-    public static void MigrateDatabases(this IApplicationBuilder app)
-    {
-        using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()!.CreateScope();
-        var context = serviceScope.ServiceProvider.GetRequiredService<UserDbContext>();
-        context.Database.Migrate();
-    }
-
     public static async Task AddFirstAdminAccountAsync(this IApplicationBuilder app)
     {
         const string defaultUser = "oveldman@gmail.com";

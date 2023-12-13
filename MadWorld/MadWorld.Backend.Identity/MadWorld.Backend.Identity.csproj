@@ -33,7 +33,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MadWorld.Shared.Settings\MadWorld.Shared.Settings.csproj" />
+      <ProjectReference Include="..\MadWorld.Shared.Infrastructure\MadWorld.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

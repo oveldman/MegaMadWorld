@@ -1,6 +1,6 @@
-namespace MadWorld.Shared.Settings.API;
+namespace MadWorld.Shared.Infrastructure.Settings;
 
-public static class Policies
+public static class Roles
 {
     public const string IdentityAdministrator = nameof(IdentityAdministrator);
 }

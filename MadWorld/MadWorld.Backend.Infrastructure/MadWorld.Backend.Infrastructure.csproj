@@ -17,5 +17,6 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Backend.Domain\MadWorld.Backend.Domain.csproj" />
+      <ProjectReference Include="..\MadWorld.Shared.Infrastructure\MadWorld.Shared.Infrastructure.csproj" />
     </ItemGroup>
 </Project>
