@@ -16,6 +16,7 @@ public static class IdentityUserMapper
     {
         return new UserContract
         {
+            Id = user.Id,
             Email = user.Email!
         };
     }
