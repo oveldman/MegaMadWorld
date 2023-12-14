@@ -39,7 +39,8 @@ public static class IdentityEndpoints
                     var claims = new List<Claim>
                     {
                         new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new(JwtRegisteredClaimNames.Sub, user!.Email!),
+                        new(ClaimTypes.NameIdentifier, user!.Id),
+                        new(JwtRegisteredClaimNames.Sub, user.Email!),
                         new(JwtRegisteredClaimNames.Email, user.Email!),
                     };
 
