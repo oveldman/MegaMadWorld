@@ -1,4 +1,4 @@
-using MadWorld.Backend.Identity.Endpoints;
+using MadWorld.Backend.Identity.Contracts;
 using Microsoft.AspNetCore.Identity;
 
 namespace MadWorld.Backend.Identity.Application.Mappers;

@@ -1,4 +1,4 @@
-namespace MadWorld.Backend.Identity.Endpoints;
+namespace MadWorld.Backend.Identity.Contracts;
 
 public sealed class UserContract
 {
