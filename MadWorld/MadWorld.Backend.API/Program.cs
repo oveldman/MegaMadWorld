@@ -3,6 +3,7 @@ using System.Threading.RateLimiting;
 using MadWorld.Backend.API.Endpoints;
 using MadWorld.Backend.Application.CommonLogic.Extensions;
 using MadWorld.Backend.Infrastructure.Database.Extensions;
+using MadWorld.Shared.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Tokens;
@@ -70,7 +71,7 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
     {
         rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
         
-        rateLimiterOptions.AddPolicy("GeneralLimiter", httpContext =>
+        rateLimiterOptions.AddPolicy(RateLimiterNames.GeneralLimiter, httpContext =>
         {
             return RateLimitPartition.GetFixedWindowLimiter(
                 partitionKey: httpContext.Request.Headers["X-Forwarded-For"],

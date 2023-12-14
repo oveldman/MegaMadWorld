@@ -88,7 +88,7 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
     {
         rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
         
-        rateLimiterOptions.AddPolicy("GeneralLimiter", httpContext =>
+        rateLimiterOptions.AddPolicy(RateLimiterNames.GeneralLimiter, httpContext =>
         {
             return RateLimitPartition.GetFixedWindowLimiter(
                 partitionKey: httpContext.Request.Headers["X-Forwarded-For"],

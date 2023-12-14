@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using MadWorld.Shared.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -13,7 +14,7 @@ public static class IdentityEndpoints
     {
         var account = app.MapGroup("/Account")
             .WithTags("Account")
-            .RequireRateLimiting("GeneralLimiter");
+            .RequireRateLimiting(RateLimiterNames.GeneralLimiter);
 
         account.MapIdentityApi<IdentityUser>()
             .WithOpenApi();

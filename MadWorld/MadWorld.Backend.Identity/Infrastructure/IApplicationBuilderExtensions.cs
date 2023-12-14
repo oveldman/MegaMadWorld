@@ -15,7 +15,8 @@ public static class IApplicationBuilderExtensions
         var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
         
         var user = await FindOrCreateUser(userManager, defaultUser);
-        await FindOrCreateRole(roleManager);
+        await FindOrCreateRole(roleManager, Roles.IdentityAdministrator);
+        await FindOrCreateRole(roleManager, Roles.IdentityShipSimulator);
         await AddRoleToDefaultUser(userManager, user);
     }
 
@@ -37,12 +38,12 @@ public static class IApplicationBuilderExtensions
         return (await userManager.FindByEmailAsync(defaultUser))!;
     }
     
-    private static async Task FindOrCreateRole(RoleManager<IdentityRole> roleManager)
+    private static async Task FindOrCreateRole(RoleManager<IdentityRole> roleManager, string roleName)
     {
-        var role = await roleManager.FindByNameAsync(Roles.IdentityAdministrator);
+        var role = await roleManager.FindByNameAsync(roleName);
         if (role is null)
         {
-            var newRole = new IdentityRole(Roles.IdentityAdministrator);
+            var newRole = new IdentityRole(roleName);
             await roleManager.CreateAsync(newRole);
         }
     }

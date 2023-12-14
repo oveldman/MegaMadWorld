@@ -9,7 +9,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" />
         <PackageReference Include="Serilog.AspNetCore" />
         <PackageReference Include="Serilog.Enrichers.ClientInfo" />
         <PackageReference Include="Serilog.Exceptions" />
@@ -22,6 +29,11 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MadWorld.ShipSimulator.Application\MadWorld.ShipSimulator.Application.csproj" />
+      <ProjectReference Include="..\MadWorld.ShipSimulator.Infrastructure\MadWorld.ShipSimulator.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ public static class UserManagerEndpoints
     {
         var userManager = app.MapGroup("/UserManager")
             .WithTags("UserManager")
-            .RequireRateLimiting("GeneralLimiter")
+            .RequireRateLimiting(RateLimiterNames.GeneralLimiter)
             .RequireAuthorization(Policies.IdentityAdministrator);
 
         userManager.MapGet("/Users", ([FromServices] GetUsersUseCase userCase)

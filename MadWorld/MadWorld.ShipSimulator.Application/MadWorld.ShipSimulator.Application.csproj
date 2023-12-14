@@ -6,4 +6,12 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MadWorld.ShipSimulator.Domain\MadWorld.ShipSimulator.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    </ItemGroup>
+
 </Project>

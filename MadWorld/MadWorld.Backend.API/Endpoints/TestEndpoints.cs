@@ -1,4 +1,5 @@
 using MadWorld.Shared.Contracts.Test;
+using MadWorld.Shared.Infrastructure.Settings;
 
 namespace MadWorld.Backend.API.Endpoints;
 
@@ -8,7 +9,7 @@ public static class TestEndpoints
     {
         var testEndpoint = app.MapGroup("/Test")
             .WithTags("Test")
-            .RequireRateLimiting("GeneralLimiter");
+            .RequireRateLimiting(RateLimiterNames.GeneralLimiter);
 
         testEndpoint.MapGet("/Anonymous", () => "Hello Anonymous World!")
             .WithName("AnonymousTest")
