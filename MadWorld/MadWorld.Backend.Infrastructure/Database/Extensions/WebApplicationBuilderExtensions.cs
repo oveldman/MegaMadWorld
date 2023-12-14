@@ -1,5 +1,6 @@
 using MadWorld.Backend.Domain.CurriculaVitae;
 using MadWorld.Backend.Infrastructure.CurriculaVitae;
+using MadWorld.Shared.Infrastructure.Databases;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,12 +24,5 @@ public static class WebApplicationBuilderExtensions
                 
         
         builder.Services.AddScoped<ICurriculaVitaeRepository, CurriculaVitaeRepository>();
-    }
-
-    private static string BuildConnectionString(this WebApplicationBuilder builder, string connectionStringName)
-    {
-        var connectionString = builder.Configuration.GetValue<string>($"DbContext:{connectionStringName}")!;
-        var password = builder.Configuration.GetValue<string>("DbContext:Password")!;
-        return connectionString.Replace("{password}", password);
     }
 }
