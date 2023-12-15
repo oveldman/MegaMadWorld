@@ -1,4 +1,5 @@
 using MadWorld.Backend.Identity.Application;
+using MadWorld.Backend.Identity.Contracts.UserManagers;
 using MadWorld.Shared.Infrastructure.Settings;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,10 @@ public static class UserManagerEndpoints
         
         userManager.MapGet("/User", ([FromQuery]string id, [FromServices] GetUserUseCase userCase)
                 => userCase.GetUser(id))
+            .WithOpenApi();
+        
+        userManager.MapPatch("/User", ([FromBody] PatchUserRequest request, [FromServices] PatchUserUseCase userCase)
+                => userCase.PatchUser(request))
             .WithOpenApi();
         
         userManager.MapGet("/Roles", ([FromServices] GetRolesUseCase userCase)

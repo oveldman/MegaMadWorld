@@ -19,6 +19,9 @@ builder.Host.UseSerilog((context, configuration) =>
 
 builder.Services.AddSingleton<IEmailSender<IdentityUser>, EmailSender>();
 builder.Services.AddScoped<GetUsersUseCase>();
+builder.Services.AddScoped<GetUserUseCase>();
+builder.Services.AddScoped<PatchUserUseCase>();
+builder.Services.AddScoped<GetRolesUseCase>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddEndpointsApiExplorer();

@@ -1,8 +1,7 @@
 namespace MadWorld.Backend.Identity.Contracts.UserManagers;
 
-public class GetUserResponse
+public sealed class PatchUserRequest
 {
-    public required string Id { get; init; }
-    public required string Email { get; init; }
+    public string Id { get; set; } = string.Empty;
     public IReadOnlyList<string> Roles { get; set; } = Array.Empty<string>();
 }
