@@ -17,6 +17,10 @@ public static class UserManagerEndpoints
                 => userCase.GetUsers())
             .WithOpenApi();
         
+        userManager.MapGet("/User", ([FromQuery]string id, [FromServices] GetUserUseCase userCase)
+                => userCase.GetUser(id))
+            .WithOpenApi();
+        
         userManager.MapGet("/Roles", ([FromServices] GetRolesUseCase userCase)
                 => userCase.GetRoles())
             .WithOpenApi();

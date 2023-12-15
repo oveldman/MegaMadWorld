@@ -1,4 +1,4 @@
-using MadWorld.Backend.Identity.Contracts;
+using MadWorld.Backend.Identity.Contracts.UserManagers;
 using Microsoft.AspNetCore.Identity;
 
 namespace MadWorld.Backend.Identity.Application;

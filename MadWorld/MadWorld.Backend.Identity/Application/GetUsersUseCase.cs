@@ -1,5 +1,5 @@
 using MadWorld.Backend.Identity.Application.Mappers;
-using MadWorld.Backend.Identity.Contracts;
+using MadWorld.Backend.Identity.Contracts.UserManagers;
 using MadWorld.Backend.Identity.Infrastructure;
 
 namespace MadWorld.Backend.Identity.Application;
