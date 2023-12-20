@@ -21,10 +21,25 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      - name: Build and push API
         uses: docker/build-push-action@v5
         with:
           context: ./MadWorld
           file: ./MadWorld/MadWorld.Backend.API/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-api:latest
+      - name: Build and push Identity
+        uses: docker/build-push-action@v5
+        with:
+          context: ./MadWorld
+          file: ./MadWorld/MadWorld.Backend.Identity/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-identity:latest
+          
+      - name: Build and push Ship Simulator API
+        uses: docker/build-push-action@v5
+        with:
+          context: ./MadWorld
+          file: ./MadWorld/MadWorld.ShipSimulator.API/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-api:latest
