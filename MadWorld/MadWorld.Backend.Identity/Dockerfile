@@ -1,4 +1,5 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+﻿FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+ARG BUILDPLATFORM
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
@@ -6,7 +7,9 @@ EXPOSE 443
 # Ensure we listen on any IP Address 
 ENV DOTNET_URLS=http://+:80
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILDPLATFORM
+
 WORKDIR /src
 COPY ["MadWorld.Backend.Identity/MadWorld.Backend.Identity.csproj", "MadWorld.Backend.Identity/"]
 RUN dotnet restore "MadWorld.Backend.Identity/MadWorld.Backend.Identity.csproj"
