@@ -398,5 +398,8 @@ FodyWeavers.xsd
 .idea/
 *.sln.iml
 
+# MacOS
+.DS_Store
+
 # MadWorldVps
 Secrets-Prod.yaml
