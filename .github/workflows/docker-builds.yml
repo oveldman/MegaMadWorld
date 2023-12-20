@@ -5,6 +5,10 @@ on:
     branches:
       - 'main'
 
+env:
+  DEFAULT_CONTEXT: ./MadWorld
+  PLATFORM_BUILDS: linux/amd64,linux/arm64
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -25,43 +29,49 @@ jobs:
       - name: Build and push API
         uses: docker/build-push-action@v5
         with:
-          context: ./MadWorld
+          context: ${{ env.DEFAULT_CONTEXT }}
           file: ./MadWorld/MadWorld.Backend.API/Dockerfile
           push: true
+          platforms: ${{ env.PLATFORM_BUILDS }}
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-api:latest
       - name: Build and push Identity
         uses: docker/build-push-action@v5
         with:
-          context: ./MadWorld
+          context: ${{ env.DEFAULT_CONTEXT }}
           file: ./MadWorld/MadWorld.Backend.Identity/Dockerfile
           push: true
+          platforms: ${{ env.PLATFORM_BUILDS }}
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-identity:latest
       - name: Build and push Ship Simulator API
         uses: docker/build-push-action@v5
         with:
-          context: ./MadWorld
+          context: ${{ env.DEFAULT_CONTEXT }}
           file: ./MadWorld/MadWorld.ShipSimulator.API/Dockerfile
           push: true
+          platforms: ${{ env.PLATFORM_BUILDS }}
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-api:latest
           
       - name: Build and push Admin
         uses: docker/build-push-action@v5
         with:
-          context: ./MadWorld
+          context: ${{ env.DEFAULT_CONTEXT }}
           file: ./MadWorld/MadWorld.Frontend.Admin/Dockerfile
           push: true
+          platforms: ${{ env.PLATFORM_BUILDS }}
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-admin:latest
       - name: Build and push UI
         uses: docker/build-push-action@v5
         with:
-          context: ./MadWorld
+          context: ${{ env.DEFAULT_CONTEXT }}
           file: ./MadWorld/MadWorld.Frontend.UI/Dockerfile
           push: true
+          platforms: ${{ env.PLATFORM_BUILDS }}
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-ui:latest
       - name: Build and push Ship Simulator UI
         uses: docker/build-push-action@v5
         with:
-          context: ./MadWorld
+          context: ${{ env.DEFAULT_CONTEXT }}
           file: ./MadWorld/MadWorld.ShipSimulator.UI/Dockerfile
           push: true
+          platforms: ${{ env.PLATFORM_BUILDS }}
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-ui:latest
