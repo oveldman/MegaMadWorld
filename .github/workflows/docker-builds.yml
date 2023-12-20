@@ -25,6 +25,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./MadWorld
-          file: MadWorld.Backend.API/Dockerfile
+          file: ./MadWorld/MadWorld.Backend.API/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-api:latest
