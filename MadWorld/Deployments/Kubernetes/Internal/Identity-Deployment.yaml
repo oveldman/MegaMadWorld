@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: madworld-identity
-          image: madworld/vps/identity:latest
+          image: rodero/madworld-identity:latest
           args:
             - /server
           livenessProbe:
@@ -40,7 +40,7 @@ spec:
                 secretKeyRef:
                   name: madworld-secrets
                   key: jwtkey
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 ---

@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: madworld-shipsimulator-backend
-          image: madworld/vps/shipsimulatorbackend:latest
+          image: rodero/madworld-shipsimulator-apilatest
           args:
             - /server
           livenessProbe:
@@ -40,7 +40,7 @@ spec:
                 secretKeyRef:
                   name: madworld-secrets
                   key: jwtkey
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 ---

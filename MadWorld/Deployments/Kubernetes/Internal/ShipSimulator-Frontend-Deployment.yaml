@@ -20,8 +20,8 @@ spec:
     spec:
       containers:
         - name: madworld-shipsimulator-frontend
-          image: madworld/vps/shipsimulatorfrontend:latest
-          imagePullPolicy: Never
+          image: rodero/madworld-shipsimulator-ui:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 ---

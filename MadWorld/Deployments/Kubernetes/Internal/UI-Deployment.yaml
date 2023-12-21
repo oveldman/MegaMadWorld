@@ -20,8 +20,8 @@ spec:
     spec:
       containers:
         - name: madworld-ui
-          image: madworld/vps/ui:latest
-          imagePullPolicy: Never
+          image: rodero/madworld-ui:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 ---
