@@ -34,7 +34,7 @@ jobs:
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-api:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-api:${{ github.ref_name }}
             ${{ secrets.DOCKERHUB_USERNAME }}/madworld-api:latest
       - name: Build and push Identity
         uses: docker/build-push-action@v5
@@ -44,7 +44,7 @@ jobs:
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-identity:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-identity:${{ github.ref_name }}
             ${{ secrets.DOCKERHUB_USERNAME }}/madworld-identity:latest
       - name: Build and push Ship Simulator API
         uses: docker/build-push-action@v5
@@ -54,7 +54,7 @@ jobs:
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-api:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-api:${{ github.ref_name }}
             ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-api:latest
           
       - name: Build and push Admin
@@ -65,7 +65,7 @@ jobs:
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-admin:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-admin:${{ github.ref_name }}
             ${{ secrets.DOCKERHUB_USERNAME }}/madworld-admin:latest
       - name: Build and push UI
         uses: docker/build-push-action@v5
@@ -75,7 +75,7 @@ jobs:
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-ui:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-ui:${{ github.ref_name }}
             ${{ secrets.DOCKERHUB_USERNAME }}/madworld-ui:latest
       - name: Build and push Ship Simulator UI
         uses: docker/build-push-action@v5
@@ -85,5 +85,5 @@ jobs:
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-ui:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-ui:${{ github.ref_name }}
             ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-ui:latest
