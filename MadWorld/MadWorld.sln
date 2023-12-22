@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		..\Documentation\Microk8s.md = ..\Documentation\Microk8s.md
 		..\Documentation\MiniKube.md = ..\Documentation\MiniKube.md
 		..\Documentation\Config.md = ..\Documentation\Config.md
+		..\Documentation\Update.md = ..\Documentation\Update.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{7B3A6ED8-9613-4F88-A788-0B298D4F3076}"
