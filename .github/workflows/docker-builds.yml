@@ -33,7 +33,9 @@ jobs:
           file: ./MadWorld/MadWorld.Backend.API/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-api:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-api:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-api:latest
       - name: Build and push Identity
         uses: docker/build-push-action@v5
         with:
@@ -41,7 +43,9 @@ jobs:
           file: ./MadWorld/MadWorld.Backend.Identity/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-identity:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-identity:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-identity:latest
       - name: Build and push Ship Simulator API
         uses: docker/build-push-action@v5
         with:
@@ -49,7 +53,9 @@ jobs:
           file: ./MadWorld/MadWorld.ShipSimulator.API/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-api:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-api:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-api:latest
           
       - name: Build and push Admin
         uses: docker/build-push-action@v5
@@ -58,7 +64,9 @@ jobs:
           file: ./MadWorld/MadWorld.Frontend.Admin/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-admin:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-admin:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-admin:latest
       - name: Build and push UI
         uses: docker/build-push-action@v5
         with:
@@ -66,7 +74,9 @@ jobs:
           file: ./MadWorld/MadWorld.Frontend.UI/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-ui:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-ui:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-ui:latest
       - name: Build and push Ship Simulator UI
         uses: docker/build-push-action@v5
         with:
@@ -74,4 +84,6 @@ jobs:
           file: ./MadWorld/MadWorld.ShipSimulator.UI/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-ui:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-ui:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-ui:latest
