@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: madworld-shipsimulator-backend
-          image: rodero/madworld-shipsimulator-apilatest
+          image: rodero/madworld-shipsimulator-api:latest
           args:
             - /server
           livenessProbe:
