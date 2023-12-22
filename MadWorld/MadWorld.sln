@@ -48,10 +48,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Environment", "Environment"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{564D932A-A4FD-4527-99C1-A058041865BC}"
 	ProjectSection(SolutionItems) = preProject
-		Deployments\Scripts\local-build-and-deploy.sh = Deployments\Scripts\local-build-and-deploy.sh
-		Deployments\Scripts\prod-build-and-deploy.sh = Deployments\Scripts\prod-build-and-deploy.sh
 		Deployments\Scripts\local-refresh-pods.sh = Deployments\Scripts\local-refresh-pods.sh
 		Deployments\Scripts\prod-refresh-pods.sh = Deployments\Scripts\prod-refresh-pods.sh
+		Deployments\Scripts\local-deploy-kubernetes.sh = Deployments\Scripts\local-deploy-kubernetes.sh
+		Deployments\Scripts\prod-deploy-kubernetes.sh = Deployments\Scripts\prod-deploy-kubernetes.sh
+		Deployments\Scripts\local-build.sh = Deployments\Scripts\local-build.sh
+		Deployments\Scripts\prod-build.sh = Deployments\Scripts\prod-build.sh
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI", "MadWorld.Frontend.UI\MadWorld.Frontend.UI.csproj", "{2DA8D0F9-4DDE-4351-93EA-32987BB833F3}"
