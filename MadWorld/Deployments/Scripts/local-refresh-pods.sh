@@ -1,3 +1,3 @@
 #!/bin/bash
-minikube kubectl rollout restart -n default
-minikube kubectl rollout restart -n madworld
+minikube kubectl -n default rollout restart deploy
+minikube kubectl -n madworld rollout restart deploy
