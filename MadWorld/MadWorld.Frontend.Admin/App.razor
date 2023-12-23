@@ -1,4 +1,7 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@using MadWorld.Shared.Blazor
+
+<CascadingAuthenticationState>
+<Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="new []{ typeof(ISharedBlazorMarker).Assembly }">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
         <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
@@ -10,3 +13,4 @@
         </LayoutView>
     </NotFound>
 </Router>
+</CascadingAuthenticationState>

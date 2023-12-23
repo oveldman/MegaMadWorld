@@ -63,6 +63,7 @@ public static class IdentityEndpoints
                     
                     var token = tokenHandler.CreateToken(tokenDescriptor);
                     var jwt = tokenHandler.WriteToken(token)!;
+                    
                     return Results.Ok(new JwtLoginResponse
                     {
                         Jwt = jwt

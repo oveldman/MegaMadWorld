@@ -1,0 +1,14 @@
+@page "/LoginV2"
+
+<AuthorizeView>
+    <Authorized>
+        <p>You are logged in</p>
+        
+        <p>Has IdentityAdministrator role: @IdentityAdministrator</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>Not logged in</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+<button @onclick="LoginAsync">Login</button>
