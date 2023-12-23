@@ -1,5 +1,6 @@
 using Blazored.LocalStorage;
 using MadWorld.Shared.Blazor.Authentications;
+using MadWorld.Shared.Contracts.Identity;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 
@@ -7,13 +8,19 @@ namespace MadWorld.Shared.Blazor.Pages;
 
 public partial class Login
 {
-    public bool IdentityAdministrator = false;
-    
     [Inject]
     public AuthenticationStateProvider AuthenticationStateProvider { get; set; } = null!;
     
     [Inject]
+    public IIdentityService IdentityService { get; set; } = null!;
+    
+    [Inject]
     public ILocalStorageService LocalStorage { get; set; } = null!;
+
+    public JwtLoginRequest JwtLoginRequest { get; set; } = new();
+    
+    private bool _identityAdministrator;
+    private bool _hasError;
     
     protected override async Task OnInitializedAsync()
     {
@@ -22,10 +29,17 @@ public partial class Login
 
     private async Task LoginAsync()
     {
-        const string token = "TempKey";
+        _hasError = false;
+        var response = await IdentityService.Login(JwtLoginRequest);
+
+        if (response.IsSuccess)
+        {
+            await LocalStorage.SetItemAsStringAsync(LocalStorageKeys.JwtToken, response.Jwt);
+            var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            _identityAdministrator = state.User.IsInRole(Roles.IdentityAdministrator);
+            return;
+        }
         
-        await LocalStorage.SetItemAsStringAsync(LocalStorageKeys.JwtToken, token);
-        var test = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        IdentityAdministrator = test.User.IsInRole(Roles.IdentityAdministrator);
+        _hasError = true;
     }
 }

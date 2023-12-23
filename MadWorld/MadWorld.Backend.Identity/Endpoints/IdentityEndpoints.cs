@@ -1,7 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using MadWorld.Backend.Identity.Contracts;
+using MadWorld.Shared.Contracts.Identity;
 using MadWorld.Shared.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -66,6 +66,7 @@ public static class IdentityEndpoints
                     
                     return Results.Ok(new JwtLoginResponse
                     {
+                        IsSuccess = true,
                         Jwt = jwt
                     });
                 })

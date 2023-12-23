@@ -1,10 +1,15 @@
 @page "/Login"
 
+@if (_hasError)
+{
+    <p>There was an error logging in.</p>
+}
+
 <AuthorizeView>
     <Authorized>
         <p>You are logged in</p>
         
-        <p>Has IdentityAdministrator role: @IdentityAdministrator</p>
+        <p>Has IdentityAdministrator role: @_identityAdministrator</p>
     </Authorized>
     <NotAuthorized>
         <p>Not logged in</p>

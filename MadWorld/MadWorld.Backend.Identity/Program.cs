@@ -89,6 +89,20 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
         ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 });
 
+var madWorldOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: madWorldOrigins,
+        policy  =>
+        {
+            policy.WithOrigins(
+                "https://admin.mad-world.nl",
+                "https://localhost:7298");
+            policy.AllowAnyMethod();
+            policy.AllowAnyHeader();
+        });
+});
+
 builder.Services.AddRateLimiter(rateLimiterOptions =>
     {
         rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -120,6 +134,7 @@ app.AddIdentityEndpoints();
 app.AddUserManagerEndpoints();
 
 app.UseRateLimiter();
+app.UseCors(madWorldOrigins);
 
 app.MigrateDatabase<UserDbContext>();
 await app.AddFirstAdminAccountAsync();
