@@ -1,0 +1,12 @@
+@page "/Login"
+
+<AuthorizeView>
+    <Authorized>
+        <p>You are logged in</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>Not logged in</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+<button @onclick="LoginAsync">Login</button>

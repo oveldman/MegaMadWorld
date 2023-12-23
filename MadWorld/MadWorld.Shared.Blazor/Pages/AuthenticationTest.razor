@@ -1,0 +1,27 @@
+@page "/AuthenticationTest"
+@using MadWorld.Shared.Blazor.Authentications
+@using System.Security.Claims
+
+<AuthorizeView>
+    <Authorized>
+        <p>You are logged in</p>
+        
+        @foreach (var claim in context.User.Claims.ToList())
+        {
+            <p>@claim.Type : @claim.Value</p>
+            <br />
+        }
+        
+    </Authorized>
+    <NotAuthorized>
+        <p>Not logged in</p>
+    </NotAuthorized>
+</AuthorizeView>
+<AuthorizeView Roles="@Roles.IdentityShipSimulator">
+    <Authorized>
+        <p>You got the role: @Roles.IdentityShipSimulator</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>You don't have the role: @Roles.IdentityShipSimulator</p>
+    </NotAuthorized>
+</AuthorizeView>
