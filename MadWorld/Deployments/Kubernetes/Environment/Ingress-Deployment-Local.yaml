@@ -11,7 +11,7 @@ spec:
     - host: admin.mad-world.local
       http:
         paths:
-          - path: /
+          - path: (/|$)(.*)
             pathType: Prefix
             backend:
               service:
@@ -51,7 +51,7 @@ spec:
     - host: shipsimulator.mad-world.local
       http:
         paths:
-          - path: /
+          - path: (/|$)(.*)
             pathType: Prefix
             backend:
               service:
@@ -71,7 +71,7 @@ spec:
     - host: www.mad-world.local
       http:
         paths:
-          - path: /
+          - path: (/|$)(.*)
             pathType: Prefix
             backend:
               service:
