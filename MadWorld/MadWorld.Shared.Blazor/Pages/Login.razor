@@ -7,13 +7,26 @@
 
 <AuthorizeView>
     <Authorized>
-        <p>You are logged in</p>
+        <h1>You are logged in</h1>
         
         <p>Has IdentityAdministrator role: @_identityAdministrator</p>
     </Authorized>
     <NotAuthorized>
-        <p>Not logged in</p>
+        <h1>Not logged in</h1>
+        <RadzenRow Gap="2rem" Class="rz-p-0 rz-p-lg-4">
+            <RadzenRow AlignItems="AlignItems.Center">
+                <RadzenFormField Text="Email" Variant="Variant.Filled" Style="width: 100%;">
+                    <RadzenTextBox @bind-Value="@JwtLoginRequest.Email" Style="width: 100%;" />
+                </RadzenFormField>
+            </RadzenRow>
+            <RadzenRow AlignItems="AlignItems.Center">
+                <RadzenFormField Text="Password" Variant="Variant.Filled" Style="width: 100%;">
+                    <RadzenPassword @bind-Value="@JwtLoginRequest.Password" aria-label="enter password" />
+                </RadzenFormField>
+            </RadzenRow>
+            <RadzenRow AlignItems="AlignItems.Center">
+                <RadzenButton Shade="Shade.Lighter" Click=@LoginAsync Text="Login" ButtonStyle="ButtonStyle.Primary"/>
+            </RadzenRow>
+        </RadzenRow>
     </NotAuthorized>
 </AuthorizeView>
-
-<button @onclick="LoginAsync">Login</button>
