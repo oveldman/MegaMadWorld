@@ -2,14 +2,14 @@
 
 @if (_hasError)
 {
-    <p>There was an error logging in.</p>
+    <RadzenAlert AlertStyle="AlertStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter">
+        There was an error logging in.
+    </RadzenAlert>
 }
 
 <AuthorizeView>
     <Authorized>
         <h1>You are logged in</h1>
-        
-        <p>Has IdentityAdministrator role: @_identityAdministrator</p>
     </Authorized>
     <NotAuthorized>
         <h1>Not logged in</h1>

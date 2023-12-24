@@ -17,6 +17,12 @@ public class IdentityService : IIdentityService
     public async Task<JwtLoginResponse> Login(JwtLoginRequest request)
     {
         var response = await _client.PostAsJsonAsync($"{Endpoint}/JwtLogin", request);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return new JwtLoginResponse();
+        }
+        
         return await response.Content.ReadFromJsonAsync<JwtLoginResponse>() ?? new JwtLoginResponse();
     }
 }
