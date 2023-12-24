@@ -41,7 +41,7 @@ spec:
     - host: admin.mad-world.nl
       http:
         paths:
-          - path: (/|$)(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
@@ -81,7 +81,7 @@ spec:
     - host: shipsimulator.mad-world.nl
       http:
         paths:
-          - path: (/|$)(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
@@ -101,7 +101,7 @@ spec:
     - host: www.mad-world.nl
       http:
         paths:
-          - path: (/|$)(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:

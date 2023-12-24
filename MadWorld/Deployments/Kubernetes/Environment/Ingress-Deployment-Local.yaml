@@ -4,7 +4,6 @@ metadata:
   name: madworld-ingress
   namespace: madworld
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Forwarded-For $http_x_forwarded_for";
 spec:
@@ -12,7 +11,7 @@ spec:
     - host: admin.mad-world.local
       http:
         paths:
-          - path: (/|$)(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
@@ -52,7 +51,7 @@ spec:
     - host: shipsimulator.mad-world.local
       http:
         paths:
-          - path: (/|$)(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
@@ -72,7 +71,7 @@ spec:
     - host: www.mad-world.local
       http:
         paths:
-          - path: (/|$)(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
