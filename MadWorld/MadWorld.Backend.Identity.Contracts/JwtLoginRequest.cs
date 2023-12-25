@@ -1,4 +1,4 @@
-namespace MadWorld.Shared.Contracts.Identity;
+namespace MadWorld.Backend.Identity.Contracts;
 
 public sealed class JwtLoginRequest
 {

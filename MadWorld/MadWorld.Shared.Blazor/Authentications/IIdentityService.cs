@@ -1,4 +1,4 @@
-using MadWorld.Shared.Contracts.Identity;
+using MadWorld.Backend.Identity.Contracts;
 
 namespace MadWorld.Shared.Blazor.Authentications;
 

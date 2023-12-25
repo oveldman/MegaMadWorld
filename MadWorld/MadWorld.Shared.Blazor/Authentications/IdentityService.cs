@@ -1,6 +1,6 @@
 using System.Net.Http.Json;
+using MadWorld.Backend.Identity.Contracts;
 using MadWorld.Shared.Blazor.Common;
-using MadWorld.Shared.Contracts.Identity;
 
 namespace MadWorld.Shared.Blazor.Authentications;
 

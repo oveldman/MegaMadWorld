@@ -1,6 +1,6 @@
 using Blazored.LocalStorage;
+using MadWorld.Backend.Identity.Contracts;
 using MadWorld.Shared.Blazor.Authentications;
-using MadWorld.Shared.Contracts.Identity;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 

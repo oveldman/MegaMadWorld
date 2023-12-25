@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MadWorld.Shared.Contracts\MadWorld.Shared.Contracts.csproj" />
+      <ProjectReference Include="..\MadWorld.Backend.Identity.Contracts\MadWorld.Backend.Identity.Contracts.csproj" />
     </ItemGroup>
 
 </Project>
