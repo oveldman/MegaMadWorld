@@ -5,6 +5,10 @@
 <AuthorizeView Roles="@Roles.IdentityAdministrator">
     <Authorized>
         <p>You got the role: <b>@Roles.IdentityAdministrator</b></p>
+        <p>Email: @UserInfo.Email</p>
+        <p>Is Email Confirmed: @UserInfo.IsEmailConfirmed</p>
+        <RadzenButton Shade="Shade.Lighter" Click=@GetUserInfo Text="Get Current User Info" ButtonStyle="ButtonStyle.Primary"/>
+        <br />
     </Authorized>
     <NotAuthorized>
         <p>You don't have the role: <b>@Roles.IdentityAdministrator</b></p>

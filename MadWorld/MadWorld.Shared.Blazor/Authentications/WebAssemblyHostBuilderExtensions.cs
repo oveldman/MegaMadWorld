@@ -19,6 +19,11 @@ public static class WebAssemblyHostBuilderExtensions
         builder.Services.AddCascadingAuthenticationState();
         builder.Services.AddAuthorizationCore();
         builder.Services.AddScoped<IIdentityService, IdentityService>();
+
+        builder.Services.AddScoped<BaseAddressAuthorizationMessageHandler>();
+        builder.Services.AddSingleton<MyAccessTokenProvider>();
+        builder.Services.AddSingleton<IAccessTokenProvider>(provider => provider.GetService<MyAccessTokenProvider>()!);
+        builder.Services.AddSingleton<IAccessTokenWriter>(provider => provider.GetService<MyAccessTokenProvider>()!);
         
         builder.Services.AddIdentityHttpClient();
     }
@@ -29,6 +34,6 @@ public static class WebAssemblyHostBuilderExtensions
         {
             var apiUrlsOption = serviceProvider.GetService<IOptions<ApiUrls>>()!;
             client.BaseAddress = new Uri(apiUrlsOption.Value.Identity!);
-        });
+        }).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
     }
 }

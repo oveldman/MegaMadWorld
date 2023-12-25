@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using MadWorld.Backend.Identity.Contracts;
 using MadWorld.Shared.Infrastructure.Settings;
@@ -51,11 +52,12 @@ public static class IdentityEndpoints
                             roles.Select(role => 
                                 new Claim(ClaimTypes.Role, role)));
                     }
-                    
+
+                    var expires = DateTime.UtcNow.AddHours(1);
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
                         Subject = new ClaimsIdentity(claims),
-                        Expires = DateTime.UtcNow.AddHours(1),
+                        Expires = expires,
                         Issuer = app.Configuration["Jwt:Issuer"],
                         Audience = app.Configuration["Jwt:Audience"],
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -63,15 +65,28 @@ public static class IdentityEndpoints
                     
                     var token = tokenHandler.CreateToken(tokenDescriptor);
                     var jwt = tokenHandler.WriteToken(token)!;
+                    var refreshToken = GenerateRefreshToken();
+
+                    await signInManager.RefreshSignInAsync(user);
                     
                     return Results.Ok(new JwtLoginResponse
                     {
                         IsSuccess = true,
-                        Jwt = jwt
+                        Jwt = jwt,
+                        Expires = expires,
+                        RefreshToken = refreshToken
                     });
                 })
             .WithName("JwtLogin")
             .WithOpenApi()
             .AllowAnonymous();
+    }
+    
+    private static string GenerateRefreshToken()
+    {
+        var randomNumber = new byte[512];
+        using var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(randomNumber);
+        return Convert.ToBase64String(randomNumber);
     }
 }

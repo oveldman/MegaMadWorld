@@ -15,11 +15,13 @@ public partial class Login
     public IIdentityService IdentityService { get; set; } = null!;
     
     [Inject]
+    public IAccessTokenWriter AccessTokenWriter { get; set; } = null!;
+    
+    [Inject]
     public ILocalStorageService LocalStorage { get; set; } = null!;
 
-    public JwtLoginRequest JwtLoginRequest { get; set; } = new();
+    private JwtLoginRequest JwtLoginRequest { get; set; } = new();
     
-    private bool _identityAdministrator;
     private bool _hasError;
     
     protected override async Task OnInitializedAsync()
@@ -35,8 +37,9 @@ public partial class Login
         if (response.IsSuccess)
         {
             await LocalStorage.SetItemAsStringAsync(LocalStorageKeys.JwtToken, response.Jwt);
-            var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            _identityAdministrator = state.User.IsInRole(Roles.IdentityAdministrator);
+            await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            AccessTokenWriter.SetAccessToken(response.Jwt, response.Expires);
+            
             return;
         }
         

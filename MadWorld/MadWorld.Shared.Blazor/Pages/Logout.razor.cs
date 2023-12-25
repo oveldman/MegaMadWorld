@@ -11,11 +11,15 @@ public partial class Logout
     public AuthenticationStateProvider AuthenticationStateProvider { get; set; } = null!;
     
     [Inject]
+    public IAccessTokenWriter AccessTokenWriter { get; set; } = null!;
+    
+    [Inject]
     public ILocalStorageService LocalStorage { get; set; } = null!;
 
     protected override async Task OnInitializedAsync()
     {
         await LocalStorage.RemoveItemAsync(LocalStorageKeys.JwtToken);
         await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        AccessTokenWriter.SetAccessToken(string.Empty, DateTimeOffset.Now);
     }
 }

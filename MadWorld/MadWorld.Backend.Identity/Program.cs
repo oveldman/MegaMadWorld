@@ -89,7 +89,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
         ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 });
 
-var madWorldOrigins = "_myAllowSpecificOrigins";
+const string madWorldOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: madWorldOrigins,
@@ -102,6 +102,7 @@ builder.Services.AddCors(options =>
             policy.AllowAnyHeader();
         });
 });
+
 
 builder.Services.AddRateLimiter(rateLimiterOptions =>
     {

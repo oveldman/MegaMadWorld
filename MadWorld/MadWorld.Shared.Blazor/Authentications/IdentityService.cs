@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using MadWorld.Backend.Identity.Contracts;
+using MadWorld.Backend.Identity.Contracts.UserInfo;
 using MadWorld.Shared.Blazor.Common;
 
 namespace MadWorld.Shared.Blazor.Authentications;
@@ -24,5 +25,10 @@ public class IdentityService : IIdentityService
         }
         
         return await response.Content.ReadFromJsonAsync<JwtLoginResponse>() ?? new JwtLoginResponse();
+    }
+
+    public async Task<InfoResponse> GetInfo()
+    {
+        return await _client.GetFromJsonAsync<InfoResponse>($"{Endpoint}/manage/info") ?? new InfoResponse();
     }
 }
