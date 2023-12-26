@@ -20,6 +20,5 @@ public partial class Logout
     {
         await LocalStorage.RemoveItemAsync(LocalStorageKeys.JwtToken);
         await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        AccessTokenWriter.SetAccessToken(string.Empty, DateTimeOffset.Now);
     }
 }

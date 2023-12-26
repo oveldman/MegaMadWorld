@@ -6,7 +6,7 @@ namespace MadWorld.Shared.Blazor.Authentications;
 
 public class MyAccessTokenProvider : IAccessTokenProvider, IAccessTokenWriter
 {
-    private AccessToken? _token;
+    private AccessToken? _token = new();
     private readonly IOptions<ApiUrls> _urls;
     private string RefreshUrl => $"{_urls.Value.Identity}/Account/RefreshToken";
 
@@ -44,5 +44,10 @@ public class MyAccessTokenProvider : IAccessTokenProvider, IAccessTokenWriter
             Expires = expires,
             Value = token
         };
+    }
+
+    public void RemoveToken()
+    {
+        _token = new AccessToken();
     }
 }

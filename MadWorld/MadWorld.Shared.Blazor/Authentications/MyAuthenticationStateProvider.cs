@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Blazored.LocalStorage;
+using MadWorld.Backend.Identity.Contracts;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace MadWorld.Shared.Blazor.Authentications;
@@ -8,29 +9,41 @@ namespace MadWorld.Shared.Blazor.Authentications;
 public class MyAuthenticationStateProvider : AuthenticationStateProvider
 {
     private readonly ILocalStorageService _localStorageService;
+    private readonly IAccessTokenWriter _accessTokenWriter;
 
-    public MyAuthenticationStateProvider(ILocalStorageService localStorageService)
+    public MyAuthenticationStateProvider(ILocalStorageService localStorageService, IAccessTokenWriter accessTokenWriter)
     {
         _localStorageService = localStorageService;
+        _accessTokenWriter = accessTokenWriter;
     }
     
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         var identity = new ClaimsIdentity();
 
-        var token = await _localStorageService.GetItemAsStringAsync(LocalStorageKeys.JwtToken);
-        if (!string.IsNullOrEmpty(token))
+        JwtLoginResponse? jwtResponse = null;
+        if (await _localStorageService.ContainKeyAsync(LocalStorageKeys.JwtToken))
+        {
+            jwtResponse = await _localStorageService.GetItemAsync<JwtLoginResponse>(LocalStorageKeys.JwtToken);            
+        }
+
+        if (jwtResponse is not null)
         {
             try
             {
-                token = token.Trim();
-                identity = RetrieveUserFromJwt(token);
+                identity = RetrieveUserFromJwt(jwtResponse.Jwt);
+                _accessTokenWriter.SetAccessToken(jwtResponse.Jwt, jwtResponse.Expires);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 identity = new ClaimsIdentity();
+                _accessTokenWriter.RemoveToken();
             }
+        }
+        else
+        {
+            _accessTokenWriter.RemoveToken();
         }
         
         var user = new ClaimsPrincipal(identity);

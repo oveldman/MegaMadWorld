@@ -15,9 +15,6 @@ public partial class Login
     public IIdentityService IdentityService { get; set; } = null!;
     
     [Inject]
-    public IAccessTokenWriter AccessTokenWriter { get; set; } = null!;
-    
-    [Inject]
     public ILocalStorageService LocalStorage { get; set; } = null!;
 
     private JwtLoginRequest JwtLoginRequest { get; set; } = new();
@@ -36,10 +33,8 @@ public partial class Login
 
         if (response.IsSuccess)
         {
-            await LocalStorage.SetItemAsStringAsync(LocalStorageKeys.JwtToken, response.Jwt);
+            await LocalStorage.SetItemAsync(LocalStorageKeys.JwtToken, response);
             await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            AccessTokenWriter.SetAccessToken(response.Jwt, response.Expires);
-            
             return;
         }
         
