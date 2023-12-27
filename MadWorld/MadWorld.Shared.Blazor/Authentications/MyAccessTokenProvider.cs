@@ -31,6 +31,12 @@ public class MyAccessTokenProvider : IAccessTokenProvider, IAccessTokenWriter
             Interaction = InteractionType.GetToken,
             ReturnUrl = options.ReturnUrl!,
         };
+
+        if (string.IsNullOrEmpty(_token?.Value))
+        {
+            return ValueTask.FromResult(
+                new AccessTokenResult(AccessTokenResultStatus.RequiresRedirect, _token!, RefreshUrl, interactiveRequestOptions));   
+        }
         
         return ValueTask.FromResult(
             new AccessTokenResult(AccessTokenResultStatus.Success, _token!, RefreshUrl, interactiveRequestOptions));

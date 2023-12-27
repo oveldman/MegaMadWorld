@@ -27,9 +27,29 @@ public class MyHttpMessageHandler : DelegatingHandler
     private async Task AddAuthorizationHeader(HttpRequestMessage request)
     {
         var accessToken = await _provider.RequestAccessToken();
-        if (accessToken.TryGetToken(out var token) && token.Expires > DateTimeOffset.UtcNow)
+        if (accessToken.TryGetToken(out var token))
         {
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.Value);
+            token = await TryRefreshToken(token);
+
+            if (token is not null)
+            {
+                AddBearerToken(request, token);   
+            }
         }
+    }
+
+    private async Task<AccessToken?> TryRefreshToken(AccessToken token)
+    {
+        if (token.Expires >= DateTimeOffset.UtcNow.AddMinutes(-5)) return token;
+        
+        // Refresh Token
+            
+        var accessToken = await _provider.RequestAccessToken();
+        return accessToken.TryGetToken(out var newToken) ? newToken : null;
+    }
+    
+    private static void AddBearerToken(HttpRequestMessage request, AccessToken token)
+    {
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.Value);
     }
 }
