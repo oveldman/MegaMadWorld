@@ -18,6 +18,7 @@ builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddSingleton<IEmailSender<IdentityUser>, EmailSender>();
+builder.Services.AddScoped<GetJwtLoginUseCase>();
 builder.Services.AddScoped<GetUsersUseCase>();
 builder.Services.AddScoped<GetUserUseCase>();
 builder.Services.AddScoped<PatchUserUseCase>();
