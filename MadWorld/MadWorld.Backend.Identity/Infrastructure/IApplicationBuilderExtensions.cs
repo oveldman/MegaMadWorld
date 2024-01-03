@@ -1,3 +1,4 @@
+using MadWorld.Backend.Identity.Domain.Users;
 using MadWorld.Shared.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ public static class IApplicationBuilderExtensions
         const string defaultUser = "oveldman@gmail.com";
         
         using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()!.CreateScope();
-        var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+        var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<IdentityUserExtended>>();
         var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
         
         var user = await FindOrCreateUser(userManager, defaultUser);
@@ -20,7 +21,7 @@ public static class IApplicationBuilderExtensions
         await AddRoleToDefaultUser(userManager, user);
     }
 
-    private static async Task<IdentityUser> FindOrCreateUser(UserManager<IdentityUser> userManager, string defaultUser)
+    private static async Task<IdentityUserExtended> FindOrCreateUser(UserManager<IdentityUserExtended> userManager, string defaultUser)
     {
         var user = await userManager.FindByEmailAsync(defaultUser);
         if (user is not null)
@@ -28,7 +29,7 @@ public static class IApplicationBuilderExtensions
             return user;
         }
 
-        var newUser = new IdentityUser(defaultUser)
+        var newUser = new IdentityUserExtended(defaultUser)
         {
             EmailConfirmed = true,
             Email = defaultUser
@@ -48,7 +49,7 @@ public static class IApplicationBuilderExtensions
         }
     }
     
-    private static async Task AddRoleToDefaultUser(UserManager<IdentityUser> userManager, IdentityUser user)
+    private static async Task AddRoleToDefaultUser(UserManager<IdentityUserExtended> userManager, IdentityUserExtended user)
     {
         var currentRoles = await userManager.GetRolesAsync(user);
         if (!currentRoles.Contains(Roles.IdentityAdministrator))

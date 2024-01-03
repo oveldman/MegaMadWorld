@@ -1,37 +1,24 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
-using MadWorld.Backend.Identity.Contracts;
+using MadWorld.Backend.Identity.Domain;
+using MadWorld.Backend.Identity.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace MadWorld.Backend.Identity.Application;
 
-public class GetJwtLoginUseCase
+public class JwtGenerator : IJwtGenerator
 {
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly UserManager<IdentityUser> _userManager;
     private readonly IConfiguration _configuration;
 
-    public GetJwtLoginUseCase(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IConfiguration configuration)
+    public JwtGenerator(IConfiguration configuration)
     {
-        _signInManager = signInManager;
-        _userManager = userManager;
         _configuration = configuration;
     }
     
-    public async Task<IResult> GetJwtLogin(JwtLoginRequest request)
+    public JwtToken GenerateToken(IdentityUserExtended user, IList<string> roles)
     {
-        var result = await _signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
-        if (!result.Succeeded)
-        {
-            return Results.Unauthorized();
-        }
-
-        var user = await _userManager.FindByEmailAsync(request.Email);
-        var roles = await _userManager.GetRolesAsync(user!);
-
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]!);
 
@@ -63,22 +50,11 @@ public class GetJwtLoginUseCase
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
         var jwt = tokenHandler.WriteToken(token)!;
-        var refreshToken = GenerateRefreshToken();
 
-        return Results.Ok(new JwtLoginResponse
+        return new JwtToken()
         {
-            IsSuccess = true,
-            Jwt = jwt,
-            Expires = expires,
-            RefreshToken = refreshToken
-        });
-    }
-    
-    private static string GenerateRefreshToken()
-    {
-        var randomNumber = new byte[512];
-        using var rng = RandomNumberGenerator.Create();
-        rng.GetBytes(randomNumber);
-        return Convert.ToBase64String(randomNumber);
+            Token = jwt,
+            Expired = expires
+        };
     }
 }
