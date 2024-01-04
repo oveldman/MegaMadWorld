@@ -18,22 +18,30 @@ public static class WebAssemblyHostBuilderExtensions
         builder.Services.AddScoped<AuthenticationStateProvider, MyAuthenticationStateProvider>();
         builder.Services.AddCascadingAuthenticationState();
         builder.Services.AddAuthorizationCore();
+        builder.Services.AddScoped<IAccountService, AccountService>();
         builder.Services.AddScoped<IIdentityService, IdentityService>();
 
         builder.Services.AddScoped<MyHttpMessageHandler>();
         builder.Services.AddSingleton<MyAccessTokenProvider>();
+        builder.Services.AddScoped<ITokenRefresher, TokenRefresher>();
         builder.Services.AddSingleton<IAccessTokenProvider>(provider => provider.GetService<MyAccessTokenProvider>()!);
         builder.Services.AddSingleton<IAccessTokenWriter>(provider => provider.GetService<MyAccessTokenProvider>()!);
         
-        builder.Services.AddIdentityHttpClient();
+        builder.Services.AddIdentityHttpClients();
     }
     
-    private static void AddIdentityHttpClient(this IServiceCollection services)
+    private static void AddIdentityHttpClients(this IServiceCollection services)
     {
         services.AddHttpClient(ApiTypes.Identity, (serviceProvider, client) =>
         {
             var apiUrlsOption = serviceProvider.GetService<IOptions<ApiUrls>>()!;
             client.BaseAddress = new Uri(apiUrlsOption.Value.Identity!);
         }).AddHttpMessageHandler<MyHttpMessageHandler>();
+
+        services.AddHttpClient(ApiTypes.IdentityAnonymous, (serviceProvider, client) =>
+        {
+            var apiUrlsOption = serviceProvider.GetService<IOptions<ApiUrls>>()!;
+            client.BaseAddress = new Uri(apiUrlsOption.Value.Identity!);
+        });
     }
 }

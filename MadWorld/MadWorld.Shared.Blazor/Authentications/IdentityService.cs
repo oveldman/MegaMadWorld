@@ -12,7 +12,7 @@ public class IdentityService : IIdentityService
     private readonly HttpClient _client;
     public IdentityService(IHttpClientFactory clientFactory)
     {
-        _client = clientFactory.CreateClient(ApiTypes.Identity);
+        _client = clientFactory.CreateClient(ApiTypes.IdentityAnonymous);
     }
     
     public async Task<JwtLoginResponse> Login(JwtLoginRequest request)
@@ -26,9 +26,16 @@ public class IdentityService : IIdentityService
         
         return await response.Content.ReadFromJsonAsync<JwtLoginResponse>() ?? new JwtLoginResponse();
     }
-
-    public async Task<InfoResponse> GetInfo()
+    
+    public async Task<JwtRefreshResponse> Refresh(JwtRefreshRequest request)
     {
-        return await _client.GetFromJsonAsync<InfoResponse>($"{Endpoint}/manage/info") ?? new InfoResponse();
+        var response = await _client.PostAsJsonAsync($"{Endpoint}/JwtRefresh", request);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return new JwtRefreshResponse();
+        }
+        
+        return await response.Content.ReadFromJsonAsync<JwtRefreshResponse>() ?? new JwtRefreshResponse();
     }
 }

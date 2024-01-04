@@ -6,10 +6,12 @@ namespace MadWorld.Shared.Blazor.Authentications;
 public class MyHttpMessageHandler : DelegatingHandler
 {
     private readonly IAccessTokenProvider _provider;
+    private readonly ITokenRefresher _tokenRefresher;
 
-    public MyHttpMessageHandler(IAccessTokenProvider provider)
+    public MyHttpMessageHandler(IAccessTokenProvider provider, ITokenRefresher tokenRefresher)
     {
         _provider = provider;
+        _tokenRefresher = tokenRefresher;
     }
     
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -40,9 +42,9 @@ public class MyHttpMessageHandler : DelegatingHandler
 
     private async Task<AccessToken?> TryRefreshToken(AccessToken token)
     {
-        if (token.Expires >= DateTimeOffset.UtcNow.AddMinutes(-5)) return token;
-        
-        // Refresh Token
+        if (token.Expires <= DateTimeOffset.UtcNow.AddMinutes(-5)) return token;
+
+        await _tokenRefresher.Execute();
             
         var accessToken = await _provider.RequestAccessToken();
         return accessToken.TryGetToken(out var newToken) ? newToken : null;

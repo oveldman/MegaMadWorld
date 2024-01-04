@@ -6,5 +6,5 @@ namespace MadWorld.Shared.Blazor.Authentications;
 public interface IIdentityService
 {
     Task<JwtLoginResponse> Login(JwtLoginRequest request);
-    Task<InfoResponse> GetInfo();
+    Task<JwtRefreshResponse> Refresh(JwtRefreshRequest request);
 }

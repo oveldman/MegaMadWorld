@@ -7,12 +7,12 @@ namespace MadWorld.Shared.Blazor.Pages;
 public partial class AuthenticationTest
 {
     [Inject]
-    public IIdentityService IdentityService { get; set; } = null!;
+    public IAccountService AccountService { get; set; } = null!;
     
     public InfoResponse UserInfo { get; set; } = new();
 
     public async Task GetUserInfo()
     {
-        UserInfo = await IdentityService.GetInfo();
+        UserInfo = await AccountService.GetInfo();
     }
 }
