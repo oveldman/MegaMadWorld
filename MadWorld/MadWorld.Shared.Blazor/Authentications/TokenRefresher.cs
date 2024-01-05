@@ -27,6 +27,12 @@ public class TokenRefresher : ITokenRefresher
         {
             RefreshToken = response.RefreshToken
         });
+
+        if (!refreshResponse.IsSuccess)
+        {
+            await _localStorage.RemoveItemAsync(LocalStorageKeys.JwtToken);
+            return;
+        }
         
         await _localStorage.SetItemAsync(LocalStorageKeys.JwtToken, refreshResponse);
     }

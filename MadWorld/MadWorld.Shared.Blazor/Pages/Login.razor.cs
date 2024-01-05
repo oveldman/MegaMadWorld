@@ -23,6 +23,7 @@ public partial class Login
     
     protected override async Task OnInitializedAsync()
     {
+        await AuthenticationStateProvider.GetAuthenticationStateAsync();
         await base.OnInitializedAsync();
     }
 

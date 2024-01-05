@@ -1,4 +1,3 @@
-using Cronos;
 using MadWorld.Backend.Identity.Application;
 using MadWorld.Shared.Infrastructure.BackgroundServices;
 
@@ -6,7 +5,7 @@ namespace MadWorld.Backend.Identity.BackgroundServices;
 
 public class DeleteSessionService : BackgroundService
 {
-    private const string ExecuteTime = "0 0 3 * * *";
+    private const string ExecuteTime = "0 3 * * *";
 
     private readonly IServiceScopeFactory _serviceFactory;
     private readonly ILogger<DeleteSessionService> _logger;

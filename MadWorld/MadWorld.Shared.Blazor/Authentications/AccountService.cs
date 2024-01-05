@@ -16,6 +16,13 @@ public class AccountService : IAccountService
     
     public async Task<InfoResponse> GetInfo()
     {
-        return await _client.GetFromJsonAsync<InfoResponse>($"{Endpoint}/manage/info") ?? new InfoResponse();
+        var response = await _client.GetAsync($"{Endpoint}/manage/info");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return new InfoResponse();
+        }
+        
+        return await response.Content.ReadFromJsonAsync<InfoResponse>() ?? new InfoResponse();
     }
 }
