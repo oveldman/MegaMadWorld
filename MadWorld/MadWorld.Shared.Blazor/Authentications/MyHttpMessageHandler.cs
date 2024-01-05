@@ -77,7 +77,9 @@ public class MyHttpMessageHandler : DelegatingHandler
 
     private async Task<AccessToken?> TryRefreshToken(AccessToken token)
     {
-        if (token.Expires <= DateTimeOffset.UtcNow.AddMinutes(-5)) return token;
+        Console.WriteLine($"{token.Expires.AddMinutes(-5):HH:mm:ss zz} <= {DateTimeOffset.UtcNow:HH:mm:ss zz} = {token.Expires.AddMinutes(-5) >= DateTimeOffset.UtcNow}");
+        
+        if (token.Expires.AddMinutes(-5) >= DateTimeOffset.UtcNow) return token;
 
         await _tokenRefresher.Execute();
         await _authenticationStateProvider.GetAuthenticationStateAsync();
