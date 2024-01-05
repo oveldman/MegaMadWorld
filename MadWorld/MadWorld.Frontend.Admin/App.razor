@@ -1,9 +1,21 @@
 ﻿@using MadWorld.Shared.Blazor
+@using MadWorld.Shared.Blazor.Pages
 
 <CascadingAuthenticationState>
 <Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="new []{ typeof(ISharedBlazorMarker).Assembly }">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+            <NotAuthorized>
+                @if (context.User.Identity?.IsAuthenticated != true)
+                {
+                    <RedirectToLogin/>
+                }
+                else
+                {
+                    <p role="alert">You are not authorized to access this resource.</p>
+                }
+            </NotAuthorized>
+        </AuthorizeRouteView>
         <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
     </Found>
     <NotFound>
