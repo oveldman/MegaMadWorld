@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Text;
 using MadWorld.Backend.Identity.Domain;
 using MadWorld.Backend.Identity.Domain.Users;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace MadWorld.Backend.Identity.Application;

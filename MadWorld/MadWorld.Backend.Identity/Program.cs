@@ -1,6 +1,7 @@
 using System.Text;
 using System.Threading.RateLimiting;
 using MadWorld.Backend.Identity.Application;
+using MadWorld.Backend.Identity.BackgroundServices;
 using MadWorld.Backend.Identity.Domain;
 using MadWorld.Backend.Identity.Domain.Users;
 using MadWorld.Backend.Identity.Endpoints;
@@ -20,6 +21,7 @@ builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddSingleton<IEmailSender<IdentityUserExtended>, EmailSender>();
+builder.Services.AddScoped<DeleteSessionsUseCase>();
 builder.Services.AddScoped<GetUsersUseCase>();
 builder.Services.AddScoped<GetUserUseCase>();
 builder.Services.AddScoped<PatchUserUseCase>();
@@ -29,6 +31,8 @@ builder.Services.AddScoped<PostJwtRefreshUseCase>();
 
 builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddHostedService<DeleteSessionService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>

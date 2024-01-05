@@ -28,6 +28,14 @@ public class UserRepository : IUserRepository
         
         return _context.SaveChangesAsync();
     }
+
+    public Task<int> DeleteExpiredRefreshTokens()
+    {
+        return _context
+            .RefreshTokens
+            .Where(t => t.Expires < DateTime.UtcNow)
+            .ExecuteDeleteAsync();
+    }
     
     public RefreshToken? GetRefreshToken(string token)
     {
