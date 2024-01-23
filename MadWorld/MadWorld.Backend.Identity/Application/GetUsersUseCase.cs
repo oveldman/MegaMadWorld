@@ -13,9 +13,11 @@ public class GetUsersUseCase
         _repository = repository;
     }
     
-    public GetUsersResponse GetUsers()
+    public GetUsersResponse GetUsers(int page)
     {
-        var users = _repository.GetUsers();
+        ArgumentOutOfRangeException.ThrowIfNegative(page);
+
+        var users = _repository.GetUsers(page);
         return new GetUsersResponse()
         {
             Users = users.ToDto()

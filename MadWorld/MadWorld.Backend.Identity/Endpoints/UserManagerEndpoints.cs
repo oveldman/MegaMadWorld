@@ -14,8 +14,8 @@ public static class UserManagerEndpoints
             .RequireRateLimiting(RateLimiterNames.GeneralLimiter)
             .RequireAuthorization(Policies.IdentityAdministrator);
 
-        userManager.MapGet("/Users", ([FromServices] GetUsersUseCase userCase)
-                => userCase.GetUsers())
+        userManager.MapGet("/Users", ([FromQuery]int page,[FromServices] GetUsersUseCase userCase)
+                => userCase.GetUsers(page))
             .WithOpenApi();
         
         userManager.MapGet("/User", ([FromQuery]string id, [FromServices] GetUserUseCase userCase)

@@ -4,7 +4,7 @@ namespace MadWorld.Backend.Identity.Infrastructure;
 
 public interface IUserRepository
 {
-    List<IdentityUserExtended> GetUsers();
+    List<IdentityUserExtended> GetUsers(int page);
     Task AddRefreshToken(RefreshToken token);
     Task<int> DeleteExpiredRefreshTokens();
     RefreshToken? GetRefreshToken(string token);

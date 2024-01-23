@@ -5,6 +5,8 @@ namespace MadWorld.Backend.Identity.Infrastructure;
 
 public class UserRepository : IUserRepository
 {
+    private int TakeAmount = 10;
+    
     private readonly UserDbContext _context;
 
     public UserRepository(UserDbContext context)
@@ -12,11 +14,13 @@ public class UserRepository : IUserRepository
         _context = context;
     }
     
-    public List<IdentityUserExtended> GetUsers()
+    public List<IdentityUserExtended> GetUsers(int page)
     {
         return _context
                 .Users
                 .AsNoTracking()
+                .Skip(page * TakeAmount)
+                .Take(TakeAmount)
                 .ToList();
     }
     
