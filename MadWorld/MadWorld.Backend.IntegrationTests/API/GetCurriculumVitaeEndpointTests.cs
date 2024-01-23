@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shouldly;
 using Testcontainers.PostgreSql;
+using MadWorld.Backend.API;
+using MadWorld.Backend.IntegrationTests.Common;
 
 namespace MadWorld.Backend.IntegrationTests.API;
 
@@ -15,13 +17,7 @@ public sealed class GetCurriculumVitaeEndpointTests : IClassFixture<WebApplicati
 {
     private WebApplicationFactory<Program> _factory;
     
-    private readonly PostgreSqlContainer _postgreSqlContainer = new PostgreSqlBuilder()
-        .WithImage("postgres:latest")
-        .WithDatabase("db")
-        .WithUsername("postgres")
-        .WithPassword("postgres")
-        .WithCleanUp(true)
-        .Build(); 
+    private readonly PostgreSqlContainer _postgreSqlContainer  = PostgreSqlContainerBuilder.Build(); 
 
     public GetCurriculumVitaeEndpointTests(WebApplicationFactory<Program> factory)
     {
