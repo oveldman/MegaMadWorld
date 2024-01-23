@@ -19,6 +19,7 @@ public class UserRepository : IUserRepository
         return _context
                 .Users
                 .AsNoTracking()
+                .OrderBy(u => u.Id)
                 .Skip(page * TakeAmount)
                 .Take(TakeAmount)
                 .ToList();
