@@ -1,5 +1,4 @@
 using System.Net.Http.Json;
-using System.Security.Cryptography.X509Certificates;
 using MadWorld.Backend.Identity;
 using MadWorld.Backend.Identity.Contracts.UserManagers;
 using MadWorld.Backend.Identity.Domain.Users;
