@@ -3,6 +3,7 @@ using MadWorld.Backend.Identity.Contracts.UserManagers;
 using MadWorld.Backend.Identity.Domain.CommonExceptions;
 using MadWorld.Backend.Identity.Domain.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace MadWorld.Backend.Identity.Application;
 
@@ -17,7 +18,9 @@ public class GetUserUseCase
     
     public async Task<GetUserResponse> GetUser(string id)
     {
-        var user = await _userManager.FindByIdAsync(id);
+        var user = await _userManager.Users
+            .Include(u => u.RefreshTokens)
+            .FirstOrDefaultAsync(u => u.Id == id);
 
         if (user == null)
         {

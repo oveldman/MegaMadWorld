@@ -49,7 +49,8 @@ public class GetUserEndpointTests : IdentityTestBase
                 });
             }
 
-            await context.RefreshTokens.AddAsync(new RefreshToken("TestTestTest", DateTime.UtcNow, userId.ToString()));
+            await context.RefreshTokens.AddAsync(
+                new RefreshToken("TestTestTest", DateTime.UtcNow, userId.ToString()));
             
             await context.SaveChangesAsync();
         }
@@ -67,5 +68,7 @@ public class GetUserEndpointTests : IdentityTestBase
         result.Email.ShouldBe(email);
         result.Roles.Count.ShouldBe(2);
         result.Roles.ShouldContain("IdentityAdministrator");
+        result.RefreshTokens.Count.ShouldBe(1);
+        result.RefreshTokens[0].Id = "TestTestTest";
     }
 }

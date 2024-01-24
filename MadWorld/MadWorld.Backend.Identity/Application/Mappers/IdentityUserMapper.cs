@@ -18,7 +18,19 @@ public static class IdentityUserMapper
         {
             Id = user.Id,
             Email = user.Email!,
-            Roles = roles.ToList()
+            Roles = roles.ToList(),
+            RefreshTokens = user.RefreshTokens
+                .Select(ToRefreshTokenContract)
+                .ToList()
+        };
+    }
+
+    private static RefreshTokenContract ToRefreshTokenContract(RefreshToken refreshToken)
+    {
+        return new RefreshTokenContract()
+        {
+            Id = refreshToken.Id.ToString(),
+            Expires = refreshToken.Expires
         };
     }
 
