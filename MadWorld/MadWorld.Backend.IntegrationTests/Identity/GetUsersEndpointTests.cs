@@ -6,6 +6,7 @@ using MadWorld.Backend.Identity.Domain.Users;
 using MadWorld.Backend.Identity.Infrastructure;
 using MadWorld.Backend.Infrastructure.CurriculaVitae;
 using MadWorld.Backend.IntegrationTests.Common;
+using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,6 +40,8 @@ public class GetUsersEndpointTests : IClassFixture<WebApplicationFactory<Program
 
                 services.AddDbContext<UserDbContext>(options =>
                     options.UseNpgsql(_postgreSqlContainer.GetConnectionString()));
+
+                services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
             });
         });
         
@@ -71,6 +74,7 @@ public class GetUsersEndpointTests : IClassFixture<WebApplicationFactory<Program
         var result = await response.Content
             .ReadFromJsonAsync<GetUsersResponse>();
         result!.Users.Count.ShouldBe(10);
+        result!.Users[1].Email.ShouldBe($"test0@test.com");
     }
     
     public Task InitializeAsync()
