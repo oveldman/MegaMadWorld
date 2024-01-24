@@ -7,48 +7,30 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shouldly;
-using Testcontainers.PostgreSql;
 using MadWorld.Backend.API;
 using MadWorld.Backend.IntegrationTests.Common;
 
 namespace MadWorld.Backend.IntegrationTests.API;
 
-public sealed class GetCurriculumVitaeEndpointTests : IClassFixture<WebApplicationFactory<Program>>, IAsyncLifetime
+public sealed class GetCurriculumVitaeEndpointTests : ApiTestBase
 {
-    private WebApplicationFactory<Program> _factory;
-    
-    private readonly PostgreSqlContainer _postgreSqlContainer  = PostgreSqlContainerBuilder.Build(); 
-
-    public GetCurriculumVitaeEndpointTests(WebApplicationFactory<Program> factory)
+    public GetCurriculumVitaeEndpointTests(WebApplicationFactory<Program> factory) : base(factory)
     {
-        _factory = factory;
     }
-    
+
     [Fact]
     public async Task Execute_WhenRequestIsValid_ShouldReturnValidResponse()
     {
         // Arrange
-        _factory = _factory.WithWebHostBuilder(builder =>
-        {
-            builder.ConfigureTestServices(services =>
-            {
-                services.RemoveAll(typeof(CurriculaVitaeContext));
-                services.RemoveAll(typeof(DbContextOptions<CurriculaVitaeContext>));
-
-                services.AddDbContext<CurriculaVitaeContext>(options =>
-                    options.UseNpgsql(_postgreSqlContainer.GetConnectionString()));
-            });
-        });
-
         var profile = Profile.Create("Emily Thompson", "Graphic Designer");
-        using (var scope = _factory.Services.CreateScope())
+        using (var scope = Factory.Services.CreateScope())
         {
             var context = scope.ServiceProvider.GetRequiredService<CurriculaVitaeContext>();
             await context.Profiles.AddAsync(profile);
             await context.SaveChangesAsync();
         }
 
-        var client = _factory.CreateClient();
+        var client = Factory.CreateClient();
         // Act
         var response = await client.GetAsync("/CurriculumVitae?isdraft=false");
 
@@ -59,17 +41,5 @@ public sealed class GetCurriculumVitaeEndpointTests : IClassFixture<WebApplicati
         result!.Profile.Id.ShouldBe(profile.Id);
         result!.Profile.FullName.ShouldBe("Emily Thompson");
         result!.Profile.JobTitle.ShouldBe("Graphic Designer");
-    }
-
-    public Task InitializeAsync()
-    {
-        return _postgreSqlContainer.StartAsync();
-    }
-
-    public Task DisposeAsync()
-    {
-        return _postgreSqlContainer
-            .DisposeAsync()
-            .AsTask();
     }
 }
