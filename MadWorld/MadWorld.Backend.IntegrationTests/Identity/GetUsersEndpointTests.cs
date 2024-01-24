@@ -4,11 +4,7 @@ using MadWorld.Backend.Identity.Contracts.UserManagers;
 using MadWorld.Backend.Identity.Domain.Users;
 using MadWorld.Backend.Identity.Infrastructure;
 using MadWorld.Backend.IntegrationTests.Common;
-using Microsoft.AspNetCore.Authorization.Policy;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shouldly;
 
 namespace MadWorld.Backend.IntegrationTests.Identity;
@@ -44,6 +40,7 @@ public class GetUsersEndpointTests : IdentityTestBase
         }
 
         var client = Factory.CreateClient();
+        
         // Act
         var response = await client.GetAsync("/UserManager/Users?page=0");
         
