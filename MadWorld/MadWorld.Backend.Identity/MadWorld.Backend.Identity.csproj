@@ -35,6 +35,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Backend.Identity.Contracts\MadWorld.Backend.Identity.Contracts.csproj" />
+      <ProjectReference Include="..\MadWorld.Shared.Common\MadWorld.Shared.Common.csproj" />
       <ProjectReference Include="..\MadWorld.Shared.Infrastructure\MadWorld.Shared.Infrastructure.csproj" />
     </ItemGroup>
 

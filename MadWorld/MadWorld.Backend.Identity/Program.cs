@@ -6,6 +6,7 @@ using MadWorld.Backend.Identity.Domain;
 using MadWorld.Backend.Identity.Domain.Users;
 using MadWorld.Backend.Identity.Endpoints;
 using MadWorld.Backend.Identity.Infrastructure;
+using MadWorld.Shared.Common.Extensions;
 using MadWorld.Shared.Infrastructure.Databases;
 using MadWorld.Shared.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -26,6 +27,8 @@ public sealed class Program
         builder.Host.UseSerilog((context, configuration) =>
             configuration.ReadFrom.Configuration(context.Configuration));
 
+        builder.AddCommon();
+        
         builder.Services.AddSingleton<IEmailSender<IdentityUserExtended>, EmailSender>();
         builder.Services.AddScoped<DeleteSessionsUseCase>();
         builder.Services.AddScoped<GetUsersUseCase>();

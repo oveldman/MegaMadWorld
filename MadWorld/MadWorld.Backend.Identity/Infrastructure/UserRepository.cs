@@ -1,4 +1,5 @@
 using MadWorld.Backend.Identity.Domain.Users;
+using MadWorld.Shared.Common.Time;
 using Microsoft.EntityFrameworkCore;
 
 namespace MadWorld.Backend.Identity.Infrastructure;
@@ -8,10 +9,12 @@ public class UserRepository : IUserRepository
     private int TakeAmount = 10;
     
     private readonly UserDbContext _context;
+    private readonly IDateTimeProvider _dateTimeProvider;
 
-    public UserRepository(UserDbContext context)
+    public UserRepository(UserDbContext context, IDateTimeProvider dateTimeProvider)
     {
         _context = context;
+        _dateTimeProvider = dateTimeProvider;
     }
     
     public List<IdentityUserExtended> GetUsers(int page)
@@ -38,7 +41,7 @@ public class UserRepository : IUserRepository
     {
         return _context
             .RefreshTokens
-            .Where(t => t.Expires < DateTime.UtcNow)
+            .Where(t => t.Expires < _dateTimeProvider.UtcNow())
             .ExecuteDeleteAsync();
     }
     
