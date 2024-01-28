@@ -35,8 +35,14 @@ public class IdentityTestBase : IClassFixture<WebApplicationFactory<Program>>, I
                     options.UseNpgsql(PostgreSqlContainer.GetConnectionString()));
 
                 services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
+                
+                SetupServices(services);
             });
         });
+    }
+
+    protected virtual void SetupServices(IServiceCollection services)
+    {
     }
     
     public Task InitializeAsync()
