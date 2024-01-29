@@ -33,6 +33,7 @@ public class GetUserEndpointTests : IdentityTestBase
                 Email = email,
                 UserName = email,
                 EmailConfirmed = true,
+                NormalizedEmail = email,
                 NormalizedUserName = email
             };
             

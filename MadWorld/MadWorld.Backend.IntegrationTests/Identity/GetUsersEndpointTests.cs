@@ -23,13 +23,17 @@ public class GetUsersEndpointTests : IdentityTestBase
         {
             var context = scope.ServiceProvider.GetRequiredService<UserDbContext>();
 
-            for (int i = 0; i < 12; i++)
+            for (var i = 0; i < 12; i++)
             {
+                var email = $"test{i}@test.com";
+                
                 var user = new IdentityUserExtended()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Email = $"test{i}@test.com",
-                    UserName = $"test{i}@test.com",
+                    Email = email,
+                    NormalizedEmail = email,
+                    UserName = email,
+                    NormalizedUserName = email,
                     EmailConfirmed = true,
                 };
                 

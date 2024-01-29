@@ -31,6 +31,7 @@ public sealed class Program
         
         builder.Services.AddSingleton<IEmailSender<IdentityUserExtended>, EmailSender>();
         builder.Services.AddScoped<DeleteExpiredSessionsUseCase>();
+        builder.Services.AddScoped<DeleteSessionUseCase>();
         builder.Services.AddScoped<GetUsersUseCase>();
         builder.Services.AddScoped<GetUserUseCase>();
         builder.Services.AddScoped<PatchUserUseCase>();

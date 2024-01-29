@@ -7,9 +7,9 @@ namespace MadWorld.Backend.Identity.Application;
 
 public class DeleteSessionUseCase
 {
-    private readonly UserRepository _repository;
+    private readonly IUserRepository _repository;
 
-    public DeleteSessionUseCase(UserRepository repository)
+    public DeleteSessionUseCase(IUserRepository repository)
     {
         _repository = repository;
     }
