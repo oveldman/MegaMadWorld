@@ -22,7 +22,7 @@ public class UserRepository : IUserRepository
         return _context
                 .Users
                 .AsNoTracking()
-                .OrderBy(u => u.Email)
+                .OrderBy(u => u.NormalizedEmail)
                 .Skip(page * TakeAmount)
                 .Take(TakeAmount)
                 .ToList();
