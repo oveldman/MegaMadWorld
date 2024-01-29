@@ -12,7 +12,7 @@ public static class DangerEndpoints
             .WithTags("Danger")
             .RequireRateLimiting(RateLimiterNames.GeneralLimiter);
 
-        dangerEndpoints.MapPost("/HardReset", ([FromServices] PostHardResetUseCase useCase) =>
+        dangerEndpoints.MapDelete("/HardReset", ([FromServices] PostHardResetUseCase useCase) =>
             {
                 useCase.PostHardReset();
 

@@ -12,96 +12,106 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog((context, configuration) => 
-    configuration.ReadFrom.Configuration(context.Configuration));
+namespace MadWorld.ShipSimulator.API;
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(opt =>
+public sealed class Program
 {
-    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MadWorld Ship Simulator", Version = "v1" });
-    opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    private static void Main(string[] args)
     {
-        In = ParameterLocation.Header,
-        Description = "Please enter token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        BearerFormat = "JWT",
-        Scheme = "bearer"
-    });
-    opt.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
+        var builder = WebApplication.CreateBuilder(args);
+        builder.Host.UseSerilog((context, configuration) =>
+            configuration.ReadFrom.Configuration(context.Configuration));
+
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen(opt =>
         {
-            new OpenApiSecurityScheme
+            opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MadWorld Ship Simulator", Version = "v1" });
+            opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference
+                In = ParameterLocation.Header,
+                Description = "Please enter token",
+                Name = "Authorization",
+                Type = SecuritySchemeType.Http,
+                BearerFormat = "JWT",
+                Scheme = "bearer"
+            });
+            opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
                 {
-                    Type=ReferenceType.SecurityScheme,
-                    Id="Bearer"
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] { }
                 }
-            },
-            new string[]{}
-        }
-    });
-});
-
-builder.AddApplication();
-builder.AddDatabase();
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
-    options.TokenValidationParameters = new TokenValidationParameters {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
-    };
-});
-
-builder.Services.AddAuthorizationBuilder()
-    .AddPolicy(Policies.IdentityShipSimulator, policy =>
-        policy.RequireRole(Roles.IdentityShipSimulator));
-
-builder.Services.AddAuthorization();
-
-builder.Services.AddHealthChecks();
-
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
-{
-    options.ForwardedHeaders =
-        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-});
-
-builder.Services.AddRateLimiter(rateLimiterOptions =>
-    {
-        rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
-        
-        rateLimiterOptions.AddPolicy(RateLimiterNames.GeneralLimiter, httpContext =>
-        {
-            return RateLimitPartition.GetFixedWindowLimiter(
-                partitionKey: httpContext.Request.Headers["X-Forwarded-For"],
-                factory: _ => new FixedWindowRateLimiterOptions()
-                {
-                    PermitLimit = 10,
-                    Window = TimeSpan.FromSeconds(10)
-                });
+            });
         });
+
+        builder.AddApplication();
+        builder.AddDatabase();
+
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                ValidAudience = builder.Configuration["Jwt:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+            };
+        });
+
+        builder.Services.AddAuthorizationBuilder()
+            .AddPolicy(Policies.IdentityShipSimulator, policy =>
+                policy.RequireRole(Roles.IdentityShipSimulator));
+
+        builder.Services.AddAuthorization();
+
+        builder.Services.AddHealthChecks();
+
+        builder.Services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders =
+                ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+        });
+
+        builder.Services.AddRateLimiter(rateLimiterOptions =>
+            {
+                rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+                rateLimiterOptions.AddPolicy(RateLimiterNames.GeneralLimiter, httpContext =>
+                {
+                    return RateLimitPartition.GetFixedWindowLimiter(
+                        partitionKey: httpContext.Request.Headers["X-Forwarded-For"],
+                        factory: _ => new FixedWindowRateLimiterOptions()
+                        {
+                            PermitLimit = 10,
+                            Window = TimeSpan.FromSeconds(10)
+                        });
+                });
+            }
+        );
+
+        var app = builder.Build();
+        app.UseForwardedHeaders();
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
+        app.MapHealthChecks("/healthz");
+
+        app.UseRateLimiter();
+
+        app.AddDangerEndpoints();
+
+        app.MigrateDatabase<ShipSimulatorContext>();
+
+        app.Run();
     }
-);
-
-var app = builder.Build();
-app.UseForwardedHeaders();
-
-app.UseSwagger();
-app.UseSwaggerUI();
-app.MapHealthChecks("/healthz");
-
-app.UseRateLimiter();
-
-app.AddDangerEndpoints();
-
-app.MigrateDatabase<ShipSimulatorContext>();
-
-app.Run();
+}

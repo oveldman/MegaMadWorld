@@ -2,15 +2,12 @@ using System.Net.Http.Json;
 using MadWorld.Backend.Domain.CurriculaVitae;
 using MadWorld.Backend.Infrastructure.CurriculaVitae;
 using MadWorld.Shared.Contracts.CurriculaVitae;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shouldly;
 using MadWorld.Backend.API;
 using MadWorld.Backend.IntegrationTests.Common;
 
-namespace MadWorld.Backend.IntegrationTests.API;
+namespace MadWorld.Backend.IntegrationTests.API.CurriculumVitae;
 
 public sealed class GetCurriculumVitaeEndpointTests : ApiTestBase
 {

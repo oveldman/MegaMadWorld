@@ -30,6 +30,7 @@
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Backend.API\MadWorld.Backend.API.csproj" />
       <ProjectReference Include="..\MadWorld.Backend.Identity\MadWorld.Backend.Identity.csproj" />
+      <ProjectReference Include="..\MadWorld.ShipSimulator.API\MadWorld.ShipSimulator.API.csproj" />
     </ItemGroup>
 
 </Project>
