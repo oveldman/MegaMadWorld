@@ -22,10 +22,24 @@ public class PatchUserUseCase
         ValidateAllRolesExists(request);
         
         var user = await RetrieveUser(request);
+        await SetBlockedStatus(request, user);
         await RemoveCurrentUserRoles(user);
         await AddNewRolesToUser(request, user);
         
         return new DefaultResponse();
+    }
+    
+    private void ValidateAllRolesExists(PatchUserRequest request)
+    {
+        var existingRoles = _roleManager.Roles.Select(x => x.Name!).ToList();
+
+        foreach (var role in request.Roles)
+        {
+            if (!existingRoles.Contains(role))
+            {
+                throw new RoleNotFoundException(role);
+            }
+        }
     }
 
     private async Task<IdentityUserExtended> RetrieveUser(PatchUserRequest request)
@@ -39,17 +53,17 @@ public class PatchUserUseCase
 
         return user;
     }
-
-    private void ValidateAllRolesExists(PatchUserRequest request)
+    
+    private async Task SetBlockedStatus(PatchUserRequest request, IdentityUserExtended user)
     {
-        var existingRoles = _roleManager.Roles.Select(x => x.Name!).ToList();
-
-        foreach (var role in request.Roles)
+        if (request.IsBlocked)
         {
-            if (!existingRoles.Contains(role))
-            {
-                throw new RoleNotFoundException(role);
-            }
+            await _userManager.SetLockoutEnabledAsync(user, true);
+            await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.MaxValue);
+        }
+        else
+        {
+            await _userManager.SetLockoutEnabledAsync(user, false);
         }
     }
     

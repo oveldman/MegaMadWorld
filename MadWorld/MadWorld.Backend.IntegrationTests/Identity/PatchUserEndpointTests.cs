@@ -1,18 +1,21 @@
+using System.Net;
 using System.Net.Http.Json;
 using MadWorld.Backend.Identity;
 using MadWorld.Backend.Identity.Contracts.UserManagers;
 using MadWorld.Backend.Identity.Domain.Users;
 using MadWorld.Backend.Identity.Infrastructure;
 using MadWorld.Backend.IntegrationTests.Common;
+using MadWorld.Shared.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 
 namespace MadWorld.Backend.IntegrationTests.Identity;
 
-public class GetUserEndpointTests : IdentityTestBase
+public class PatchUserEndpointTests : IdentityTestBase
 {
-    public GetUserEndpointTests(WebApplicationFactory<Program> factory) : base(factory)
+    public PatchUserEndpointTests(WebApplicationFactory<Program> factory) : base(factory)
     {
     }
 
@@ -38,19 +41,6 @@ public class GetUserEndpointTests : IdentityTestBase
             };
             
             await context.Users.AddAsync(user);
-
-            var currentRoles = context.Roles.ToList();
-            foreach (var currentRole in currentRoles)
-            {
-                await context.UserRoles.AddAsync(new IdentityUserRole<string>()
-                {
-                    UserId = userId.ToString(),
-                    RoleId = currentRole.Id
-                });
-            }
-
-            await context.RefreshTokens.AddAsync(
-                new RefreshToken("TestTestTest", DateTime.UtcNow, userId.ToString()));
             
             await context.SaveChangesAsync();
         }
@@ -58,18 +48,29 @@ public class GetUserEndpointTests : IdentityTestBase
         var client = Factory.CreateClient();
         
         // Act
-        var response = await client.GetAsync($"/UserManager/User?id={userId}");
+        var request = new PatchUserRequest()
+        {
+            Id = userId.ToString(),
+            IsBlocked = false,
+            Roles = new []{ Roles.IdentityAdministrator, Roles.IdentityShipSimulator }
+        };
+        
+        var response = await client.PatchAsJsonAsync("/UserManager/User", request);
         
         // Assert
-        response.EnsureSuccessStatusCode();
-        var result = await response.Content
-            .ReadFromJsonAsync<GetUserResponse>();
-        result!.Id.ShouldBe(userId.ToString());
-        result.Email.ShouldBe(email);
-        result.IsBlocked.ShouldBe(false);
-        result.Roles.Count.ShouldBe(2);
-        result.Roles.ShouldContain("IdentityAdministrator");
-        result.RefreshTokens.Count.ShouldBe(1);
-        result.RefreshTokens[0].Id = "TestTestTest";
+        response.StatusCode.ShouldBe(HttpStatusCode.OK);
+        
+        using (var scope = Factory.Services.CreateScope())
+        {
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUserExtended>>();
+            var user = await userManager.FindByIdAsync(userId.ToString());
+            user!.Email.ShouldBe(email);
+            user.LockoutEnabled.ShouldBe(false);
+            
+            var roles = await userManager.GetRolesAsync(user);
+            roles.Count.ShouldBe(2);
+            roles.ShouldContain(Roles.IdentityAdministrator);
+            roles.ShouldContain(Roles.IdentityShipSimulator);
+        }
     }
 }

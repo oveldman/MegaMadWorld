@@ -18,6 +18,7 @@ public static class IdentityUserMapper
         {
             Id = user.Id,
             Email = user.Email!,
+            IsBlocked = user.LockoutEnabled,
             Roles = roles.ToList(),
             RefreshTokens = user.RefreshTokens
                 .Select(ToRefreshTokenContract)

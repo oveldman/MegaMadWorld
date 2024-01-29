@@ -4,6 +4,7 @@ public class GetUserResponse
 {
     public required string Id { get; init; }
     public required string Email { get; init; }
+    public required bool IsBlocked { get; init; }
     public IReadOnlyList<string> Roles { get; init; } = Array.Empty<string>();
     public IReadOnlyList<RefreshTokenContract> RefreshTokens { get; init; } = Array.Empty<RefreshTokenContract>();
 }
