@@ -16,6 +16,7 @@ public class GetRolesUseCase
     {
         var roles = _manager.Roles
             .Select(x => x.Name!)
+            .OrderBy(n => n)
             .ToList();
         
         return new GetRolesResponse()
