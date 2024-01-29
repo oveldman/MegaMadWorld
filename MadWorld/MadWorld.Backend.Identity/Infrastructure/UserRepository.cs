@@ -36,6 +36,14 @@ public class UserRepository : IUserRepository
         
         return _context.SaveChangesAsync();
     }
+    
+    public Task<int> DeleteUserSessions(string userId)
+    {
+        return _context
+            .RefreshTokens
+            .Where(t => t.UserId == userId)
+            .ExecuteDeleteAsync();
+    }
 
     public Task<int> DeleteExpiredRefreshTokens()
     {

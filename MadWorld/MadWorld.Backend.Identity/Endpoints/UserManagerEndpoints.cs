@@ -26,6 +26,10 @@ public static class UserManagerEndpoints
                 => userCase.PatchUser(request))
             .WithOpenApi();
         
+        userManager.MapDelete("/Session", ([FromBody] DeleteSessionRequest request, [FromServices] DeleteSessionUseCase userCase)
+                => userCase.DeleteSession(request))
+            .WithOpenApi();
+        
         userManager.MapGet("/Roles", ([FromServices] GetRolesUseCase userCase)
                 => userCase.GetRoles())
             .WithOpenApi();

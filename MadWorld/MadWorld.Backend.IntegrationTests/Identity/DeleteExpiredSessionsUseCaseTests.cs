@@ -11,11 +11,11 @@ using Shouldly;
 
 namespace MadWorld.Backend.IntegrationTests.Identity;
 
-public class DeleteSessionsUseCaseTests : IdentityTestBase
+public class DeleteExpiredSessionsUseCaseTests : IdentityTestBase
 {
     private readonly IDateTimeProvider _dateTimeProvider;
     
-    public DeleteSessionsUseCaseTests(WebApplicationFactory<Program> factory) : base(factory)
+    public DeleteExpiredSessionsUseCaseTests(WebApplicationFactory<Program> factory) : base(factory)
     {
         _dateTimeProvider = Substitute.For<IDateTimeProvider>();
     }
@@ -41,10 +41,10 @@ public class DeleteSessionsUseCaseTests : IdentityTestBase
 
         using (var scope = Factory.Services.CreateScope())
         {
-            var useCase = scope.ServiceProvider.GetRequiredService<DeleteSessionsUseCase>();
+            var useCase = scope.ServiceProvider.GetRequiredService<DeleteExpiredSessionsUseCase>();
             
             // Act
-            await useCase.DeleteSessions();
+            await useCase.DeleteExpiredSessions();
         }
 
         // Assert

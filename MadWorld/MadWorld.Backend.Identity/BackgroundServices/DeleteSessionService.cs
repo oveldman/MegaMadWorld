@@ -31,9 +31,9 @@ public class DeleteSessionService : BackgroundService
                 _logger.LogInformation("Start delete sessions");  
             
                 using var scope = _serviceFactory.CreateScope();
-                var useCase = scope.ServiceProvider.GetRequiredService<DeleteSessionsUseCase>();
+                var useCase = scope.ServiceProvider.GetRequiredService<DeleteExpiredSessionsUseCase>();
                 
-                await useCase.DeleteSessions();
+                await useCase.DeleteExpiredSessions();
             
                 _logger.LogInformation("Delete sessions finished");
             }

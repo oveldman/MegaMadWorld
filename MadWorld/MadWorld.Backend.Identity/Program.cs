@@ -30,7 +30,7 @@ public sealed class Program
         builder.AddCommon();
         
         builder.Services.AddSingleton<IEmailSender<IdentityUserExtended>, EmailSender>();
-        builder.Services.AddScoped<DeleteSessionsUseCase>();
+        builder.Services.AddScoped<DeleteExpiredSessionsUseCase>();
         builder.Services.AddScoped<GetUsersUseCase>();
         builder.Services.AddScoped<GetUserUseCase>();
         builder.Services.AddScoped<PatchUserUseCase>();

@@ -2,18 +2,18 @@ using MadWorld.Backend.Identity.Infrastructure;
 
 namespace MadWorld.Backend.Identity.Application;
 
-public sealed class DeleteSessionsUseCase
+public sealed class DeleteExpiredSessionsUseCase
 {
     private readonly IUserRepository _userRepository;
-    private readonly ILogger<DeleteSessionsUseCase> _logger;
+    private readonly ILogger<DeleteExpiredSessionsUseCase> _logger;
 
-    public DeleteSessionsUseCase(IUserRepository userRepository, ILogger<DeleteSessionsUseCase> logger)
+    public DeleteExpiredSessionsUseCase(IUserRepository userRepository, ILogger<DeleteExpiredSessionsUseCase> logger)
     {
         _userRepository = userRepository;
         _logger = logger;
     }
     
-    public async Task DeleteSessions()
+    public async Task DeleteExpiredSessions()
     {
         var deletedRows = await _userRepository.DeleteExpiredRefreshTokens();
         
