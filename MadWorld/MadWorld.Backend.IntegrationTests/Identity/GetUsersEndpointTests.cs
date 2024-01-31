@@ -52,6 +52,7 @@ public class GetUsersEndpointTests : IdentityTestBase
         response.EnsureSuccessStatusCode();
         var result = await response.Content
             .ReadFromJsonAsync<GetUsersResponse>();
+        result!.TotalCount.ShouldBe(13);
         result!.Users.Count.ShouldBe(10);
         result!.Users[1].Email.ShouldBe($"test0@test.com");
     }

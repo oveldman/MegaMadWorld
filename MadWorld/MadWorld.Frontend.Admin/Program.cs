@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MadWorld.Frontend.Admin;
+using MadWorld.Frontend.Admin.Extensions;
 using MadWorld.Shared.Blazor.Authentications;
 using MadWorld.Shared.Blazor.Common;
 
@@ -10,6 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.AddCommon();
 builder.AddAuthentication();
+builder.AddApplication();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

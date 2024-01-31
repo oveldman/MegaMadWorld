@@ -6,8 +6,8 @@ namespace MadWorld.Backend.Identity.Infrastructure;
 
 public class UserRepository : IUserRepository
 {
-    private int TakeAmount = 10;
-    
+    private const int TakeAmount = 10;
+
     private readonly UserDbContext _context;
     private readonly IDateTimeProvider _dateTimeProvider;
 
@@ -15,6 +15,13 @@ public class UserRepository : IUserRepository
     {
         _context = context;
         _dateTimeProvider = dateTimeProvider;
+    }
+    
+    public int CountUsers()
+    {
+        return _context
+            .Users
+            .Count();
     }
     
     public List<IdentityUserExtended> GetUsers(int page)
