@@ -19,7 +19,4 @@
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Shared.Blazor\MadWorld.Shared.Blazor.csproj" />
     </ItemGroup>
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
-    </ItemGroup>
 </Project>
