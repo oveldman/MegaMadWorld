@@ -11,7 +11,8 @@
                     LoadData="LoadData"
                     PagerPosition="PagerPosition.Bottom" 
                     PagerHorizontalAlign="HorizontalAlign.Center"
-                    ShowPagingSummary="true" Data="@_response.Users" TItem="UserContract">
+                    ShowPagingSummary="true" Data="@_response.Users" TItem="UserContract"
+                    RowClick="OpenUser">
         <Columns>
             <RadzenDataGridColumn TItem="UserContract" Property="Email" Title="Email" Width="150px" />
         </Columns>

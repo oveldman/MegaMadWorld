@@ -1,13 +1,17 @@
 using MadWorld.Backend.Identity.Contracts.UserManagers;
+using MadWorld.Frontend.Admin.Application.Users;
 using Microsoft.AspNetCore.Components;
 using Radzen;
 
-namespace MadWorld.Frontend.Admin.Application.Users;
+namespace MadWorld.Frontend.Admin.Pages.UserManagement;
 
 public partial class Users
 {
     [Inject]
     public IUserService UserService { get; set; } = null!;
+    
+    [Inject]
+    public NavigationManager Navigation { get; set; } = null!;
 
     private GetUsersResponse _response = new();
 
@@ -20,7 +24,7 @@ public partial class Users
         await base.OnInitializedAsync();
     }
     
-    private Task LoadData(LoadDataArgs _) => Task.CompletedTask;
+    private Task LoadData() => Task.CompletedTask;
 
     private async Task OnPage(PagerEventArgs args)
     {
@@ -29,6 +33,11 @@ public partial class Users
             _currentPage = args.PageIndex;
             await LoadUsers();   
         }
+    }
+
+    private void OpenUser(DataGridRowMouseEventArgs<UserContract> user)
+    {
+        Navigation.NavigateTo($"/User/{user.Data.Id}");
     }
 
     private async Task LoadUsers()
