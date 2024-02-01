@@ -1,2 +1,12 @@
 @page "/ShipSimulator/HardReset"
-<h3>HardReset</h3>
+
+<SuccessMessage Show="@ShowSuccess" Message="@DefaultSuccessMessage" />
+<ErrorMessage Show="@ShowError" Message="@DefaultErrorMessage" />
+
+<h3>Reset Ship Simulator</h3>
+<p>For testing purposes in our Ship Simulator, resetting the server is a critical step to ensure the game's stability
+    and functionality. This process, done through the admin panel, clears any temporary issues and refreshes the system
+    for a clean test environment. It's important to back up data before resetting and to check all features post-reset
+    for comprehensive test results.</p>
+
+<button type="button" class="btn btn-primary" @onclick="ResetServer">Reset Server</button>

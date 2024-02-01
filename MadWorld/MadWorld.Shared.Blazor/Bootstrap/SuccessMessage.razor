@@ -1,0 +1,14 @@
+@if (Show)
+{
+  <div class="alert alert-success" role="alert">
+    @Message
+  </div>
+}
+
+@code {
+  [Parameter]
+  public bool Show { get; set; }
+  
+  [Parameter]
+  public string Message { get; set; } = string.Empty;
+}

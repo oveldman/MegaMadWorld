@@ -117,7 +117,9 @@ public sealed class Program
                 {
                     policy.WithOrigins(
                         "https://admin.mad-world.nl",
-                        "https://localhost:7298");
+                        "https://shipsimulator.mad-world.nl",
+                        "https://localhost:7298",
+                        "https://localhost:7180");
                     policy.AllowAnyMethod();
                     policy.AllowAnyHeader();
                 });

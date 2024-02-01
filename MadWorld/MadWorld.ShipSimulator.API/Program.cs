@@ -82,6 +82,23 @@ public sealed class Program
                 ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
         });
 
+        const string madWorldOrigins = "_myAllowSpecificOrigins";
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(name: madWorldOrigins,
+                policy =>
+                {
+                    policy.WithOrigins(
+                        "https://admin.mad-world.nl",
+                        "https://shipsimulator.mad-world.nl",
+                        "https://localhost:7298",
+                        "https://localhost:7180");
+                    policy.AllowAnyMethod();
+                    policy.AllowAnyHeader();
+                });
+        });
+
+
         builder.Services.AddRateLimiter(rateLimiterOptions =>
             {
                 rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -107,6 +124,7 @@ public sealed class Program
         app.MapHealthChecks("/healthz");
 
         app.UseRateLimiter();
+        app.UseCors(madWorldOrigins);
 
         app.AddDangerEndpoints();
 
