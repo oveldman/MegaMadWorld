@@ -18,5 +18,6 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Shared.Blazor\MadWorld.Shared.Blazor.csproj" />
+      <ProjectReference Include="..\MadWorld.ShipSimulator.Contracts\MadWorld.ShipSimulator.Contracts.csproj" />
     </ItemGroup>
 </Project>
