@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using MadWorld.Backend.Identity.Contracts;
 using MadWorld.Backend.Identity.Contracts.UserManagers;
 using MadWorld.Shared.Blazor.Common;
 
@@ -48,5 +49,17 @@ public class UserService : IUserService
         }
         
         return await response.Content.ReadFromJsonAsync<GetUserResponse>() ?? GetUserResponse.Empty;
+    }
+    
+    public async Task<DefaultResponse> PatchUser(PatchUserRequest request)
+    {
+        var response = await _client.PatchAsJsonAsync($"{Endpoint}/User", request);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return new DefaultResponse();
+        }
+        
+        return await response.Content.ReadFromJsonAsync<DefaultResponse>() ?? new DefaultResponse();
     }
 }

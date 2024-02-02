@@ -10,13 +10,21 @@ public partial class User
     public string Id { get; set; } = null!;
     
     [Inject]
+    public GetUserUseCase GetUseCase { get; set; } = null!;
+    
+    [Inject]
+    public PatchUserUseCase PatchUseCase { get; set; } = null!;
+    
+    [Inject]
     public IUserService UserService { get; set; } = null!;
     
-    private GetUserResponse UserResponse { get; set; } = GetUserResponse.Empty;
+    private GetRolesResponse _roles = new();
+    private UserDetails _user = new();
 
     protected override async Task OnInitializedAsync()
     {
-        UserResponse = await UserService.GetUser(Id);
+        _roles = await UserService.GetAllRoles();
+        _user = await GetUseCase.GetUser(Id);
         
         await base.OnInitializedAsync();
     }

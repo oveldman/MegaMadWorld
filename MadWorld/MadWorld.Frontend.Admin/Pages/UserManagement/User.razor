@@ -2,11 +2,11 @@
 
 <p>User: @Id</p>
 
-<p>User: @UserResponse.Email</p>
+<p>User: @_user.Email</p>
 
 <p>Roles: </p>
 
-@foreach(var role in UserResponse.Roles)
+@foreach(var role in _user.Roles)
 {
     <p>@role</p>
 }
