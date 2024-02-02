@@ -2,3 +2,12 @@
 
 <p>User: @Id</p>
 
+<p>User: @UserResponse.Email</p>
+
+<p>Roles: </p>
+
+@foreach(var role in UserResponse.Roles)
+{
+    <p>@role</p>
+}
+
