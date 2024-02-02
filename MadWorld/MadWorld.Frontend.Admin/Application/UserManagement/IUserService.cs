@@ -1,6 +1,6 @@
 using MadWorld.Backend.Identity.Contracts.UserManagers;
 
-namespace MadWorld.Frontend.Admin.Application.Users;
+namespace MadWorld.Frontend.Admin.Application.UserManagement;
 
 public interface IUserService
 {

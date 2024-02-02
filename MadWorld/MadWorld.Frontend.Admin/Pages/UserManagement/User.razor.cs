@@ -1,5 +1,5 @@
 using MadWorld.Backend.Identity.Contracts.UserManagers;
-using MadWorld.Frontend.Admin.Application.Users;
+using MadWorld.Frontend.Admin.Application.UserManagement;
 using Microsoft.AspNetCore.Components;
 
 namespace MadWorld.Frontend.Admin.Pages.UserManagement;

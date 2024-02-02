@@ -1,5 +1,5 @@
 using MadWorld.Frontend.Admin.Application.ShipSimulator.Reset;
-using MadWorld.Frontend.Admin.Application.Users;
+using MadWorld.Frontend.Admin.Application.UserManagement;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace MadWorld.Frontend.Admin.Extensions;

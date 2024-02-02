@@ -2,7 +2,7 @@ using System.Net.Http.Json;
 using MadWorld.Backend.Identity.Contracts.UserManagers;
 using MadWorld.Shared.Blazor.Common;
 
-namespace MadWorld.Frontend.Admin.Application.Users;
+namespace MadWorld.Frontend.Admin.Application.UserManagement;
 
 public class UserService : IUserService
 {
