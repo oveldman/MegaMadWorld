@@ -55,5 +55,6 @@ public class GetUsersEndpointTests : IdentityTestBase
         result!.TotalCount.ShouldBe(13);
         result!.Users.Count.ShouldBe(10);
         result!.Users[1].Email.ShouldBe($"test0@test.com");
+        result!.Users[1].IsBlocked.ShouldBe(false);
     }
 }
