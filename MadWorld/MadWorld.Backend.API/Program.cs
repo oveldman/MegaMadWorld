@@ -58,7 +58,7 @@ public sealed class Program
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                ValidAudience = builder.Configuration["Jwt:Audience"],
+                ValidAudiences = builder.Configuration.GetSection("Jwt:Audiences").Get<string[]>(),
                 IssuerSigningKey =
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
             };
@@ -74,6 +74,18 @@ public sealed class Program
         {
             options.ForwardedHeaders =
                 ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+        });
+        
+        const string madWorldOrigins = "_myAllowSpecificOrigins";
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(name: madWorldOrigins,
+                policy =>
+                {
+                    policy.WithOrigins(builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()!);
+                    policy.AllowAnyMethod();
+                    policy.AllowAnyHeader();
+                });
         });
 
         builder.Services.AddRateLimiter(rateLimiterOptions =>
@@ -107,6 +119,7 @@ public sealed class Program
         app.AddTestEndpoints();
 
         app.UseRateLimiter();
+        app.UseCors(madWorldOrigins);
 
         app.MigrateDatabases();
 

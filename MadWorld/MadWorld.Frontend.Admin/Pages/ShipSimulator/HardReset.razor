@@ -1,4 +1,7 @@
 @page "/ShipSimulator/HardReset"
+@using Microsoft.AspNetCore.Authorization
+@using MadWorld.Shared.Blazor.Authentications
+@attribute [Authorize(Roles = Roles.IdentityAdministrator)]
 
 <SuccessMessage Show="@ShowSuccess" Message="@DefaultSuccessMessage" />
 <ErrorMessage Show="@ShowError" Message="@DefaultErrorMessage" />

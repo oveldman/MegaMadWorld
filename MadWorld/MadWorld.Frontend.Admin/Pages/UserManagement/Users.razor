@@ -1,6 +1,9 @@
-@using MadWorld.Backend.Identity.Contracts.UserManagers;
-
 @page "/Users"
+@using MadWorld.Backend.Identity.Contracts.UserManagers;
+@using MadWorld.Shared.Blazor.Authentications
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = Roles.IdentityAdministrator)]
+
 <div class="row">
     <h3>All Users</h3>
 </div>

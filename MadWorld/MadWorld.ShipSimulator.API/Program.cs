@@ -63,7 +63,7 @@ public sealed class Program
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                ValidAudience = builder.Configuration["Jwt:Audience"],
+                ValidAudiences = builder.Configuration.GetSection("Jwt:Audiences").Get<string[]>(),
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
             };
         });
@@ -88,11 +88,7 @@ public sealed class Program
             options.AddPolicy(name: madWorldOrigins,
                 policy =>
                 {
-                    policy.WithOrigins(
-                        "https://admin.mad-world.nl",
-                        "https://shipsimulator.mad-world.nl",
-                        "https://localhost:7298",
-                        "https://localhost:7180");
+                    policy.WithOrigins(builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()!);
                     policy.AllowAnyMethod();
                     policy.AllowAnyHeader();
                 });

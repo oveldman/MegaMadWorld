@@ -1,4 +1,5 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using MadWorld.Shared.Blazor.Authentications
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">MadWorld.Frontend.Admin</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -14,16 +15,20 @@
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="/Users">
-                <span class="bi bi-people-fill-nav-menu" aria-hidden="true"></span> Users
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="/ShipSimulator/HardReset">
-                <span class="bi bi-truck-nav-menu" aria-hidden="true"></span> Ship Simulator
-            </NavLink>
-        </div>
+        <AuthorizeView Roles="@Roles.IdentityAdministrator">
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="/Users">
+                        <span class="bi bi-people-fill-nav-menu" aria-hidden="true"></span> Users
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="/ShipSimulator/HardReset">
+                        <span class="bi bi-truck-nav-menu" aria-hidden="true"></span> Ship Simulator
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
     </nav>
 </div>
 

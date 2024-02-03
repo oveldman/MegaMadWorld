@@ -5,6 +5,7 @@ using System.Text;
 using MadWorld.Backend.Identity.Application;
 using MadWorld.Backend.Identity.Contracts;
 using MadWorld.Backend.Identity.Domain.Users;
+using MadWorld.Backend.Identity.Extensions;
 using MadWorld.Shared.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -24,15 +25,15 @@ public static class IdentityEndpoints
             .WithOpenApi();
 
         account.MapPost("/JwtLogin",
-                ([FromBody] JwtLoginRequest request, [FromServices] PostJwtLoginUseCase useCase) =>
-                    useCase.PostJwtLogin(request))
+                ([FromBody] JwtLoginRequest request, [FromServices] PostJwtLoginUseCase useCase, HttpContext context) =>
+                    useCase.PostJwtLogin(request, context.Request.GetBaseUrl()))
             .WithName("JwtLogin")
             .WithOpenApi()
             .AllowAnonymous();
         
         account.MapPost("/JwtRefresh",
-                ([FromBody] JwtRefreshRequest request, [FromServices] PostJwtRefreshUseCase useCase) =>
-                    useCase.PostJwtRefresh(request))
+                ([FromBody] JwtRefreshRequest request, [FromServices] PostJwtRefreshUseCase useCase, HttpContext context) =>
+                    useCase.PostJwtRefresh(request, context.Request.GetBaseUrl()))
             .WithName("JwtRefresh")
             .WithOpenApi()
             .AllowAnonymous();

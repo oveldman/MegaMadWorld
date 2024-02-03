@@ -19,7 +19,7 @@ public class PostJwtRefreshUseCase
         _userRepository = userRepository;
     }
     
-    public async Task<IResult> PostJwtRefresh(JwtRefreshRequest request)
+    public async Task<IResult> PostJwtRefresh(JwtRefreshRequest request, string audience)
     {
         var refreshToken = _userRepository.GetRefreshToken(request.RefreshToken);
 
@@ -31,7 +31,7 @@ public class PostJwtRefreshUseCase
         var user = refreshToken.User;
         var roles = await _userManager.GetRolesAsync(user);
         
-        var jwt = _jwtGenerator.GenerateToken(user, roles);
+        var jwt = _jwtGenerator.GenerateToken(user, audience, roles);
 
         return Results.Ok(new JwtRefreshResponse()
         {

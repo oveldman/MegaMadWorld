@@ -10,6 +10,10 @@ public class RefreshTokenEntityTypeConfiguration : IEntityTypeConfiguration<Refr
     {
         builder.HasKey(x => x.Id);
         
+        builder.Property(x => x.Audience)
+            .IsRequired()
+            .HasMaxLength(RefreshToken.MaxLength);
+        
         builder.Property(x => x.Token)
             .IsRequired()
             .HasMaxLength(RefreshToken.MaxLength);

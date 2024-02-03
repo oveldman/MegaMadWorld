@@ -39,8 +39,8 @@ public class DeleteSessionEndpointTests : IdentityTestBase
             
             await context.Users.AddAsync(otherUser);
             
-            await context.RefreshTokens.AddAsync(new RefreshToken("Test", new DateTime(2024, 01, 27, 0, 0,0,0, DateTimeKind.Utc), adminUser.Id));
-            await context.RefreshTokens.AddAsync(new RefreshToken("Test2", new DateTime(2024, 01, 29, 0, 0,0,0, DateTimeKind.Utc), otherUser.Id));
+            await context.RefreshTokens.AddAsync(new RefreshToken("Test", "https://test", new DateTime(2024, 01, 27, 0, 0,0,0, DateTimeKind.Utc), adminUser.Id));
+            await context.RefreshTokens.AddAsync(new RefreshToken("Test2", "https://test", new DateTime(2024, 01, 29, 0, 0,0,0, DateTimeKind.Utc), otherUser.Id));
             
             await context.SaveChangesAsync();
         }
@@ -48,7 +48,7 @@ public class DeleteSessionEndpointTests : IdentityTestBase
         var client = Factory.CreateClient();
         
         // Act
-        var response = await client.DeleteAsync("/UserManager/Session?userId=" + userId);
+        var response = await client.DeleteAsync("/UserManager/Sessions?userId=" + userId);
         
         // Assert
         response.StatusCode.ShouldBe(HttpStatusCode.OK);

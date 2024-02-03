@@ -31,6 +31,7 @@ public static class IdentityUserMapper
         return new RefreshTokenContract()
         {
             Id = refreshToken.Id.ToString(),
+            Audience = refreshToken.Audience,
             Expires = refreshToken.Expires
         };
     }

@@ -22,7 +22,7 @@ public class PostJwtLoginUseCase
         _userManager = userManager;
     }
     
-    public async Task<IResult> PostJwtLogin(JwtLoginRequest request)
+    public async Task<IResult> PostJwtLogin(JwtLoginRequest request, string audience)
     {
         var result = await _signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
         if (!result.Succeeded)
@@ -33,10 +33,10 @@ public class PostJwtLoginUseCase
         var user = await _userManager.FindByEmailAsync(request.Email);
         var roles = await _userManager.GetRolesAsync(user!);
         
-        var jwt = _jwtGenerator.GenerateToken(user!, roles);
+        var jwt = _jwtGenerator.GenerateToken(user!, audience, roles);
         var token = GenerateRefreshToken();
 
-        var refreshToken = new RefreshToken(token, expires: DateTime.UtcNow.AddDays(7), user!.Id);
+        var refreshToken = new RefreshToken(token, audience, expires: DateTime.UtcNow.AddDays(7), user!.Id);
         await _userRepository.AddRefreshToken(refreshToken);
         
         return Results.Ok(new JwtLoginResponse

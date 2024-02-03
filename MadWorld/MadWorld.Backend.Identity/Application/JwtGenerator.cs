@@ -16,7 +16,7 @@ public class JwtGenerator : IJwtGenerator
         _configuration = configuration;
     }
     
-    public JwtToken GenerateToken(IdentityUserExtended user, IList<string> roles)
+    public JwtToken GenerateToken(IdentityUserExtended user, string audience, IList<string> roles)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]!);
@@ -42,7 +42,7 @@ public class JwtGenerator : IJwtGenerator
             Subject = new ClaimsIdentity(claims),
             Expires = expires,
             Issuer = _configuration["Jwt:Issuer"],
-            Audience = _configuration["Jwt:Audience"],
+            Audience = audience,
             SigningCredentials =
                 new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };

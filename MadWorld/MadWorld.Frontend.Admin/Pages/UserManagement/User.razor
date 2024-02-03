@@ -1,5 +1,8 @@
 @page "/User/{Id}"
 @using MadWorld.Frontend.Admin.Application.UserManagement
+@using MadWorld.Shared.Blazor.Authentications
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = Roles.IdentityAdministrator)]
 
 <SuccessMessage Show="@ShowDeleteSessionsSuccess" Message="@DefaultDeleteSessionsMessage" />
 <SuccessMessage Show="@ShowPatchSuccess" Message="@DefaultPatchSuccessMessage" />
@@ -46,7 +49,8 @@
       <RadzenDataGrid AllowFiltering="false" AllowSorting="false" AllowPaging="false"
                       ShowPagingSummary="true" Data="@_user.RefreshTokens" TItem="RefreshTokenDetails">
         <Columns>
-          <RadzenDataGridColumn TItem="RefreshTokenDetails" Property="Expires" Title="Expires" />
+          <RadzenDataGridColumn TItem="RefreshTokenDetails" Property="Audience" Title="Audience"/>
+          <RadzenDataGridColumn TItem="RefreshTokenDetails" Property="Expires" Title="Expires"/>
         </Columns>
       </RadzenDataGrid>
         <div class="mb-3">

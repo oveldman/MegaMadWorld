@@ -33,8 +33,8 @@ public class DeleteExpiredSessionsUseCaseTests : IdentityTestBase
             var context = scope.ServiceProvider.GetRequiredService<UserDbContext>();
             var user = context.Users.First();
 
-            await context.RefreshTokens.AddAsync(new RefreshToken("Test", new DateTime(2024, 01, 27, 0, 0,0,0, DateTimeKind.Utc), user.Id));
-            await context.RefreshTokens.AddAsync(new RefreshToken("Test2", new DateTime(2024, 01, 29, 0, 0,0,0, DateTimeKind.Utc), user.Id));
+            await context.RefreshTokens.AddAsync(new RefreshToken("Test", "https://test", new DateTime(2024, 01, 27, 0, 0,0,0, DateTimeKind.Utc), user.Id));
+            await context.RefreshTokens.AddAsync(new RefreshToken("Test2", "https://test", new DateTime(2024, 01, 29, 0, 0,0,0, DateTimeKind.Utc), user.Id));
 
             await context.SaveChangesAsync();
         }

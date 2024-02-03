@@ -44,6 +44,7 @@ public static class UserMapper
         return new RefreshTokenDetails
         {
             Id = contract.Id,
+            Audience = contract.Audience,
             Expires = contract.Expires
         };
     }
