@@ -26,7 +26,7 @@ public static class UserManagerEndpoints
                 => userCase.PatchUser(request))
             .WithOpenApi();
         
-        userManager.MapDelete("/Session", ([FromQuery] string userId, [FromServices] DeleteSessionUseCase userCase)
+        userManager.MapDelete("/Sessions", ([FromQuery] string userId, [FromServices] DeleteSessionUseCase userCase)
                 => userCase.DeleteSession(new DeleteSessionRequest(userId)))
             .WithOpenApi();
         

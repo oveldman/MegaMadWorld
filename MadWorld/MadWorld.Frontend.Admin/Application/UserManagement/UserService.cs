@@ -15,6 +15,18 @@ public class UserService : IUserService
         _client = clientFactory.CreateClient(ApiTypes.Identity);
     }
     
+    public async Task<DefaultResponse> DeleteSessions(string userId)
+    {
+        var response = await _client.DeleteAsync($"{Endpoint}/Sessions?userId={userId}");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return new DefaultResponse();
+        }
+        
+        return await response.Content.ReadFromJsonAsync<DefaultResponse>() ?? new DefaultResponse();
+    }
+    
     public async Task<GetRolesResponse> GetAllRoles()
     {
         var response = await _client.GetAsync($"{Endpoint}/Roles");

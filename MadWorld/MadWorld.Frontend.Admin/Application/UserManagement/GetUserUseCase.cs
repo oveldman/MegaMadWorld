@@ -10,7 +10,8 @@ public class GetUserUseCase
 
     public async Task<UserDetails> GetUser(string id)
     {
+        var roles = await _userService.GetAllRoles();
         var user = await _userService.GetUser(id);
-        return user.ToDetails();
+        return user.ToDetails(roles.Roles);
     }
 }
