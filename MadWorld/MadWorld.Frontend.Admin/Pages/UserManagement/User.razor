@@ -46,15 +46,25 @@
     <div class="card">
       <h5 class="card-header">Sessions</h5>
       <div class="card-body">
-      <RadzenDataGrid AllowFiltering="false" AllowSorting="false" AllowPaging="false"
-                      ShowPagingSummary="true" Data="@_user.RefreshTokens" TItem="RefreshTokenDetails">
-        <Columns>
-          <RadzenDataGridColumn TItem="RefreshTokenDetails" Property="Audience" Title="Audience"/>
-          <RadzenDataGridColumn TItem="RefreshTokenDetails" Property="Expires" Title="Expires"/>
-        </Columns>
-      </RadzenDataGrid>
-        <div class="mb-3">
-          <button type="button" class="btn btn-danger" @onclick="DeleteSessions">Delete sessions</button>
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <RadzenDataGrid AllowFiltering="false" AllowSorting="false" AllowPaging="false"
+                              ShowPagingSummary="true" Data="@_user.RefreshTokens" TItem="RefreshTokenDetails">
+                <Columns>
+                  <RadzenDataGridColumn TItem="RefreshTokenDetails" Property="Audience" Title="Audience"/>
+                  <RadzenDataGridColumn TItem="RefreshTokenDetails" Property="Expires" Title="Expires"/>
+                </Columns>
+              </RadzenDataGrid>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <button type="button" class="btn btn-danger" @onclick="DeleteSessions">Delete sessions</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

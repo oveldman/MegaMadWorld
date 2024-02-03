@@ -26,14 +26,14 @@ public static class IdentityEndpoints
 
         account.MapPost("/JwtLogin",
                 ([FromBody] JwtLoginRequest request, [FromServices] PostJwtLoginUseCase useCase, HttpContext context) =>
-                    useCase.PostJwtLogin(request, context.Request.GetBaseUrl()))
+                    useCase.PostJwtLogin(request, context.Request.GetOriginUrl()))
             .WithName("JwtLogin")
             .WithOpenApi()
             .AllowAnonymous();
         
         account.MapPost("/JwtRefresh",
                 ([FromBody] JwtRefreshRequest request, [FromServices] PostJwtRefreshUseCase useCase, HttpContext context) =>
-                    useCase.PostJwtRefresh(request, context.Request.GetBaseUrl()))
+                    useCase.PostJwtRefresh(request, context.Request.GetOriginUrl()))
             .WithName("JwtRefresh")
             .WithOpenApi()
             .AllowAnonymous();
