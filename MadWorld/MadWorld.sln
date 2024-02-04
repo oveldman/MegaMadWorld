@@ -112,6 +112,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GithubActions", "GithubActions", "{CF382674-8071-4F0B-8A36-C2FFD1063758}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\docker-builds.yml = ..\.github\workflows\docker-builds.yml
+		..\.github\workflows\sonarqube.yml = ..\.github\workflows\sonarqube.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Identity.Contracts", "MadWorld.Backend.Identity.Contracts\MadWorld.Backend.Identity.Contracts.csproj", "{AA4535D1-335E-4748-AD8B-A00BF0336D84}"
