@@ -43,7 +43,7 @@ spec:
       http:
         paths:
           - path: "/((.*(?:css|css.map|html|js|json|png)$))|(.*)"
-            pathType: prefix
+            pathType: Prefix
             backend:
               service:
                 name: madworld-admin-loadbalancer
