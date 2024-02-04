@@ -2,36 +2,39 @@
   <ItemGroup>
     <PackageVersion Include="Blazored.LocalStorage" Version="4.4.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.0" />
-    <PackageVersion Include="Cronos" Version="0.8.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
-    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0" />
+    <PackageVersion Include="Cronos" Version="0.8.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.1" PrivateAssets="all" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageVersion>
     <PackageVersion Include="Microsoft.Extensions.Http" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.JSInterop" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.JSInterop" Version="8.0.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
     <PackageVersion Include="NSubstitute" Version="5.1.0" />
-    <PackageVersion Include="Radzen.Blazor" Version="4.23.4" />
-    <PackageVersion Include="Serilog.AspNetCore" Version="8.0.0" />
+    <PackageVersion Include="Radzen.Blazor" Version="4.24.5" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
     <PackageVersion Include="Serilog.Enrichers.ClientInfo" Version="2.0.3" />
     <PackageVersion Include="Serilog.Exceptions" Version="8.4.0" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="5.0.1" />
     <PackageVersion Include="Serilog.Sinks.Seq" Version="6.0.0" />
     <PackageVersion Include="Shouldly" Version="4.2.1" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
-    <PackageVersion Include="System.Text.Json" Version="8.0.0" />
-    <PackageVersion Include="Testcontainers" Version="3.6.0" />
-    <PackageVersion Include="Testcontainers.PostgreSql" Version="3.6.0" />
-    <PackageVersion Include="xunit" Version="2.6.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.5">
+    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.3.1" />
+    <PackageVersion Include="System.Text.Json" Version="8.0.1" />
+    <PackageVersion Include="Testcontainers" Version="3.7.0" />
+    <PackageVersion Include="Testcontainers.PostgreSql" Version="3.7.0" />
+    <PackageVersion Include="xunit" Version="2.6.6" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
