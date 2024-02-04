@@ -11,6 +11,6 @@ Frontend:
 * [MadWorld.ShipSimulator.UI -> shipsimulator.mad-world.nl](https://shipsimulator.mad-world.nl/)
 
 Backend:
-* [MadWorld.Backend.API -> api.mad-world.nl](https://api.mad-world.nl/swagger/ui)
-* [MadWorld.Backend.Identity -> identity.mad-world.nl](https://identity.mad-world.nl/swagger/ui)
-* [MadWorld.ShipSimulator.API -> shipsimulator-api.mad-world.nl](https://shipsimulator-api.mad-world.nl/swagger/ui)
+* [MadWorld.Backend.API -> api.mad-world.nl](https://api.mad-world.nl/swagger/index.html)
+* [MadWorld.Backend.Identity -> identity.mad-world.nl](https://identity.mad-world.nl/swagger/index.html)
+* [MadWorld.ShipSimulator.API -> shipsimulator-api.mad-world.nl](https://shipsimulator-api.mad-world.nl/swagger/index.html)
