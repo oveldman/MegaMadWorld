@@ -124,6 +124,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{D78FC488-6C3A-4699-AFB1-85D64518C6D3}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\ISSUE_TEMPLATE\bug_report.md = ..\.github\ISSUE_TEMPLATE\bug_report.md
+		..\.github\ISSUE_TEMPLATE\feature_request.md = ..\.github\ISSUE_TEMPLATE\feature_request.md
 	EndProjectSection
 EndProject
 Global
