@@ -40,8 +40,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          dotnet-sonarscanner begin /k:"oveldman_MadWorldVPS" /o:"oveldman" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.projectBaseDir="/home/runner/work/MadWorldVPS/MadWorldVPS"
+          dotnet-sonarscanner begin /k:"oveldman_MadWorldVPS" /o:"oveldman" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.projectBaseDir="/home/runner/work/MadWorldVPS/MadWorldVPS" /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs" 
           dotnet workload restore ./MadWorld/MadWorld.sln;
           dotnet restore ./MadWorld/MadWorld.sln; 
           dotnet build ./MadWorld/MadWorld.sln --no-restore -c Release;
+          dotnet test ./MadWorld/MadWorld.sln --no-build --no-restore -c Release --blame-hang-timeout 5min --collect:"XPlat Code Coverage" --results-directory TestResults/ -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover;
           dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
