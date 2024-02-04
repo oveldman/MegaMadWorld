@@ -32,7 +32,7 @@ spec:
     - host: identity.mad-world.local
       http:
         paths:
-          - path: "/((.*(?:css|css.map|html|js|json|png)$))|(.*)"
+          - path: /
             pathType: Prefix
             backend:
               service:
