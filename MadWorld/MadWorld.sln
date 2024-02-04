@@ -121,6 +121,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.PlayTown", "MadWor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Shared.Common", "MadWorld.Shared.Common\MadWorld.Shared.Common.csproj", "{E8DBE812-CF80-49EE-A2AB-9CFF88FA4CC1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{D78FC488-6C3A-4699-AFB1-85D64518C6D3}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\ISSUE_TEMPLATE\bug_report.md = ..\.github\ISSUE_TEMPLATE\bug_report.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -244,5 +249,6 @@ Global
 		{AA4535D1-335E-4748-AD8B-A00BF0336D84} = {18A08617-AF92-4B8B-986E-C7226904D7E2}
 		{04398A38-BEB3-4002-B842-26267C3F5A3F} = {77370D3D-4A77-4414-ADD5-D80BFB1B2944}
 		{E8DBE812-CF80-49EE-A2AB-9CFF88FA4CC1} = {18A08617-AF92-4B8B-986E-C7226904D7E2}
+		{D78FC488-6C3A-4699-AFB1-85D64518C6D3} = {7B3A6ED8-9613-4F88-A788-0B298D4F3076}
 	EndGlobalSection
 EndGlobal
