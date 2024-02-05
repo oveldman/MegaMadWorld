@@ -24,6 +24,7 @@ metadata:
     cert-manager.io/subject-countries: "NL"
     cert-manager.io/email-sans: "oveldman@gmail.com"
     kubernetes.io/ingress.class: "public"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Forwarded-For $http_x_forwarded_for";
 spec:
@@ -41,7 +42,7 @@ spec:
     - host: admin.mad-world.nl
       http:
         paths:
-          - path: /
+          - path: "/((.*(?:css|css.map|html|js|json|png)$))|(.*)"
             pathType: Prefix
             backend:
               service:
@@ -51,7 +52,7 @@ spec:
     - host: api.mad-world.nl
       http:
         paths:
-          - path: /
+          - path: "/((.*)|(.*)"
             pathType: Prefix
             backend:
               service:
@@ -61,7 +62,7 @@ spec:
     - host: identity.mad-world.nl
       http:
         paths:
-          - path: /
+          - path: "/((.*)|(.*)"
             pathType: Prefix
             backend:
               service:
@@ -71,7 +72,7 @@ spec:
     - host: log.mad-world.nl
       http:
         paths:
-          - path: /
+          - path: "/((.*)|(.*)"
             pathType: Prefix
             backend:
               service:
@@ -81,7 +82,7 @@ spec:
     - host: shipsimulator.mad-world.nl
       http:
         paths:
-          - path: /
+          - path: "/((.*(?:css|css.map|html|js|json|png)$))|(.*)"
             pathType: Prefix
             backend:
               service:
@@ -91,7 +92,7 @@ spec:
     - host: shipsimulator-api.mad-world.nl
       http:
         paths:
-          - path: /
+          - path: "/((.*)|(.*)"
             pathType: Prefix
             backend:
               service:
@@ -101,7 +102,7 @@ spec:
     - host: www.mad-world.nl
       http:
         paths:
-          - path: /
+          - path: "/((.*(?:css|css.map|html|js|json|png)$))|(.*)"
             pathType: Prefix
             backend:
               service:
