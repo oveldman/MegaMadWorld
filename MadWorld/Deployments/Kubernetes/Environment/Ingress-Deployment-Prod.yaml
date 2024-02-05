@@ -42,7 +42,7 @@ spec:
     - host: admin.mad-world.nl
       http:
         paths:
-          - path: "/((?:api/.*|.*(?:css|js|png)$))|(.*)"
+          - path: "/((?:api/.*|.*(?:cs|html|js|json|png)$))|(.*)"
             pathType: Prefix
             backend:
               service:
@@ -82,7 +82,7 @@ spec:
     - host: shipsimulator.mad-world.nl
       http:
         paths:
-          - path: "/((?:api/.*|.*(?:css|js|png)$))|(.*)"
+          - path: "/((?:api/.*|.*(?:cs|html|js|json|png)$))|(.*)"
             pathType: Prefix
             backend:
               service:
@@ -102,7 +102,7 @@ spec:
     - host: www.mad-world.nl
       http:
         paths:
-          - path: "/((?:api/.*|.*(?:css|js|png)$))|(.*)"
+          - path: "/((?:api/.*|.*(?:cs|html|js|json|png)$))|(.*)"
             pathType: Prefix
             backend:
               service:
