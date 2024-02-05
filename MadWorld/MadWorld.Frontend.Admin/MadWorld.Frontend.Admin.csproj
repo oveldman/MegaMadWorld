@@ -20,4 +20,14 @@
       <ProjectReference Include="..\MadWorld.Shared.Blazor\MadWorld.Shared.Blazor.csproj" />
       <ProjectReference Include="..\MadWorld.ShipSimulator.Contracts\MadWorld.ShipSimulator.Contracts.csproj" />
     </ItemGroup>
+    <!-- Explain fix: https://github.com/dotnet/aspnetcore/issues/22715#issuecomment-643505248 -->
+    <ItemGroup>
+        <None Include="../MadWorld.Shared.Blazor/wwwroot/.well-known/*" LinkBase="wwwroot/.well-known">
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </None>
+        <None Update="wwwroot/.well-known" CopyToPublishDirectory="Never" />
+    </ItemGroup>
+    <Target Name="CopyLinkedFiles" BeforeTargets="Build">
+        <Copy SourceFiles="%(None.Identity)" DestinationFiles="wwwroot/.well-known/%(Filename)%(Extension)" Condition="'%(None.Link)' != ''" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" />
+    </Target>
 </Project>

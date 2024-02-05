@@ -5,7 +5,8 @@
 [Setup openvpn](https://www.cyberciti.biz/faq/howto-setup-openvpn-server-on-ubuntu-linux-14-04-or-16-04-lts/)\
 [Identity Dotnet 8](https://kgrontis.github.io/posts/Exploring-Identity-Endpoints-in-.NET-8/)\
 [Integration API dotnet 8](https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-8.0)\
-[Initial Password Seq](https://blog.datalust.co/setting-an-initial-password-when-deploying-seq-to-docker/)
+[Initial Password Seq](https://blog.datalust.co/setting-an-initial-password-when-deploying-seq-to-docker/)\
+[Generate Security.txt](https://securitytxt.org/)
 
 ## Kubernetes
 [Start Kubernetes](https://kubernetes.io/docs/concepts/overview/working-with-objects/)\
