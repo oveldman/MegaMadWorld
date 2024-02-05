@@ -24,7 +24,7 @@ metadata:
     cert-manager.io/subject-countries: "NL"
     cert-manager.io/email-sans: "oveldman@gmail.com"
     kubernetes.io/ingress.class: "public"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Forwarded-For $http_x_forwarded_for";
 spec:
