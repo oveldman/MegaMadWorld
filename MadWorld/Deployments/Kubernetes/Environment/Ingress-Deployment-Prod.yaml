@@ -52,7 +52,7 @@ spec:
     - host: api.mad-world.nl
       http:
         paths:
-          - path: /
+          - path: "/(.*)"
             pathType: Prefix
             backend:
               service:
@@ -62,7 +62,7 @@ spec:
     - host: identity.mad-world.nl
       http:
         paths:
-          - path: /
+          - path: "/(.*)"
             pathType: Prefix
             backend:
               service:
@@ -72,7 +72,7 @@ spec:
     - host: log.mad-world.nl
       http:
         paths:
-          - path: /
+          - path: "/(.*)"
             pathType: Prefix
             backend:
               service:
@@ -92,7 +92,7 @@ spec:
     - host: shipsimulator-api.mad-world.nl
       http:
         paths:
-          - path: /
+          - path: "/(.*)"
             pathType: Prefix
             backend:
               service:
