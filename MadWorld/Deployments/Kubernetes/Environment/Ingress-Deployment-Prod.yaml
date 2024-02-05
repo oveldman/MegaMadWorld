@@ -102,7 +102,7 @@ spec:
     - host: www.mad-world.nl
       http:
         paths:
-          - path: "/(.*(?:css|html|js|json|png|wasm)$)|(.*)"
+          - path: "/(.*(?:css|css.map|html|js|json|png|wasm)$)|(.*)"
             pathType: Prefix
             backend:
               service:
