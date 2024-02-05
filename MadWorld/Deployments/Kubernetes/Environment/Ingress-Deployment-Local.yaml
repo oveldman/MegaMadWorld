@@ -12,6 +12,7 @@ spec:
     - host: admin.mad-world.local
       http:
         paths:
+          # All the path will be directed to the SPA application
           - path: "/(.*(?:css|css.map|html|js|json|png|wasm)$)|(.*)"
             pathType: Prefix
             backend:
