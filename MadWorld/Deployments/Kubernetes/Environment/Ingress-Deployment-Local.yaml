@@ -13,7 +13,7 @@ spec:
       http:
         paths:
           # All the path will be directed to the SPA application
-          - path: "/(.*(?:css|css.map|html|js|json|png|wasm)$)|(.*)"
+          - path: "/(.*(?:css|css.map|html|js|json|png|txt|wasm)$)|(.*)"
             pathType: Prefix
             backend:
               service:
@@ -53,7 +53,7 @@ spec:
     - host: shipsimulator.mad-world.local
       http:
         paths:
-          - path: "/(.*(?:css|css.map|html|js|json|png|wasm)$)|(.*)"
+          - path: "/(.*(?:css|css.map|html|js|json|png|txt|wasm)$)|(.*)"
             pathType: Prefix
             backend:
               service:
@@ -73,7 +73,7 @@ spec:
     - host: www.mad-world.local
       http:
         paths:
-          - path: "/(.*(?:css|css.map|html|js|json|png|wasm)$)|(.*)"
+          - path: "/(.*(?:css|css.map|html|js|json|png|txt|wasm)$)|(.*)"
             pathType: Prefix
             backend:
               service:
