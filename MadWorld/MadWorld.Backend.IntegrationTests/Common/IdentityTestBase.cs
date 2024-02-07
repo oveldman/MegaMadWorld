@@ -1,4 +1,5 @@
 using MadWorld.Backend.Identity;
+using MadWorld.Backend.Identity.BackgroundServices;
 using MadWorld.Backend.Identity.Infrastructure;
 using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.TestHost;
@@ -28,6 +29,7 @@ public class IdentityTestBase : IClassFixture<WebApplicationFactory<Program>>, I
         {
             builder.ConfigureTestServices(services =>
             {
+                services.RemoveAll(typeof(DeleteSessionService));
                 services.RemoveAll(typeof(UserDbContext));
                 services.RemoveAll(typeof(DbContextOptions<UserDbContext>));
 
