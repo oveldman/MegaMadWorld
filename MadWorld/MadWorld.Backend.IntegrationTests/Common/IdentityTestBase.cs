@@ -29,7 +29,7 @@ public class IdentityTestBase : IClassFixture<WebApplicationFactory<Program>>, I
         {
             builder.ConfigureTestServices(services =>
             {
-                services.RemoveAll(typeof(DeleteSessionService));
+                services.RemoveHostedService<DeleteSessionService>();
                 services.RemoveAll(typeof(UserDbContext));
                 services.RemoveAll(typeof(DbContextOptions<UserDbContext>));
 
