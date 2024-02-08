@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: madworld-api-deployment
+  namespace: madworld
+  labels:
+    app: madworld-api
+    name: backend-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: madworld-api
+      task: backend-api
+  template:
+    metadata:
+      labels:
+        app: madworld-api
+        task: backend-api
+    spec:
+      containers:
+        - name: madworld-api
+          image: rodero/madworld-api:latest
+          args:
+            - /server
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 3
+          env:
+            - name: DbContext__Password
+              valueFrom:
+                secretKeyRef:
+                  name: madworld-secrets
+                  key: dbpassword
+            - name: Jwt__Key
+              valueFrom:
+                secretKeyRef:
+                  name: madworld-secrets
+                  key: jwtkey
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: madworld-api-loadbalancer
+  namespace: madworld
+spec:
+  selector:
+    app: madworld-api
+    task: backend-api
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8082
+      targetPort: 80
+  type: LoadBalancer

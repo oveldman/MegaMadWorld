@@ -1,0 +1,72 @@
+@page "/User/{Id}"
+@using MadWorld.Frontend.Admin.Application.UserManagement
+@using MadWorld.Shared.Blazor.Authentications
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = Roles.IdentityAdministrator)]
+
+<SuccessMessage Show="@ShowDeleteSessionsSuccess" Message="@DefaultDeleteSessionsMessage" />
+<SuccessMessage Show="@ShowPatchSuccess" Message="@DefaultPatchSuccessMessage" />
+<ErrorMessage Show="@ShowError" Message="@DefaultErrorMessage" />
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <h5 class="card-header">User</h5>
+      <div class="card-body">
+        <form>
+          <div class="mb-3">
+            <label for="user-id" class="form-label">Id</label>
+            <input type="text" class="form-control" id="user-id" value="@_user.Id" disabled="disabled">
+          </div>
+          <div class="mb-3">
+            <label for="user-email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="user-email" value="@_user.Email" disabled="disabled">
+          </div>
+          <div class="mb-3 form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="user-blocked" @bind="@_user.IsBlocked">
+            <label class="form-check-label" for="user-blocked">Is blocked?</label>
+          </div>
+          <div class="mb-3">
+            <p><strong>Roles</strong></p>
+          </div>
+          @foreach (var role in _user.Roles)
+          {
+            <div class="mb-3 form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="role-@role.Name" @bind="@role.IsActive">
+              <label class="form-check-label" for="role-@role.Name">@role.Name</label>
+            </div>
+          }
+          <button type="button" class="btn btn-primary" @onclick="Save">Save</button>
+          <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <h5 class="card-header">Sessions</h5>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <RadzenDataGrid AllowFiltering="false" AllowSorting="false" AllowPaging="false"
+                              ShowPagingSummary="true" Data="@_user.RefreshTokens" TItem="RefreshTokenDetails">
+                <Columns>
+                  <RadzenDataGridColumn TItem="RefreshTokenDetails" Property="Audience" Title="Audience"/>
+                  <RadzenDataGridColumn TItem="RefreshTokenDetails" Property="Expires" Title="Expires"/>
+                </Columns>
+              </RadzenDataGrid>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <button type="button" class="btn btn-danger" @onclick="DeleteSessions">Delete sessions</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

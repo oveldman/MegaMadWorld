@@ -1,0 +1,89 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: seq-pv-volume
+  namespace: madworld
+  labels:
+    type: local
+    app: seq
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/home/oveldman/Docker_Storage/Seq"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: seq-pv-claim
+  namespace: madworld
+  labels:
+    app: seq
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seq
+  namespace: madworld
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seq
+  template:
+    metadata:
+      labels:
+        app: seq
+    spec:
+      containers:
+        - name: seq
+          image: datalust/seq:latest
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 80
+            - containerPort: 5341
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: SEQ_FIRSTRUN_ADMINPASSWORDHASH
+              valueFrom:
+                secretKeyRef:
+                  name: madworld-secrets
+                  key: seq_firsttime_password
+          volumeMounts:
+            - mountPath: "/data"
+              name: seqvolume
+      volumes:
+        - name: seqvolume
+          persistentVolumeClaim:
+            claimName: seq-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: seq-loadbalancer
+  namespace: madworld
+spec:
+  type: LoadBalancer
+  selector:
+    app: seq
+  ports:
+    - protocol: TCP
+      name: seq-ui
+      port: 8070
+      targetPort: 80
+    - protocol: TCP
+      name: seq-stream
+      port: 5341
+      targetPort: 5341

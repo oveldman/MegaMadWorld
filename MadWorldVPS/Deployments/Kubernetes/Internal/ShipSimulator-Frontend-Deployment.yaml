@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: madworld-shipsimulator-frontend-deployment
+  namespace: madworld
+  labels:
+    app: madworld-shipsimulator-frontend
+    name: shipsimulator-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: madworld-shipsimulator-frontend
+      task: shipsimulator-frontend
+  template:
+    metadata:
+      labels:
+        app: madworld-shipsimulator-frontend
+        task: shipsimulator-frontend
+    spec:
+      containers:
+        - name: madworld-shipsimulator-frontend
+          image: rodero/madworld-shipsimulator-ui:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: madworld-shipsimulator-frontend-loadbalancer
+  namespace: madworld
+spec:
+  selector:
+    app: madworld-shipsimulator-frontend
+    task: shipsimulator-frontend
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8085
+      targetPort: 80
+  type: LoadBalancer

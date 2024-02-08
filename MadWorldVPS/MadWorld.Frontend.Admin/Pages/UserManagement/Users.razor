@@ -1,0 +1,24 @@
+@page "/Users"
+@using MadWorld.Backend.Identity.Contracts.UserManagers;
+@using MadWorld.Shared.Blazor.Authentications
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = Roles.IdentityAdministrator)]
+
+<div class="row">
+    <h3>All Users</h3>
+</div>
+<div class="row">
+    <RadzenDataGrid AllowFiltering="false" AllowSorting="false" AllowPaging="true" 
+                    AllowVirtualization="true" Style="height:600px"
+                    PageSize="10" Count="@_response.TotalCount" Page="OnPage"
+                    LoadData="LoadData"
+                    PagerPosition="PagerPosition.Bottom" 
+                    PagerHorizontalAlign="HorizontalAlign.Center"
+                    ShowPagingSummary="true" Data="@_response.Users" TItem="UserContract"
+                    RowClick="OpenUser">
+        <Columns>
+            <RadzenDataGridColumn TItem="UserContract" Property="Email" Title="Email" Width="150px" />
+            <RadzenDataGridColumn TItem="UserContract" Property="IsBlocked" Title="Is Blocked" Width="150px" />
+        </Columns>
+    </RadzenDataGrid>
+</div>
