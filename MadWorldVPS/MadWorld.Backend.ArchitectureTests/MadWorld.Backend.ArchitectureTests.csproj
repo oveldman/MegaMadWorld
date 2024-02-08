@@ -26,6 +26,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Backend.API\MadWorld.Backend.API.csproj" />
+      <ProjectReference Include="..\MadWorld.ShipSimulator.API\MadWorld.ShipSimulator.API.csproj" />
+      <ProjectReference Include="..\MadWorld.ShipSimulator.Contracts\MadWorld.ShipSimulator.Contracts.csproj" />
     </ItemGroup>
 
 </Project>
