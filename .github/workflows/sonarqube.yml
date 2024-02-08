@@ -40,7 +40,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          dotnet-sonarscanner begin /k:"oveldman_MadWorldVPS" /o:"oveldman" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.projectBaseDir="/home/runner/work/MadWorldVPS/MadWorldVPS" /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs" 
+          dotnet-sonarscanner begin /k:"oveldman_MadWorldVPS" /o:"oveldman" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.projectBaseDir="/home/runner/work/MegaMadWorld/MegaMadWorld" /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs" 
           dotnet workload restore ./MadWorld/MadWorld.sln;
           dotnet restore ./MadWorld/MadWorld.sln; 
           dotnet build ./MadWorld/MadWorld.sln --no-restore -c Release;
