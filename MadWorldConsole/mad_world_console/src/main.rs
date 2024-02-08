@@ -15,11 +15,11 @@ fn main() {
     let mut scale_up: bool = false;
     let mut scale_total_options: i32 = 0;
 
-    if (args.len() > 1){
+    if args.len() > 1 {
         scale_total_options = args[1].parse::<i32>().unwrap();
     }
 
-    if (args.len() > 2){
+    if args.len() > 2 {
         scale_up = args[2] == "up";
     }
 

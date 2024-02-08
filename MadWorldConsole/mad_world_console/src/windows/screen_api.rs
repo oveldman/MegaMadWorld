@@ -36,7 +36,7 @@ fn set_scale_settings(keyboard: &mut Enigo, scale_up: bool, scale_total_options:
     thread::sleep(time::Duration::from_millis(100));
 
     let mut i = 0;
-    while (i < scale_total_options)
+    while i < scale_total_options
     {
         press_key(keyboard, move_key);
         i = i + 1;
