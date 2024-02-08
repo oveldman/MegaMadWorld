@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "MadWorldConsole"
+name = "mad_world_console"
 version = "0.1.0"
