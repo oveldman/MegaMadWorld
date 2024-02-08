@@ -1,4 +1,0 @@
-Contact: mailto:oveldman@gmail.com
-Expires: 2025-02-04T23:00:00.000Z
-Preferred-Languages: en, nl
-Policy: https://github.com/oveldman/MadWorldVPS?tab=security-ov-file

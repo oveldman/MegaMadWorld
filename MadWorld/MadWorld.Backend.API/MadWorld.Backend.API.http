@@ -1,5 +1,0 @@
-@MadWorld_Backend_API_HostAddress = http://localhost:5086
-
-GET {{MadWorld_Backend_API_HostAddress}}/Test/Authorized/
-Accept: application/json
-Authorization: Bearer {{RandomToken}}
