@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\MadWorld.ShipSimulator.Contracts\MadWorld.ShipSimulator.Contracts.csproj" />
       <ProjectReference Include="..\MadWorld.ShipSimulator.Domain\MadWorld.ShipSimulator.Domain.csproj" />
     </ItemGroup>
 

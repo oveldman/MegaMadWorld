@@ -1,5 +1,7 @@
 using MadWorld.Shared.Infrastructure.Databases;
+using MadWorld.ShipSimulator.Domain.Companies;
 using MadWorld.ShipSimulator.Domain.Danger;
+using MadWorld.ShipSimulator.Infrastructure.Database.Companies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +12,8 @@ public static class WebApplicationBuilderExtensions
 {
     public static void AddDatabase(this WebApplicationBuilder builder)
     {
+        builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+        
         builder.AddShipSimulatorDatabase();
     }
 
