@@ -71,9 +71,15 @@ public sealed class Program
         });
 
         builder.Services.AddAuthorizationBuilder()
+            .AddPolicy(Policies.IdentityAdministrator, policy =>
+            {
+                policy.RequireRole(Roles.IdentityAdministrator);
+            })
             .AddPolicy(Policies.IdentityShipSimulator, policy =>
-                policy.RequireRole(Roles.IdentityShipSimulator));
-
+            {
+                policy.RequireRole(Roles.IdentityShipSimulator);
+            });
+        
         builder.Services.AddAuthorization();
 
         builder.Services.AddHealthChecks();
