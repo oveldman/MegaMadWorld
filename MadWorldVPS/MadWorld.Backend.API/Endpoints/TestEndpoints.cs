@@ -1,3 +1,4 @@
+using Asp.Versioning.Builder;
 using MadWorld.Shared.Contracts.Test;
 using MadWorld.Shared.Infrastructure.Settings;
 
@@ -5,7 +6,7 @@ namespace MadWorld.Backend.API.Endpoints;
 
 public static class TestEndpoints
 {
-    public static void AddTestEndpoints(this WebApplication app)
+    public static void AddTestEndpoints(this IVersionedEndpointRouteBuilder app)
     {
         var testEndpoint = app.MapGroup("/Test")
             .WithTags("Test")
@@ -14,12 +15,14 @@ public static class TestEndpoints
         testEndpoint.MapGet("/Anonymous", () => "Hello Anonymous World!")
             .WithName("AnonymousTest")
             .WithOpenApi()
-            .AllowAnonymous();
+            .AllowAnonymous()
+            .HasApiVersion(1, 0);
 
         testEndpoint.MapGet("/Authorized", () => "Hello Authorized World!")
             .WithName("AuthorizedTest")
             .WithOpenApi()
-            .RequireAuthorization();
+            .RequireAuthorization()
+            .HasApiVersion(1, 0);
         
         testEndpoint.MapGet("/WhatIsMyIp", (HttpContext context) => 
                 new GetWhatIsMyIpResponse()
@@ -28,6 +31,7 @@ public static class TestEndpoints
                 })
             .WithName("WhatIsMyIp")
             .WithOpenApi()
-            .AllowAnonymous();
+            .AllowAnonymous()
+            .HasApiVersion(1, 0);
     }
 }

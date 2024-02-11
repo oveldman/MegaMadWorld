@@ -1,5 +1,6 @@
 using System.Text;
 using System.Threading.RateLimiting;
+using Asp.Versioning;
 using MadWorld.Backend.API.Endpoints;
 using MadWorld.Backend.Application.CommonLogic.Extensions;
 using MadWorld.Backend.Infrastructure.Database.Extensions;
@@ -104,6 +105,14 @@ public sealed class Program
                 });
             }
         );
+        
+        builder.Services.AddApiVersioning(options =>
+        {
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.ReportApiVersions = true;
+            options.ApiVersionReader = new HeaderApiVersionReader("api-version");
+        });
 
         var app = builder.Build();
         app.UseForwardedHeaders();
@@ -114,9 +123,13 @@ public sealed class Program
 
         app.UseAuthentication();
         app.UseAuthorization();
+        
+        var apiBuilder = app.NewVersionedApi()
+            .HasApiVersion(1, 0)
+            .ReportApiVersions();
 
-        app.AddCurriculumVitaeEndpoints();
-        app.AddTestEndpoints();
+        apiBuilder.AddCurriculumVitaeEndpoints();
+        apiBuilder.AddTestEndpoints();
 
         app.UseRateLimiter();
         app.UseCors(madWorldOrigins);

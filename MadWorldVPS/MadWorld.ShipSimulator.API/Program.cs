@@ -1,5 +1,7 @@
+using System.Collections.Immutable;
 using System.Text;
 using System.Threading.RateLimiting;
+using Asp.Versioning;
 using MadWorld.Shared.Infrastructure.Databases;
 using MadWorld.Shared.Infrastructure.Settings;
 using MadWorld.ShipSimulator.API.Endpoints;
@@ -112,6 +114,14 @@ public sealed class Program
             }
         );
 
+        builder.Services.AddApiVersioning(options =>
+        {
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.ReportApiVersions = true;
+            options.ApiVersionReader = new HeaderApiVersionReader("api-version");
+        });
+
         var app = builder.Build();
         app.UseForwardedHeaders();
 
@@ -122,7 +132,11 @@ public sealed class Program
         app.UseRateLimiter();
         app.UseCors(madWorldOrigins);
 
-        app.AddDangerEndpoints();
+        var apiBuilder = app.NewVersionedApi()
+            .HasApiVersion(1, 0)
+            .ReportApiVersions();
+
+        apiBuilder.AddDangerEndpoints();
 
         app.MigrateDatabase<ShipSimulatorContext>();
 

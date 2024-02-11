@@ -1,3 +1,4 @@
+using Asp.Versioning.Builder;
 using MadWorld.Shared.Infrastructure.Settings;
 using MadWorld.ShipSimulator.Application.Danger;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ namespace MadWorld.ShipSimulator.API.Endpoints;
 
 public static class DangerEndpoints
 {
-    public static void AddDangerEndpoints(this WebApplication app)
+    public static void AddDangerEndpoints(this IVersionedEndpointRouteBuilder app)
     {
         var dangerEndpoints = app.MapGroup("Danger")
             .WithTags("Danger")
@@ -20,6 +21,7 @@ public static class DangerEndpoints
             })
             .WithName("HardReset")
             .WithOpenApi()
-            .RequireAuthorization(Policies.IdentityShipSimulator);
+            .RequireAuthorization(Policies.IdentityShipSimulator)
+            .HasApiVersion(1, 0);
     }
 }
