@@ -21,7 +21,7 @@ public static class DangerEndpoints
             })
             .WithName("HardReset")
             .WithOpenApi()
-            .RequireAuthorization(Policies.IdentityShipSimulator)
+            .RequireAuthorization(Policies.IdentityAdministrator)
             .HasApiVersion(1, 0);
     }
 }

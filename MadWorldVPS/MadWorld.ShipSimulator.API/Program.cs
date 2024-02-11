@@ -136,6 +136,7 @@ public sealed class Program
             .HasApiVersion(1, 0)
             .ReportApiVersions();
 
+        apiBuilder.AddCompanyEndpoints();
         apiBuilder.AddDangerEndpoints();
 
         app.MigrateDatabase<ShipSimulatorContext>();
