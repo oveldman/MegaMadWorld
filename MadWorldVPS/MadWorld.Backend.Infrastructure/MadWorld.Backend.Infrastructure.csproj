@@ -14,6 +14,7 @@
       </PackageReference>
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" />
+      <PackageReference Include="System.Text.Json" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Backend.Domain\MadWorld.Backend.Domain.csproj" />

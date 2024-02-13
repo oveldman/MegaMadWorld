@@ -26,6 +26,7 @@
         <PackageReference Include="Serilog.Sinks.Console" />
         <PackageReference Include="Serilog.Sinks.Seq" />
         <PackageReference Include="Swashbuckle.AspNetCore" />
+        <PackageReference Include="System.Text.Json" />
     </ItemGroup>
 
     <ItemGroup>
