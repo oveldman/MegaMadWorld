@@ -5,18 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-
-    <ItemGroup>
-      <Protobuf Include="Protos\greet.proto">
-        <GrpcServices>Server</GrpcServices>
-        <Access>Public</Access>
-        <ProtoCompile>True</ProtoCompile>
-        <CompileOutputs>True</CompileOutputs>
-        <OutputDir>obj\Debug/net8.0/</OutputDir>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-    </ItemGroup>
-
+    
     <ItemGroup>
         <Protobuf Include="Protos\greet.proto" GrpcServices="Both" />
     </ItemGroup>
