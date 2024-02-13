@@ -1,5 +1,5 @@
 using Grpc.Core;
-using MadWorld.Backend.gRPC;
+using MadWorld.Shared.gRPC;
 
 namespace MadWorld.Backend.gRPC.Services;
 

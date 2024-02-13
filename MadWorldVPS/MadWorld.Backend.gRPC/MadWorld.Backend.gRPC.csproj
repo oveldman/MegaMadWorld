@@ -8,10 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\greet.proto" GrpcServices="Server"/>
-    </ItemGroup>
-
-    <ItemGroup>
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
@@ -19,6 +15,10 @@
 
     <ItemGroup>
       <PackageReference Include="Grpc.AspNetCore" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MadWorld.Shared.gRPC\MadWorld.Shared.gRPC.csproj" />
     </ItemGroup>
 
 </Project>
