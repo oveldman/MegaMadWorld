@@ -29,17 +29,6 @@ spec:
               port: 80
             initialDelaySeconds: 10
             periodSeconds: 3
-          env:
-            - name: DbContext__Password
-              valueFrom:
-                secretKeyRef:
-                  name: madworld-secrets
-                  key: dbpassword
-            - name: Jwt__Key
-              valueFrom:
-                secretKeyRef:
-                  name: madworld-secrets
-                  key: jwtkey
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
