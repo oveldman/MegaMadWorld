@@ -87,3 +87,13 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-ui:${{ github.ref_name }}
             ${{ secrets.DOCKERHUB_USERNAME }}/madworld-shipsimulator-ui:latest
+      - name:  Build and push gRPC
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ env.DEFAULT_CONTEXT }}
+          file: ./MadWorld/MadWorld.Backend.gRPC/Dockerfile
+          push: true
+          platforms: ${{ env.PLATFORM_BUILDS }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-grpc:${{ github.ref_name }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/madworld-grpc:latest
