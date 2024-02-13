@@ -6,7 +6,7 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 
 env:
-  DEFAULT_CONTEXT: ./MadWorld
+  DEFAULT_CONTEXT: ./MadWorldVPS
   PLATFORM_BUILDS: linux/amd64,linux/arm64
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ${{ env.DEFAULT_CONTEXT }}
-          file: ./MadWorld/MadWorld.Backend.API/Dockerfile
+          file: ./MadWorldVPS/MadWorld.Backend.API/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
@@ -40,7 +40,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ${{ env.DEFAULT_CONTEXT }}
-          file: ./MadWorld/MadWorld.Backend.Identity/Dockerfile
+          file: ./MadWorldVPS/MadWorld.Backend.Identity/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ${{ env.DEFAULT_CONTEXT }}
-          file: ./MadWorld/MadWorld.ShipSimulator.API/Dockerfile
+          file: ./MadWorldVPS/MadWorld.ShipSimulator.API/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
@@ -61,7 +61,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ${{ env.DEFAULT_CONTEXT }}
-          file: ./MadWorld/MadWorld.Frontend.Admin/Dockerfile
+          file: ./MadWorldVPS/MadWorld.Frontend.Admin/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
@@ -71,7 +71,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ${{ env.DEFAULT_CONTEXT }}
-          file: ./MadWorld/MadWorld.Frontend.UI/Dockerfile
+          file: ./MadWorldVPS/MadWorld.Frontend.UI/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
@@ -81,7 +81,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ${{ env.DEFAULT_CONTEXT }}
-          file: ./MadWorld/MadWorld.ShipSimulator.UI/Dockerfile
+          file: ./MadWorldVPS/MadWorld.ShipSimulator.UI/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
@@ -91,7 +91,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ${{ env.DEFAULT_CONTEXT }}
-          file: ./MadWorld/MadWorld.Backend.gRPC/Dockerfile
+          file: ./MadWorldVPS/MadWorld.Backend.gRPC/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: |
