@@ -4,6 +4,7 @@
     <PackageVersion Include="Blazored.LocalStorage" Version="4.4.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.0" />
     <PackageVersion Include="Cronos" Version="0.8.2" />
+    <PackageVersion Include="Grpc.AspNetCore" Version="2.60.0" />
     <PackageVersion Include="LanguageExt.Core" Version="4.4.8" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.1" />
