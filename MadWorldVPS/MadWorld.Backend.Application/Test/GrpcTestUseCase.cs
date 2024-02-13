@@ -11,7 +11,7 @@ public class GrpcTestUseCase
         _client = client;
     }
     
-    public TestGrpcData GetTestGrpcData()
+    public Task<TestGrpcData> GetTestGrpcData()
     {
         return _client.GetTestGrpcData();
     }

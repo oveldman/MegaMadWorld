@@ -7,6 +7,7 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
     <ItemGroup>
+      <PackageReference Include="Grpc.Net.Client" />
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
         <PrivateAssets>all</PrivateAssets>
@@ -18,6 +19,7 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Backend.Domain\MadWorld.Backend.Domain.csproj" />
+      <ProjectReference Include="..\MadWorld.Shared.gRPC\MadWorld.Shared.gRPC.csproj" />
       <ProjectReference Include="..\MadWorld.Shared.Infrastructure\MadWorld.Shared.Infrastructure.csproj" />
     </ItemGroup>
 </Project>

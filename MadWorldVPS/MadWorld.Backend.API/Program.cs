@@ -3,6 +3,7 @@ using System.Threading.RateLimiting;
 using Asp.Versioning;
 using MadWorld.Backend.API.Endpoints;
 using MadWorld.Backend.Application.CommonLogic.Extensions;
+using MadWorld.Backend.Domain.Options;
 using MadWorld.Backend.Infrastructure.Database.Extensions;
 using MadWorld.Shared.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,6 +21,11 @@ public sealed class Program
         var builder = WebApplication.CreateBuilder(args);
         builder.Host.UseSerilog((context, configuration) =>
             configuration.ReadFrom.Configuration(context.Configuration));
+
+        builder.Services.AddOptions<GrpcSettings>()
+                        .Bind(builder.Configuration
+                            .GetSection(GrpcSettings.SectionName)
+                        );
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(opt =>
