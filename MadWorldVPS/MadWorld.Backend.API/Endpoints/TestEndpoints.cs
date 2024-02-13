@@ -1,6 +1,8 @@
 using Asp.Versioning.Builder;
+using MadWorld.Backend.Application.Test;
 using MadWorld.Shared.Contracts.Test;
 using MadWorld.Shared.Infrastructure.Settings;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MadWorld.Backend.API.Endpoints;
 
@@ -30,6 +32,13 @@ public static class TestEndpoints
                     IpAddress = context.Request.Headers["X-Forwarded-For"]!
                 })
             .WithName("WhatIsMyIp")
+            .WithOpenApi()
+            .AllowAnonymous()
+            .HasApiVersion(1, 0);
+        
+        testEndpoint.MapGet("/gRPC", ([FromServices] GrpcTestUseCase useCase) => 
+                useCase.GetTestGrpcData())
+            .WithName("gRPC")
             .WithOpenApi()
             .AllowAnonymous()
             .HasApiVersion(1, 0);

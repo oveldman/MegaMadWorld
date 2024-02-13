@@ -1,5 +1,7 @@
 using MadWorld.Backend.Domain.CurriculaVitae;
+using MadWorld.Backend.Domain.Test;
 using MadWorld.Backend.Infrastructure.CurriculaVitae;
+using MadWorld.Backend.Infrastructure.Test;
 using MadWorld.Shared.Infrastructure.Databases;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +15,8 @@ public static class WebApplicationBuilderExtensions
     public static void AddDatabase(this WebApplicationBuilder builder)
     {
         builder.AddCurriculumVitaeDatabase();
+        
+        builder.Services.AddScoped<ITestGrpcClient, TestGrpcClient>();
     }
 
     private static void AddCurriculumVitaeDatabase(this WebApplicationBuilder builder)

@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using MadWorld.Backend.Application.CurriculaVitae;
+using MadWorld.Backend.Application.Test;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +11,8 @@ public static class WebApplicationBuilderExtensions
     public static void AddApplication(this WebApplicationBuilder builder)
     {
         builder.AddCurriculumVitaeApplication();
+        
+        builder.Services.AddScoped<GrpcTestUseCase>();
     }
     
     private static void AddCurriculumVitaeApplication(this WebApplicationBuilder builder)
