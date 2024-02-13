@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-deployment
+  namespace: madworld
+  labels:
+    app: rabbitmq
+    name: rabbitmq-bus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+      task: rabbitmq-bus
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+        task: rabbitmq-bus
+    spec:
+      hostname: rabbitmq
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5672
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: madworld-rabbitmq-loadbalancer
+  namespace: madworld
+spec:
+  selector:
+    app: rabbitmq
+    task: rabbitmq-bus
+  ports:
+    - protocol: TCP
+      name: http
+      port: 5672
+      targetPort: 5672
+  type: LoadBalancer
