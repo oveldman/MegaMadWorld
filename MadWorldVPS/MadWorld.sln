@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Internal", "Internal", "{73
 		Deployments\Kubernetes\Internal\Identity-Deployment.yaml = Deployments\Kubernetes\Internal\Identity-Deployment.yaml
 		Deployments\Kubernetes\Internal\ShipSimulator-Backend-Deployment.yaml = Deployments\Kubernetes\Internal\ShipSimulator-Backend-Deployment.yaml
 		Deployments\Kubernetes\Internal\ShipSimulator-Frontend-Deployment.yaml = Deployments\Kubernetes\Internal\ShipSimulator-Frontend-Deployment.yaml
+		Deployments\Kubernetes\Internal\Grpc-Deployment.yaml = Deployments\Kubernetes\Internal\Grpc-Deployment.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Environment", "Environment", "{48BCE473-AA74-4127-BAA4-8C8238B6085E}"
@@ -129,6 +130,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.ArchitectureTests", "MadWorld.Backend.ArchitectureTests\MadWorld.Backend.ArchitectureTests.csproj", "{BA0B023C-0718-4837-AE4D-A915DA54250B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.gRPC", "MadWorld.Backend.gRPC\MadWorld.Backend.gRPC.csproj", "{288EA58C-CD2F-46A8-968F-7CE757E4EF8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -224,6 +227,10 @@ Global
 		{BA0B023C-0718-4837-AE4D-A915DA54250B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA0B023C-0718-4837-AE4D-A915DA54250B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA0B023C-0718-4837-AE4D-A915DA54250B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{288EA58C-CD2F-46A8-968F-7CE757E4EF8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{288EA58C-CD2F-46A8-968F-7CE757E4EF8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{288EA58C-CD2F-46A8-968F-7CE757E4EF8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{288EA58C-CD2F-46A8-968F-7CE757E4EF8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9CF73880-0C45-42FC-90FB-2867E6D1B5A4} = {3B624B8F-4CB5-4CF4-B3BD-2D9C6333091A}
@@ -259,5 +266,6 @@ Global
 		{E8DBE812-CF80-49EE-A2AB-9CFF88FA4CC1} = {18A08617-AF92-4B8B-986E-C7226904D7E2}
 		{D78FC488-6C3A-4699-AFB1-85D64518C6D3} = {7B3A6ED8-9613-4F88-A788-0B298D4F3076}
 		{BA0B023C-0718-4837-AE4D-A915DA54250B} = {77370D3D-4A77-4414-ADD5-D80BFB1B2944}
+		{288EA58C-CD2F-46A8-968F-7CE757E4EF8E} = {B33450E1-4B0C-4681-BA87-6EF06C0686E3}
 	EndGlobalSection
 EndGlobal

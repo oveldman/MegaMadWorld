@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: madworld-identity-deployment
+  name: madworld-grpc-deployment
   namespace: madworld
   labels:
-    app: madworld-identity
-    name: backend-identity
+    app: madworld-grpc
+    name: backend-grpc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: madworld-identity
-      task: backend-identity
+      app: madworld-grpc
+      task: backend-grpc
   template:
     metadata:
       labels:
-        app: madworld-identity
-        task: backend-identity
+        app: madworld-grpc
+        task: backend-grpc
     spec:
       containers:
-        - name: madworld-identity
-          image: rodero/madworld-identity:latest
+        - name: madworld-grpc
+          image: rodero/madworld-grpc:latest
           args:
             - /server
           livenessProbe:
@@ -42,20 +42,20 @@ spec:
                   key: jwtkey
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: madworld-identity-loadbalancer
+  name: madworld-grpc-loadbalancer
   namespace: madworld
 spec:
   selector:
-    app: madworld-identity
-    task: backend-identity
+    app: madworld-grpc
+    task: backend-grpc
   ports:
     - protocol: TCP
       name: http
-      port: 8084
-      targetPort: 80
+      port: 8083
+      targetPort: 8080
   type: LoadBalancer
