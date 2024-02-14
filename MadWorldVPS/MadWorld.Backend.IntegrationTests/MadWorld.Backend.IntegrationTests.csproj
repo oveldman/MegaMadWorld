@@ -10,7 +10,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Grpc.Net.Client" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+        <PackageReference Include="Microsoft.AspNetCore.TestHost" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
         <PackageReference Include="NSubstitute" />
         <PackageReference Include="Shouldly" />
@@ -29,12 +31,9 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Backend.API\MadWorld.Backend.API.csproj" />
+      <ProjectReference Include="..\MadWorld.Backend.gRPC\MadWorld.Backend.gRPC.csproj" />
       <ProjectReference Include="..\MadWorld.Backend.Identity\MadWorld.Backend.Identity.csproj" />
       <ProjectReference Include="..\MadWorld.ShipSimulator.API\MadWorld.ShipSimulator.API.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Grpc\" />
     </ItemGroup>
 
 </Project>

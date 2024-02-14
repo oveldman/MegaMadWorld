@@ -1,7 +1,7 @@
 using Grpc.Core;
 using MadWorld.Shared.gRPC;
 
-namespace MadWorld.Backend.gRPC.Services;
+namespace MadWorld.Backend.gRPC.Services.Test;
 
 public class GreeterService : Greeter.GreeterBase
 {
