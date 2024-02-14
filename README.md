@@ -17,4 +17,4 @@ Backend:
 
 ## Docker Hub
 The following images are available on Docker Hub:
-* [Docker Hub Rodero](https://hub.docker.com/search?q=rodero)
+* [Docker Hub Rodero](https://hub.docker.com/search?q=rodero%2Fmadworld)
