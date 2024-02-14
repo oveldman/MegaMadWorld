@@ -5,6 +5,7 @@ using Asp.Versioning;
 using MadWorld.Shared.Infrastructure.Databases;
 using MadWorld.Shared.Infrastructure.Settings;
 using MadWorld.ShipSimulator.API.Endpoints;
+using MadWorld.ShipSimulator.API.Hubs;
 using MadWorld.ShipSimulator.Application.CommonLogic.Extensions;
 using MadWorld.ShipSimulator.Infrastructure.Database;
 using MadWorld.ShipSimulator.Infrastructure.Database.Extensions;
@@ -55,6 +56,7 @@ public sealed class Program
 
         builder.AddApplication();
         builder.AddDatabase();
+        builder.AddHubs();
 
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
         {
@@ -81,7 +83,7 @@ public sealed class Program
             });
         
         builder.Services.AddAuthorization();
-
+        
         builder.Services.AddHealthChecks();
 
         builder.Services.Configure<ForwardedHeadersOptions>(options =>
@@ -144,6 +146,7 @@ public sealed class Program
 
         apiBuilder.AddCompanyEndpoints();
         apiBuilder.AddDangerEndpoints();
+        apiBuilder.MapHub<CompanyHub>("/CompanyHub");
 
         app.MigrateDatabase<ShipSimulatorContext>();
 
