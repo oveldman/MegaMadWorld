@@ -10,7 +10,7 @@ public sealed class Program
 
         // Add services to the container.
         builder.Services.AddGrpc();
-        builder.Services.AddHealthChecks();
+        builder.Services.AddGrpcHealthChecks();
 
         var app = builder.Build();
 
@@ -20,7 +20,7 @@ public sealed class Program
             () =>
                 "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909"
         );
-        app.MapHealthChecks("/healthz");
+        app.MapGrpcHealthChecksService();
 
         app.Run();
     }

@@ -23,12 +23,6 @@ spec:
           image: rodero/madworld-shipsimulator-grpc:latest
           args:
             - /server
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 3
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
