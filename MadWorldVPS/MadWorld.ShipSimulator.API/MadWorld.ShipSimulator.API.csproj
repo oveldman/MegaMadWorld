@@ -36,6 +36,7 @@
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.ShipSimulator.Application\MadWorld.ShipSimulator.Application.csproj" />
       <ProjectReference Include="..\MadWorld.ShipSimulator.Infrastructure\MadWorld.ShipSimulator.Infrastructure.csproj" />
+      <ProjectReference Include="..\MadWorld.ShipSimulator.Shared.gRPC\MadWorld.ShipSimulator.Shared.gRPC.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: madworld-shipsimulator-grpc-deployment
+  namespace: madworld
+  labels:
+    app: madworld-shipsimulator-grpc
+    name: backend-shipsimulator-grpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: madworld-shipsimulator-grpc
+      task: backend-shipsimulator-grpc
+  template:
+    metadata:
+      labels:
+        app: madworld-shipsimulator-grpc
+        task: backend-shipsimulator-grpc
+    spec:
+      containers:
+        - name: madworld-shipsimulator-grpc
+          image: rodero/madworld-shipsimulator-grpc:latest
+          args:
+            - /server
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 3
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: madworld-shipsimulator-grpc-loadbalancer
+  namespace: madworld
+spec:
+  selector:
+    app: madworld-shipsimulator-grpc
+    task: backend-shipsimulator-grpc
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8087
+      targetPort: 8080
+  type: LoadBalancer
